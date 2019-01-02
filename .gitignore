@@ -341,4 +341,4 @@ ASALocalRun/
 healthchecksdb
 
 # Main file
-Source.cpp
+MortalCombat\MortalCombat\Source.cpp
