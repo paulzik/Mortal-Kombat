@@ -13,10 +13,99 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Animation">
+      <UniqueIdentifier>{3f57d6a2-6821-4e89-a855-ca738627b0c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Animation\Animator">
+      <UniqueIdentifier>{67af156c-486c-4f4b-b65b-730fc5c3c208}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Animation\AnimationTypes">
+      <UniqueIdentifier>{f7ceebc3-4a68-4c92-afc6-d9365e443a94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Animation\AnimationFilms">
+      <UniqueIdentifier>{29b0c260-fbf4-454b-afe9-744908a99b38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Animation">
+      <UniqueIdentifier>{f101561a-bbfd-4266-8a41-da43a0aea8ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Animation\Animator">
+      <UniqueIdentifier>{c6ab03d3-d322-4673-b76b-5b7c9d000d24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Animation\AnimationFilms">
+      <UniqueIdentifier>{91ccd787-6755-493c-b436-2425eff7cda6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Animator\Animator\Animator.cpp">
+      <Filter>Source Files\Animation\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator\Animator\MovingAnimator.cpp">
+      <Filter>Source Files\Animation\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator\Animator\FrameRangeAnimator.cpp">
+      <Filter>Source Files\Animation\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator\Sprites\Sprite\Sprite.cpp">
+      <Filter>Source Files\Animation\AnimationFilms</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator\Sprites\AnimationFilms\AnimationFilm.cpp">
+      <Filter>Source Files\Animation\AnimationFilms</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Animator\AnimationTypes\Animation.h">
+      <Filter>Header Files\Animation\AnimationTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator\AnimationTypes\FlashingAnimation.h">
+      <Filter>Header Files\Animation\AnimationTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator\AnimationTypes\FrameListAnimation.h">
+      <Filter>Header Files\Animation\AnimationTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator\AnimationTypes\FrameRangeAnimation.h">
+      <Filter>Header Files\Animation\AnimationTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator\AnimationTypes\MovingAnimation.h">
+      <Filter>Header Files\Animation\AnimationTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator\AnimationTypes\MovingPathAnimation.h">
+      <Filter>Header Files\Animation\AnimationTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator\AnimationTypes\ScrollAnimation.h">
+      <Filter>Header Files\Animation\AnimationTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator\Animator\Animator.h">
+      <Filter>Header Files\Animation\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator\Animator\MovingAnimator.h">
+      <Filter>Header Files\Animation\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator\Sprites\AnimationFilms\AnimationFilm.h">
+      <Filter>Header Files\Animation\AnimationFilms</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator\SDL_Helper.h">
+      <Filter>Header Files\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator\Sprites\AnimationFilms\AnimationFilmHolder.h">
+      <Filter>Header Files\Animation\AnimationFilms</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator\Sprites\AnimationFilms\BitmapLoader.h">
+      <Filter>Header Files\Animation\AnimationFilms</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator\Sprites\Sprite\Sprite.h">
+      <Filter>Header Files\Animation\AnimationFilms</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator\Sprites\Sprite\SpritesHolder.h">
+      <Filter>Header Files\Animation\AnimationFilms</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator\Animator\FrameRangeAnimator.h">
+      <Filter>Header Files\Animation\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator\Animator\AnimatorHolder.h">
+      <Filter>Header Files\Animation\Animator</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
