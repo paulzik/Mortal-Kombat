@@ -1,0 +1,260 @@
+{
+	"Start":
+	{
+		"xoffset":	0,
+		"yoffset":	0,
+		"frames":	1
+	}
+	"Idle":
+	{
+		"xoffset":	89,
+		"yoffset":	0,
+		"frames":	7
+	}
+	"Idle2":
+	{
+		"xoffset":	712,
+		"yoffset":	0,
+		"frames":	4
+	}
+	"Blockhigh":
+	{
+		"xoffset":	1068,
+		"yoffset":	0,
+		"frames":	3
+	}
+	"Duck":
+	{
+		"xoffset":	1335,
+		"yoffset":	0,
+		"frames":	3
+	}
+	"Blocklow":
+	{
+		"xoffset":	1602,
+		"yoffset":	0,
+		"frames":	1
+	}
+	"Walk":
+	{
+		"xoffset":	0,
+		"yoffset":	149,
+		"frames":	9
+	}
+	"Jump":
+	{
+		"xoffset":	801,
+		"yoffset":	149,
+		"frames":	3
+	}
+	"JumpForth":
+	{
+		"xoffset":	1068,
+		"yoffset":	149,
+		"frames":	8
+	}
+	"Win":
+	{
+		"xoffset":	1780,
+		"yoffset":	149,
+		"frames":	4
+	}
+	"Punchrighthigh":
+	{
+		"xoffset":	0,
+		"yoffset":	298,
+		"frames":	3
+	}
+	"Punchlefthigh":
+	{
+		"xoffset":	267,
+		"yoffset":	298,
+		"frames":	3
+	}
+	"Punchchin":
+	{
+		"xoffset":	534,
+		"yoffset":	298,
+		"frames":	2
+	}
+	"Punchrightmid":
+	{
+		"xoffset":	0,
+		"yoffset":	447,
+		"frames":	2
+	}
+	"Punchleftmid":
+	{
+		"xoffset":	178,
+		"yoffset":	447,
+		"frames":	3
+	}
+	"Throw":
+	{
+		"xoffset":	445,
+		"yoffset":	447,
+		"frames":	7
+	}
+	"Kickhigh":
+	{
+		"xoffset":	0,
+		"yoffset":	596,
+		"frames":	6
+	}
+	"Kickmid":
+	{
+		"xoffset":	534,
+		"yoffset":	596,
+		"frames":	6
+	}
+	"Knee":
+	{
+		"xoffset":	1068,
+		"yoffset":	596,
+		"frames":	2
+	}
+	"Kickround":
+	{
+		"xoffset":	0,
+		"yoffset":	745,
+		"frames":	8
+	}
+	"Tackle":
+	{
+		"xoffset":	712,
+		"yoffset":	745,
+		"frames":	8
+	}
+	"Uppercut":
+	{
+		"xoffset":	0,
+		"yoffset":	894,
+		"frames":	6
+	}
+	"Kicklow":
+	{
+		"xoffset":	534,
+		"yoffset":	894,
+		"frames":	2
+	}
+	"Punchjump":
+	{
+		"xoffset":	712,
+		"yoffset":	894,
+		"frames":	3
+	}
+	"Kickhop":
+	{
+		"xoffset":	979,
+		"yoffset":	894,
+		"frames":	2
+	}
+	"Kickjump":
+	{
+		"xoffset":	1157,
+		"yoffset":	894,
+		"frames":	2
+	}
+	"Dmgspecial":
+	{
+		"xoffset":	0,
+		"yoffset":	1043,
+		"frames":	3
+	}
+	"Dmgmid":
+	{
+		"xoffset":	267,
+		"yoffset":	1043,
+		"frames":	4
+	}
+	"Dmghigh":
+	{
+		"xoffset":	623,
+		"yoffset":	1043,
+		"frames":	6
+	}
+	"Dmgduck":
+	{
+		"xoffset":	1157,
+		"yoffset":	1043,
+		"frames":	3
+	}
+	"Dizzy":
+	{
+		"xoffset":	1424,
+		"yoffset":	1043,
+		"frames":	7
+	}
+	"Frozen":
+	{
+		"xoffset":	2047,
+		"yoffset":	1043,
+		"frames":	1
+	}
+	"Dmglow":
+	{
+		"xoffset":	2136,
+		"yoffset":	1043,
+		"frames":	2
+	}
+	"Jesus":
+	{
+		"xoffset":	2314,
+		"yoffset":	1043,
+		"frames":	3
+	}
+	"Fallback":
+	{
+		"xoffset":	0,
+		"yoffset":	1192,
+		"frames":	6
+	}
+	"Fallside":
+	{
+		"xoffset":	534,
+		"yoffset":	1192,
+		"frames":	6
+	}
+	"Fallthrow":
+	{
+		"xoffset":	0,
+		"yoffset":	1341,
+		"frames":	7
+	}
+	"Getup":
+	{
+		"xoffset":	623,
+		"yoffset":	1341,
+		"frames":	5
+	}
+	"Skull":
+	{
+		"xoffset":	0,
+		"yoffset":	1490,
+		"frames":	8
+	}
+	"Fire":
+	{
+		"xoffset":	712,
+		"yoffset":	1490,
+		"frames":	11
+	}
+	"Burned":
+	{
+		"xoffset":	0,
+		"yoffset":	1639,
+		"frames":	9
+	}
+	"Getoverhere":
+	{
+		"xoffset":	801,
+		"yoffset":	1639,
+		"frames":	1
+	}
+	"Rope":
+	{
+		"xoffset":	0,
+		"yoffset":	1788,
+		"frames":	7
+	}
+}
