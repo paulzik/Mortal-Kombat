@@ -34,6 +34,24 @@
     <Filter Include="Source Files\Animation\AnimationFilms">
       <UniqueIdentifier>{91ccd787-6755-493c-b436-2425eff7cda6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Configuration">
+      <UniqueIdentifier>{8c4561b0-d788-4724-bcda-2d5b201e7bbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Configuration">
+      <UniqueIdentifier>{c0e2af73-eef5-4cb7-93c8-a1422455aa07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Configuration\JSONParser">
+      <UniqueIdentifier>{647a4935-5506-4037-888f-7eeace840686}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Configuration\JSONParser">
+      <UniqueIdentifier>{20248a3e-3498-446f-9824-7fc488c92a26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SoundEngine">
+      <UniqueIdentifier>{92f01820-5901-4dc8-8503-64e3f134daea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SoundEngine">
+      <UniqueIdentifier>{b55a9fe7-22a2-4026-8e15-9e034b5b1650}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -53,6 +71,18 @@
     </ClCompile>
     <ClCompile Include="Animator\Sprites\AnimationFilms\AnimationFilm.cpp">
       <Filter>Source Files\Animation\AnimationFilms</Filter>
+    </ClCompile>
+    <ClCompile Include="Configuration\JSONParser\jsoncpp.cpp">
+      <Filter>Source Files\Configuration\JSONParser</Filter>
+    </ClCompile>
+    <ClCompile Include="Configuration\ConfigAPI.cpp">
+      <Filter>Source Files\Configuration</Filter>
+    </ClCompile>
+    <ClCompile Include="Configuration\ConfigAPIs.cpp">
+      <Filter>Source Files\Configuration</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundEngine\SoundEngine.cpp">
+      <Filter>Source Files\SoundEngine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +136,24 @@
     </ClInclude>
     <ClInclude Include="Animator\Animator\AnimatorHolder.h">
       <Filter>Header Files\Animation\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="Configuration\JSONParser\json\json.h">
+      <Filter>Header Files\Configuration\JSONParser</Filter>
+    </ClInclude>
+    <ClInclude Include="Configuration\JSONParser\json\json-forwards.h">
+      <Filter>Header Files\Configuration\JSONParser</Filter>
+    </ClInclude>
+    <ClInclude Include="Configuration\ConfigAPI.h">
+      <Filter>Header Files\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="Configuration\ConfigData.h">
+      <Filter>Header Files\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="Configuration\ConfigAPIs.h">
+      <Filter>Header Files\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundEngine\SoundEngine.h">
+      <Filter>Header Files\SoundEngine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -81,7 +81,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>..\Libraries;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;irrKlang.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -127,6 +127,10 @@
     <ClCompile Include="Animator\Animator\MovingAnimator.cpp" />
     <ClCompile Include="Animator\Sprites\AnimationFilms\AnimationFilm.cpp" />
     <ClCompile Include="Animator\Sprites\Sprite\Sprite.cpp" />
+    <ClCompile Include="Configuration\ConfigAPI.cpp" />
+    <ClCompile Include="Configuration\ConfigAPIs.cpp" />
+    <ClCompile Include="Configuration\JSONParser\jsoncpp.cpp" />
+    <ClCompile Include="SoundEngine\SoundEngine.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +151,12 @@
     <ClInclude Include="Animator\Sprites\AnimationFilms\BitmapLoader.h" />
     <ClInclude Include="Animator\Sprites\Sprite\Sprite.h" />
     <ClInclude Include="Animator\Sprites\Sprite\SpritesHolder.h" />
+    <ClInclude Include="Configuration\ConfigAPI.h" />
+    <ClInclude Include="Configuration\ConfigAPIs.h" />
+    <ClInclude Include="Configuration\ConfigData.h" />
+    <ClInclude Include="Configuration\JSONParser\json\json-forwards.h" />
+    <ClInclude Include="Configuration\JSONParser\json\json.h" />
+    <ClInclude Include="SoundEngine\SoundEngine.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
