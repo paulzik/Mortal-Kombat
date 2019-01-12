@@ -52,11 +52,14 @@
     <Filter Include="Source Files\SoundEngine">
       <UniqueIdentifier>{b55a9fe7-22a2-4026-8e15-9e034b5b1650}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\LayerRendered">
+      <UniqueIdentifier>{65a8f573-aee1-45aa-a213-01fccb6b37f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\LayerRenderer">
+      <UniqueIdentifier>{622ff677-c8a5-49c2-893d-931c5d35c1b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Animator\Animator\Animator.cpp">
       <Filter>Source Files\Animation\Animator</Filter>
     </ClCompile>
@@ -83,6 +86,12 @@
     </ClCompile>
     <ClCompile Include="SoundEngine\SoundEngine.cpp">
       <Filter>Source Files\SoundEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LayerRenderer\LayerRenderer.cpp">
+      <Filter>Source Files\LayerRendered</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +163,9 @@
     </ClInclude>
     <ClInclude Include="SoundEngine\SoundEngine.h">
       <Filter>Header Files\SoundEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="LayerRenderer\LayerRenderer.h">
+      <Filter>Header Files\LayerRenderer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
