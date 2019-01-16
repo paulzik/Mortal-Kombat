@@ -1,6 +1,6 @@
 #include "AnimationFilm.h"
 
-void AnimationFilm::DisplayFrame(SDL_Texture *dest, const SDL_Rect& at, byte frameNo, SDL_Renderer* rend) const {
+void AnimationFilm::DisplayFrame(SDL_Texture *dest, const SDL_Rect& at, BYTE frameNo, SDL_Renderer* rend) const {
 	//MaskedBlit(bitmap, GetFrameBox(frameNo), dest, at);
 
 

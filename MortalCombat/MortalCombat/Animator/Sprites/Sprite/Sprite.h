@@ -1,7 +1,7 @@
 #include "../AnimationFilms/AnimationFilm.h"
 
 class Sprite {
-	byte frameNo;
+	BYTE frameNo;
 	SDL_Rect frameBox;
 	int x, y;
 	bool isVisible;
@@ -9,14 +9,14 @@ class Sprite {
 	//TileLayer* myLayer;
 	
 public:
-	void SetFrame(byte i) {
+	void SetFrame(BYTE i) {
 		if (i != frameNo) {
 			assert(i < currFilm->GetTotalFrames());
 
 			frameBox = currFilm->GetFrameBox(frameNo = i);
 		}
 	}
-	byte GetFrame(void) const { return frameNo; }
+	BYTE GetFrame(void) const { return frameNo; }
 	void SetVisibility(bool v) { isVisible = v; }
 	bool IsVisible(void) const { return isVisible; }
 
