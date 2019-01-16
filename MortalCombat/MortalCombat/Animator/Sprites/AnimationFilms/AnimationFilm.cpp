@@ -2,11 +2,8 @@
 
 void AnimationFilm::DisplayFrame(SDL_Texture *dest, const SDL_Rect& at, byte frameNo, SDL_Renderer* rend) const {
 	//MaskedBlit(bitmap, GetFrameBox(frameNo), dest, at);
-	SDL_Rect a;
-	a.x = 0;
-	a.y = 0;
-	a.w = 32*2;
-	a.h = 71*2;
+
+
 	SDL_RenderCopy(rend, dest, &boxes[frameNo], &at);
 }
 

@@ -3,17 +3,36 @@
 void FrameRangeAnimator::Progress(timestamp_t currTime)
 {
 	while (currTime > lastTime && currTime - lastTime >= anim->GetDelay() && state == ANIMATOR_RUNNING) {
-		if (currFrame == anim->GetEndFrame())
-			currFrame = anim->GetStartFrame();
-		else
-			++currFrame;
+		if (currTime - lastTime > anim->GetDelay() * 2.f) {// failsafe if time difference it too high
+			lastTime = currTime;
+			if (!sprite->GetAnimationFilm()->GetIsAnimationReversed())
+				currFrame = -1;
+			else
+				currFrame = anim->GetEndFrame() + 1;
 
+		}
+
+		if (!sprite->GetAnimationFilm()->GetIsAnimationReversed())
+		{
+			if (currFrame == anim->GetEndFrame())
+				currFrame = anim->GetStartFrame();
+			else
+				++currFrame;
+		}
+		else {
+			if (currFrame == anim->GetStartFrame())
+				currFrame = anim->GetEndFrame();
+			else
+				--currFrame;
+		}
+		
 		sprite->Move(anim->GetDx(), anim->GetDy());
 		sprite->SetFrame(currFrame);
 		lastTime += anim->GetDelay();
 		if (currFrame == anim->GetEndFrame() && !anim->GetContinuous()) {
 			state = ANIMATOR_FINISHED;
 			NotifyStopped();
+			//currFrame = anim->GetStartFrame();
 			return;
 		}
 	}

@@ -6,6 +6,7 @@ class FrameRangeAnimator : public Animator {
 	Sprite* sprite;
 	FrameRangeAnimation* anim;
 	frame_t currFrame;
+
 public:
 	void Progress(timestamp_t currTime);
 	
@@ -16,6 +17,9 @@ public:
 		state = ANIMATOR_RUNNING;
 		sprite->SetFrame(currFrame = anim->GetStartFrame());
 	}
+
+
+
 	FrameRangeAnimator(void) :
 		sprite((Sprite*)0),
 		anim((FrameRangeAnimation*)0), currFrame(0xFF) {}

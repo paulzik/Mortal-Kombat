@@ -30,9 +30,9 @@ public:
 			std::vector<SDL_Rect> rects;
 			int width, height;
 			SDL_QueryTexture(bm, NULL, NULL, &width, &height);
-			int boxe_number = width / 32;
+			int boxe_number = width / 89;
 			for (int i = 0; i < boxe_number; i++) {
-				int offsetX = 32, offsetY = 71;
+				int offsetX = 89, offsetY = 149;
 				SDL_Rect tmp;
 				tmp.x = i * offsetX;
 				tmp.y = 0;

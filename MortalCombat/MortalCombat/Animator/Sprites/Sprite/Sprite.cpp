@@ -6,8 +6,8 @@ void Sprite::Display(BITMAP * dest, const SDL_Rect& da, SDL_Renderer *rend)
 	SDL_Rect pos;
 	pos.x = x;
 	pos.y = y;
-	pos.w = 32*2;
-	pos.h = 71*2;
+	pos.w = 89;
+	pos.h = 149;
 	currFilm->DisplayFrame(currFilm->GetBitmap(), pos, frameNo, rend);
 
 	//SDL_Rect visibleArea;
@@ -44,7 +44,9 @@ void Sprite::Move(int dx, int dy)
 	y += dy;
 }
 
-void Sprite::SetAnimFilm(AnimationFilm * _film)
+void Sprite::SetAnimFilm(AnimationFilm * _film, bool _reverseAnim)
 {
 	currFilm = _film;
+	currFilm->SetReverseAnimation(_reverseAnim);
+	//frameNo = 0;
 }

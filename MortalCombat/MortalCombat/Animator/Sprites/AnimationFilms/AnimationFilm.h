@@ -12,11 +12,22 @@ private:
 	std::vector<SDL_Rect> boxes;
 	SDL_Texture* bitmap;
 	std::string id;
+	bool reverse;
+
 
 public:
 	byte GetTotalFrames(void) const { return boxes.size(); }
 	SDL_Texture* GetBitmap(void) const { return bitmap; }
 	const std::string GetId(void) const { return id; }
+
+	void SetReverseAnimation(bool rev) {
+		reverse = rev;
+	}
+
+	bool GetIsAnimationReversed() {
+		return reverse;
+	}
+
 	const SDL_Rect GetFrameBox(byte frameNo) const
 	{
 		assert(boxes.size() > frameNo); return boxes[frameNo];

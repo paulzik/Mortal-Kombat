@@ -157,6 +157,7 @@
     <ClInclude Include="Configuration\JSONParser\json\json-forwards.h" />
     <ClInclude Include="Configuration\JSONParser\json\json.h" />
     <ClInclude Include="SoundEngine\SoundEngine.h" />
+    <ClInclude Include="Source.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

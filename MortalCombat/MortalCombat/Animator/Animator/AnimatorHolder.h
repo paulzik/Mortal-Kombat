@@ -4,6 +4,7 @@
 #include "Animator.h"
 
 static std::list<Animator*> running, suspended;
+static Animator* ToBeRunning, *ToBeSuspended;
 
 template<class ArgumentType, class ResultType>
 struct unary_function
@@ -20,7 +21,11 @@ private:
 		timestamp_t t;
 	public:
 		void operator()(Animator* a) const { 
-			a->Progress(t); 
+			//if (!a->GetState() == animatorstate_t::ANIMATOR_FINISHED)
+				a->Progress(t); 
+			//else {
+				//MarkAsSuspended(a);
+			//}
 		}
 		ProgressFunctor(timestamp_t _t) : t(_t) {}
 	};
@@ -41,17 +46,29 @@ public:
 	static void Cancel(Animator* a) { suspended.remove(a); }
 	static void MarkAsRunning(Animator* a)
 	{
+		a->isSuspended = false;
+		a->Resume();
 		suspended.remove(a); 
 		running.push_back(a);
-		a->Resume();
 	}
 	static void MarkAsSuspended(Animator* a)
 	{
+		a->isSuspended = true;
+		a->Pause();
 		running.remove(a); 
 		suspended.push_back(a);
-		a->Pause();
 	}
 	static void Progress(timestamp_t currTime) {
+		if (ToBeRunning != NULL) {
+			MarkAsRunning(ToBeRunning);
+		}
+		if (ToBeSuspended != NULL) {
+			MarkAsSuspended(ToBeSuspended);
+		}
+
+		ToBeRunning = NULL;
+		ToBeSuspended = NULL;
+
 		std::for_each(
 			running.begin(), running.end(), ProgressFunctor(currTime)
 		);

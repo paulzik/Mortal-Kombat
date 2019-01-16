@@ -54,9 +54,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Animator\Animator\Animator.cpp">
       <Filter>Source Files\Animation\Animator</Filter>
     </ClCompile>
@@ -83,6 +80,9 @@
     </ClCompile>
     <ClCompile Include="SoundEngine\SoundEngine.cpp">
       <Filter>Source Files\SoundEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +154,9 @@
     </ClInclude>
     <ClInclude Include="SoundEngine\SoundEngine.h">
       <Filter>Header Files\SoundEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -35,6 +35,12 @@ public:
 		onFinish = f, finishClosure = c;
 	}
 
+	animatorstate_t GetState() {
+		return state;
+	}
+
+	bool isSuspended = true;
+
 	Animator(void); 
 	virtual ~Animator() {};
 
