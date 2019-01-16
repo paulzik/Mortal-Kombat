@@ -130,6 +130,7 @@
     <ClCompile Include="Configuration\ConfigAPI.cpp" />
     <ClCompile Include="Configuration\ConfigAPIs.cpp" />
     <ClCompile Include="Configuration\JSONParser\jsoncpp.cpp" />
+    <ClCompile Include="Fighter\Fighter.cpp" />
     <ClCompile Include="LayerRenderer\LayerRenderer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="SoundEngine\SoundEngine.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="Configuration\ConfigData.h" />
     <ClInclude Include="Configuration\JSONParser\json\json-forwards.h" />
     <ClInclude Include="Configuration\JSONParser\json\json.h" />
+    <ClInclude Include="Fighter\Fighter.h" />
     <ClInclude Include="LayerRenderer\LayerRenderer.h" />
     <ClInclude Include="SoundEngine\SoundEngine.h" />
   </ItemGroup>
