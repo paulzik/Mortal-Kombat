@@ -1,18 +1,37 @@
 #include <SDL.h>        
 #include <SDL_image.h>
+#include "LayerRenderer/LayerRenderer.h"
+
+#define SCREEN_WIDTH  800
+#define SCREEN_HEIGHT 508
 
 int main(int argc, char ** argv)
 {
 	bool quit = false;
 	SDL_Event event;
 
-	SDL_Init(SDL_INIT_VIDEO);
+	SDL_Init(SDL_INIT_EVERYTHING);
 
-	SDL_Window * window = SDL_CreateWindow("SDL2 Displaying Image with SDL2 Image Library",
-		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 822, 720, 0);
+	SDL_Window * window = SDL_CreateWindow("Mortal Kombat 1 (1992)",
+		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
-	SDL_Renderer * renderer = SDL_CreateRenderer(window, -1, 0);
-	SDL_Texture * texture = IMG_LoadTexture(renderer, "./Bitmaps/Menu/menu.jpg");
+	SDL_Renderer * renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+
+	SDL_Texture * texture = IMG_LoadTexture(renderer, "./Bitmaps/BattleElements/template.png");
+	SDL_Texture * texture2 = IMG_LoadTexture(renderer, "./Bitmaps/BattleElements/lifebar.png");
+
+	SDL_Rect button_pos = {42,58,163*2,12*2};
+	SDL_Rect button_pos2 = { 412,58,163 * 2,12 * 2 };
+
+	LayerRenderer* layerRenderer = new LayerRenderer(renderer);
+	
+	//Back Template
+	layerRenderer->InitializeImageElement("./Bitmaps/BattleElements/template.png", LayerRenderer::Layer::Background, { 0,0,SCREEN_WIDTH,SCREEN_HEIGHT});
+	
+	//LifeBars -- TODO: Will be otimized as they are the same texture
+	layerRenderer->InitializeImageElement("./Bitmaps/BattleElements/lifebar.png", LayerRenderer::Layer::Foreground, { 42,58,163 * 2,12 * 2 });
+	layerRenderer->InitializeImageElement("./Bitmaps/BattleElements/lifebar.png", LayerRenderer::Layer::Foreground, { 412,58,163 * 2,12 * 2 });
+
 
 	while (!quit)
 	{
@@ -24,12 +43,18 @@ int main(int argc, char ** argv)
 			quit = true;
 			break;
 		}
+		
 
-		SDL_RenderCopy(renderer, texture, NULL, NULL);
+		//Render all 3 layers
+		layerRenderer->RenderLayer(LayerRenderer::Layer::Background);
+		layerRenderer->RenderLayer(LayerRenderer::Layer::Action);
+		layerRenderer->RenderLayer(LayerRenderer::Layer::Foreground);
+		
 		SDL_RenderPresent(renderer);
 	}
 
-	SDL_DestroyTexture(texture);
+	layerRenderer->ClearLayerRenderer();
+
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 
