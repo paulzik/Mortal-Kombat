@@ -1,10 +1,24 @@
 #include <stdio.h>
 #include <SDL.h>
+#include "Configuration/JSONParser/json/json.h"
+#include "Configuration/ConfigAPI.h"
+#include <iostream>
+#include <fstream>
+#include "SoundEngine/SoundEngine.h"
 
+using namespace std;
 int main(int argc, char* argv[]) {
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 
+	//ConfigAPI* configAPI = new ConfigAPI("ConfigurationFile.json");
+	//configAPI->ExportConfigurationData();
+	
+	SoundEngine::Get()->Play("../MortalCombat/SoundEngine/Sounds/announcer/fight.mp3",true);
+
+	//list<ConfigAPI*> configAPIs = ConfigAPIs::Get();
+	
+	/*
 	// Initialize SDL.
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 		return 1;
@@ -33,7 +47,8 @@ int main(int argc, char* argv[]) {
 
 	// Always be sure to clean up
 	SDL_Quit();
-
-
+	
+	*/
+	system("pause");
 	return 0;
 }

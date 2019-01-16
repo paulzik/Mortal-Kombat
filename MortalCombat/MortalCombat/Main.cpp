@@ -10,7 +10,7 @@
 #include "Animator/Animator/FrameRangeAnimator.h"
 #include "Animator/AnimationTypes/MovingAnimation.h"
 #include "Animator/Animator/AnimatorHolder.h"
-
+#include "Fighter/Fighter.h"
 
 #define SCREEN_WIDTH  800
 #define SCREEN_HEIGHT 508
@@ -72,9 +72,6 @@ int main(int argc, char ** argv)
 
 	SDL_Renderer * renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-	SDL_Texture * texture = IMG_LoadTexture(renderer, "./Bitmaps/BattleElements/template.png");
-	SDL_Texture * texture2 = IMG_LoadTexture(renderer, "./Bitmaps/BattleElements/lifebar.png");
-
 	SDL_Rect button_pos = {42,58,163*2,12*2};
 	SDL_Rect button_pos2 = { 412,58,163 * 2,12 * 2 };
 
@@ -87,6 +84,9 @@ int main(int argc, char ** argv)
 	layerRenderer->InitializeImageElement("./Bitmaps/BattleElements/lifebar.png", LayerRenderer::Layer::Foreground, { 42,58,163 * 2,12 * 2 });
 	layerRenderer->InitializeImageElement("./Bitmaps/BattleElements/lifebar.png", LayerRenderer::Layer::Foreground, { 412,58,163 * 2,12 * 2 });
 
+	//Generate 2 Players
+	Fighter* player1 = new Fighter(FighterTag::Scorpion);
+	Fighter* player2 = new Fighter(FighterTag::SubZero);
 
 	InitializeCharacter("subzero", renderer);
 	animator->MarkAsRunning(animators->at("idle"));

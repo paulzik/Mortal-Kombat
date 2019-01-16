@@ -58,6 +58,12 @@
     <Filter Include="Header Files\LayerRenderer">
       <UniqueIdentifier>{622ff677-c8a5-49c2-893d-931c5d35c1b5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Fighter">
+      <UniqueIdentifier>{b3ec750d-8008-4129-8860-09d719f9b4c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Fighter">
+      <UniqueIdentifier>{ca5d2401-8c0a-4fa5-a869-18acf4cdbcec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animator\Animator\Animator.cpp">
@@ -92,6 +98,9 @@
     </ClCompile>
     <ClCompile Include="LayerRenderer\LayerRenderer.cpp">
       <Filter>Source Files\LayerRendered</Filter>
+    </ClCompile>
+    <ClCompile Include="Fighter\Fighter.cpp">
+      <Filter>Source Files\Fighter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +175,9 @@
     </ClInclude>
     <ClInclude Include="LayerRenderer\LayerRenderer.h">
       <Filter>Header Files\LayerRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Fighter\Fighter.h">
+      <Filter>Header Files\Fighter</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
