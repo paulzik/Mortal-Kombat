@@ -67,9 +67,9 @@
 	},
 	"Punchlefthigh":
 	{
-		"xoffset":	267,
+		"xoffset":	0,
 		"yoffset":	298,
-		"frames":	3
+		"frames":	6
 	},
 	"Punchchin":
 	{

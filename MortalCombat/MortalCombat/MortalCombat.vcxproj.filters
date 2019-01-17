@@ -105,9 +105,6 @@
     <ClCompile Include="Fighter\Fighter.cpp">
       <Filter>Source Files\Fighter</Filter>
     </ClCompile>
-    <ClCompile Include="InputManager\InputManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animator\AnimationTypes\Animation.h">

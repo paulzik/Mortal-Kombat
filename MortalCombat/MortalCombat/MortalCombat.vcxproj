@@ -131,7 +131,6 @@
     <ClCompile Include="Configuration\ConfigAPIs.cpp" />
     <ClCompile Include="Configuration\JSONParser\jsoncpp.cpp" />
     <ClCompile Include="Fighter\Fighter.cpp" />
-    <ClCompile Include="InputManager\InputManager.cpp" />
     <ClCompile Include="LayerRenderer\LayerRenderer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="SoundEngine\SoundEngine.cpp" />
