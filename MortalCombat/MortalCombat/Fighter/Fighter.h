@@ -55,7 +55,7 @@ private:
 
 		std::map<std::string, Animation*> animations;
 		animations.insert(std::pair<std::string, Animation*>("idle", new FrameRangeAnimation(0, 6, 0, 0, 0.075f, true, 1)));
-		animations.insert(std::pair<std::string, Animation*>("walk", new FrameRangeAnimation(0, 8, 4, 0, 0.1f, true, 0)));
+		animations.insert(std::pair<std::string, Animation*>("walk", new FrameRangeAnimation(0, 8, 4, 0, 0.075f, true, 0)));
 		animations.insert(std::pair<std::string, Animation*>("walkReverse", new FrameRangeAnimation(0, 8, -4, 0, 0.075f, true, 3)));
 		animations.insert(std::pair<std::string, Animation*>("punchrighthigh", new FrameRangeAnimation(0, 2, 0, 0, 0.5f, false, 2)));
 

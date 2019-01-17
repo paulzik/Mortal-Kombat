@@ -1,5 +1,9 @@
 #include "Fighter.h"
 Direction direction = Direction::none;
+std::list< int32_t > buttons;
+
+float timer = 0;
+void UpdateKeys();
 
 Fighter::Fighter(FighterTag _tag, SDL_Renderer *renderer)
 {
@@ -44,56 +48,71 @@ float Fighter::GetHealth()
 
 void Fighter::Update()
 {
+	
+
+	UpdateKeys();
+
 	inputController.Handle();
+
 	for (auto item : inputController.GetLogical()) {
 		if (item == "moveforward") {
 			sprite->SetAnimFilm(AFH->GetFilm("Walk"));
 			animator->MarkAsRunning(animators->at("walk"));
 			animator->MarkAsSuspended(animators->at("walkReverse"));
+			animator->MarkAsSuspended(animators->at("idle"));
 		}
-		//else if (direction == Direction::none) {
-		//	sprite->SetAnimFilm(AFH->GetFilm("Idle"));
-		//	animator->MarkAsRunning(animators->at("idle"));
-		//	animator->MarkAsSuspended(animators->at("walk"));
-		//	animator->MarkAsSuspended(animators->at("walkReverse"));
-		//}
 		else if (item == "movebackward") {
 			sprite->SetAnimFilm(AFH->GetFilm("Walk"), true);
 			animator->MarkAsRunning(animators->at("walkReverse"));
 			animator->MarkAsSuspended(animators->at("walk"));
+			animator->MarkAsSuspended(animators->at("idle"));
+
 		}
 	}
+
+
 
 
 	animator->Progress(float((float)clock() / (float)CLOCKS_PER_SEC));
 	animator->Render(Renderer);
 
+
+	if (float((float)clock() / (float)CLOCKS_PER_SEC) - timer > ((float)((float)FIGHTER_ACTION_DELAY_MSECS) / 1000.0f)) {
+		timer = float((float)clock() / (float)CLOCKS_PER_SEC);
+		if (buttons.empty()) {
+			sprite->SetAnimFilm(AFH->GetFilm("Idle"));
+			animator->MarkAsRunning(animators->at("idle"));
+			animator->MarkAsSuspended(animators->at("walk"));
+			animator->MarkAsSuspended(animators->at("walkReverse"));
+		}
+
+		buttons.clear();
+
+	}
 }
 
-extern bool input::test_key(int32_t keyCode) {
+void UpdateKeys() {
 	SDL_Event _event;
 	SDL_PollEvent(&_event);
 	switch (_event.type)
 	{
 
 		case SDL_KEYDOWN: {
-			if (keyCode == _event.key.keysym.sym) {
-				
-				return true;
-			}
-			
+			if (_event.key.state == SDL_PRESSED)
+			{
+				buttons.push_back(_event.key.keysym.sym);
+			}			
 			break;
 		}
-		case SDL_KEYUP: {
-			if (keyCode == _event.key.keysym.sym) {
-				
-				return false;
-			}
-			
-			break;
+
+	}
+}
+
+extern bool input::test_key(int32_t keyCode) {
+	for (auto item : buttons) {
+		if (item == keyCode) {
+			return true;
 		}
 	}
 	return false;
-
-
 }
