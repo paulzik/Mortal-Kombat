@@ -14,3 +14,14 @@ void MovingAnimator::Progress(timestamp_t currTime)
 		}
 	}
 }
+
+void MovingAnimator::Render(SDL_Renderer* rend)
+{
+	SDL_Rect srcrect;
+
+	srcrect.x = 0;
+	srcrect.y = 0;
+	srcrect.w = sprite->GetFrame();
+	srcrect.h = 140;
+	sprite->Display(NULL, srcrect, rend);
+}

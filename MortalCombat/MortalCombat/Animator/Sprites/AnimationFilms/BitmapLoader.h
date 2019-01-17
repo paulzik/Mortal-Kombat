@@ -1,3 +1,4 @@
+#pragma once
 #include <map>
 #include "../../SDL_Helper.h"
 #include <assert.h>

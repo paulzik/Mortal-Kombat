@@ -24,7 +24,7 @@ private:
 	//engine2d::TickAnimation		tickAnim;
 	input::InputManager			inputController;
 	//logic::StateTransitions		stateTransitions;
-	AnimationFilmHolder* AFH;
+	//AnimationFilmHolder* AFH;
 	AnimatorHolder* animator;
 	typedef std::map<std::string, Animator*> Animators;
 	Animators* animators;
@@ -35,12 +35,13 @@ private:
 	int numberOfWins;
 
 	inline void InitializeCharacter(FighterTag _charName, SDL_Renderer * renderer) {
-		AFH = new AnimationFilmHolder();
-		AFH->Load("./Bitmaps/Clips/Scorpion/" + FighterName[_charName], renderer);
+		//AFH = new AnimationFilmHolder();
+		AnimationFilmHolder& AFH = AnimationFilmHolder::Get();
+		AFH.Load("./Bitmaps/Clips/Scorpion/" + FighterName[_charName], renderer);
 
 		//TODO: check json for animators
 
-		sprite = new Sprite(0, 0, AFH->GetFilm("Idle"));
+		sprite = new Sprite(0, 0, AFH.GetFilm("Idle"));
 		animators = new Animators();
 		animators->insert(std::pair<std::string, Animator*>("idle", new FrameRangeAnimator()));
 		animators->insert(std::pair<std::string, Animator*>("walk", new FrameRangeAnimator()));

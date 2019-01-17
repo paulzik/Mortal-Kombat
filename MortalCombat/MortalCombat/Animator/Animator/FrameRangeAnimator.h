@@ -1,3 +1,4 @@
+#pragma once
 #include "Animator.h"
 #include "../Sprites/Sprite/Sprite.h"
 #include "../AnimationTypes/FrameRangeAnimation.h"

@@ -1,3 +1,4 @@
+#pragma once
 #include "MovingAnimation.h"
 
 typedef unsigned char frame_t;
