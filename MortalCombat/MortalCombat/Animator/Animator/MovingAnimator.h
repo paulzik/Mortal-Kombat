@@ -15,6 +15,10 @@ public:
 		lastTime = t;
 		state = ANIMATOR_RUNNING;
 	}
+
+	// Inherited via Animator
+	virtual void Render(SDL_Renderer* rend) override;
+
 	MovingAnimator(void) :
 		sprite((Sprite*)0), anim((MovingAnimation*)0) {}
 	~MovingAnimator() {}

@@ -1,3 +1,4 @@
+#pragma once
 #include "../AnimationFilms/AnimationFilm.h"
 
 class Sprite {

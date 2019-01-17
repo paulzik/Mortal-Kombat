@@ -1,154 +1,64 @@
 {
-	"Arena":
+	"Floor":
 	{
-		"width":	1068,
-		"height":	513,
-
-		"Floor":
-		{
-			"xoffset":	0,
-			"yoffset":	0,
-			"width":	1068,
-			"height":	100
-		},
-		"Sky":
-		{
-			"xoffset":	0,
-			"yoffset":	100,
-			"width":	400,
-			"height":	132
-		},
-		"Roof":
-		{
-			"xoffset":	400,
-			"yoffset":	100,
-			"width":	382,
-			"height":	125
-		},
-		"Fence":
-		{
-			"xoffset":	782,
-			"yoffset":	100,
-			"width":	262,
-			"height":	86
-		},
-		"Banner": 
-		{
-			"xoffset":	1044,
-			"yoffset":	100,
-			"width":	29,
-			"height":	85
-		},
-		"Perimeter": {
-			"xoffset":	0,
-			"yoffset":	232,
-			"width":	857,
-			"height":	195
-		},
-		"Dragon":
-		{
-			"xoffset":	857,
-			"yoffset":	232,
-			"width":	77,
-			"height":	47
-		},
-		"Tsang":
-		{
-			"xoffset":	934,
-			"yoffset":	232,
-			"width":	48,
-			"height":	57
-		},
-		"Fencesmall":
-		{
-			"xoffset":	982,
-			"yoffset":	232,
-			"width":	58,
-			"height":	19
-		},
-		"Crowdupclap1":
-		{
-			"xoffset":	0,
-			"yoffset":	427,
-			"width":	87,
-			"height":	43
-		},
-		"Crowdupclap2":
-		{
-			"xoffset":	87,
-			"yoffset":	427,
-			"width":	87,
-			"height":	43
-		},
-		"Crowdupclap3":
-		{
-			"xoffset":	174,
-			"yoffset":	427,
-			"width":	87,
-			"height":	43
-		},
-		"Crowddownclap1":
-		{
-			"xoffset":	0,
-			"yoffset":	470,
-			"width":	87,
-			"height":	43
-		},
-		"Crowddownclap2":
-		{
-			"xoffset":	87,
-			"yoffset":	470,
-			"width":	87,
-			"height":	43
-		},
-		"Crowddownclap3":
-		{
-			"xoffset":	174,
-			"yoffset":	470,
-			"width":	87,
-			"height":	43
-		}
-		"Crowdupwatch1":
-		{
-			"xoffset":	261,
-			"yoffset":	427,
-			"width":	88,
-			"height":	40
-		},
-		"Crowdupwatch2":
-		{
-			"xoffset":	349,
-			"yoffset":	427,
-			"width":	88,
-			"height":	40
-		},
-		"Crowdupwatch3":
-		{
-			"xoffset":	437,
-			"yoffset":	427,
-			"width":	88,
-			"height":	40
-		},
-		"Crowddownwatch1":
-		{
-			"xoffset":	261,
-			"yoffset":	467,
-			"width":	88,
-			"height":	40
-		},
-		"Crowddownwatch2":
-		{
-			"xoffset":	349,
-			"yoffset":	467,
-			"width":	88,
-			"height":	40
-		},
-		"Crowddownwatch3":
-		{
-			"xoffset":	437,
-			"yoffset":	467,
-			"width":	88,
-			"height":	40
-		}
+		"xoffset":	0,
+		"yoffset":	0,
+		"width":		1068,
+		"height":	100
+	},
+	"Sky":
+	{
+		"xoffset":	0,
+		"yoffset":	100,
+		"width":		400,
+		"height":	132
+	},
+	"Roof":
+	{
+		"xoffset":	400,
+		"yoffset":	100,
+		"width":		382,
+		"height":	125
+	},
+	"Fence":
+	{
+		"xoffset":	782,
+		"yoffset":	100,
+		"width":		262,
+		"height":	86
+	},
+	"Banner": 
+	{
+		"xoffset":	1044,
+		"yoffset":	100,
+		"width":		29,
+		"height":	85
+	},
+	"Perimeter": {
+		"xoffset":	0,
+		"yoffset":	232,
+		"width":		857,
+		"height":	195
+	},
+	"Dragon":
+	{
+		"xoffset":	857,
+		"yoffset":	232,
+		"width":		77,
+		"height":	47
+	},
+	"Tsang":
+	{
+		"xoffset":	934,
+		"yoffset":	232,
+		"width":		48,
+		"height":	57
+	},
+	"Fencesmall":
+	{
+		"xoffset":	982,
+		"yoffset":	232,
+		"width":		58,
+		"height":	19
 	}
 }

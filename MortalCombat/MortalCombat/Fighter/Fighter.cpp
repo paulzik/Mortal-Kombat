@@ -9,13 +9,15 @@ Fighter::Fighter(FighterTag _tag, SDL_Renderer *renderer)
 {
 	using Input = logic::StateTransitions::Input;
 	
+	AnimationFilmHolder& AFH = AnimationFilmHolder::Get();
 	tag = _tag;
 	health = 100.0;
 	isAlive = true;
 
 	InitializeCharacter(_tag, renderer);
 
-	sprite->SetAnimFilm(AFH->GetFilm("Idle"));
+
+	sprite->SetAnimFilm(AFH.GetFilm("Idle"));
 	AnimatorHolder::MarkAsRunning(animators->at("idle"));
 
 	Renderer = renderer;
@@ -44,7 +46,7 @@ Fighter::Fighter(FighterTag _tag, SDL_Renderer *renderer)
 	stateTransitions.SetState("Idle");
 
 	Sprite* s = sprite;
-	AnimationFilmHolder* afh = AFH;
+	AnimationFilmHolder* afh = &AFH;
 	Animators* anim = animators;
 	
 	logic::StateTransitions *state = &stateTransitions;
@@ -161,7 +163,7 @@ float Fighter::GetHealth()
 
 void Fighter::Update()
 {
-
+	AnimationFilmHolder& AFH = AnimationFilmHolder::Get();
 
 	UpdateKeys();
 	inputController.Handle();
@@ -189,6 +191,7 @@ void Fighter::Update()
 			AnimatorHolder::MarkAsRunning(animators->at("walkReverse"));
 			AnimatorHolder::MarkAsSuspended(animators->at("walk"));
 			AnimatorHolder::MarkAsSuspended(animators->at("idle"));
+
 
 		}
 		else if (item == "punchrighthigh") {
@@ -220,6 +223,8 @@ void Fighter::Update()
 	AnimatorHolder::Progress(float((float)clock() / (float)CLOCKS_PER_SEC));
 	AnimatorHolder::Render(Renderer);
 
+
+	std::cout << isActionRunning << " " << isMovementRunning << " " << isIdleRunning << std::endl;
 
 	
 }
