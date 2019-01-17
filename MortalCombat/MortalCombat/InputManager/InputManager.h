@@ -4,9 +4,9 @@
 
 namespace input {
 
-	using key_combination = std::list<int32_t>;
+	using key_combination = std::list<std::string>;
 
-	extern bool test_key(int32_t, key_combination);
+	extern bool test_key(std::string, key_combination);
 
 	inline bool test_keys(const key_combination& keys, key_combination _buttons) {
 		int count = 0;
@@ -28,7 +28,7 @@ namespace input {
 		void SetLogical(const std::string& id) { logical.insert(id); }
 
 	public:
-		std::list< int32_t > buttons;
+		std::list< std::string > buttons;
 
 		void AddAction(const input::key_combination& keys, const std::string& logical)
 		{

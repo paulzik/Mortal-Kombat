@@ -103,9 +103,9 @@
 	},
 	"Kickmid":
 	{
-		"xoffset":	534,
+		"xoffset":	0,
 		"yoffset":	596,
-		"frames":	6
+		"frames":	12
 	},
 	"Knee":
 	{

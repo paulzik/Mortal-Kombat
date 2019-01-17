@@ -60,7 +60,6 @@ public:
 			a->Resume();
 			suspended.remove(a);
 			running.push_back(a);
-
 		}
 	}
 	static void MarkAsSuspended(Animator* a)

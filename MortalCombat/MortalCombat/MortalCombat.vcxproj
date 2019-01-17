@@ -163,6 +163,7 @@
     <ClInclude Include="LayerRenderer\LayerRenderer.h" />
     <ClInclude Include="SoundEngine\SoundEngine.h" />
     <ClInclude Include="Source.h" />
+    <ClInclude Include="StateTransition\StateTransition.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

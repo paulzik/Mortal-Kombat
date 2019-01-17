@@ -11,6 +11,7 @@ class Sprite {
 public:
 	void SetFrame(BYTE i) {
 		if (i != frameNo) {
+			if (i >= currFilm->GetTotalFrames()) i = currFilm->GetTotalFrames()-1;
 			assert(i < currFilm->GetTotalFrames());
 
 			frameBox = currFilm->GetFrameBox(frameNo = i);

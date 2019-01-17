@@ -67,6 +67,9 @@
     <Filter Include="Header Files\InputManager">
       <UniqueIdentifier>{ad75a8db-3b09-4966-a44e-1a34b100e8c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\StateTransition">
+      <UniqueIdentifier>{8d39a847-fc19-48bd-a3d6-c2a8de5cc546}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animator\Animator\Animator.cpp">
@@ -187,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="InputManager\InputManager.h">
       <Filter>Header Files\InputManager</Filter>
+    </ClInclude>
+    <ClInclude Include="StateTransition\StateTransition.h">
+      <Filter>Header Files\StateTransition</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
