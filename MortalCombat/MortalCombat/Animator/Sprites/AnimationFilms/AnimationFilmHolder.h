@@ -55,7 +55,7 @@ public:
 
 			for (int k = 0; k < Array[0]; k++) {
 				SDL_Rect box;
-				box.x = k * Array[1];
+				box.x = (k)*offsetX + Array[1];
 				box.y = Array[2];
 				box.w = offsetX;
 				box.h = offsetY;

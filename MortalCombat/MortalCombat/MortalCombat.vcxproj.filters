@@ -64,6 +64,9 @@
     <Filter Include="Source Files\Fighter">
       <UniqueIdentifier>{ca5d2401-8c0a-4fa5-a869-18acf4cdbcec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\InputManager">
+      <UniqueIdentifier>{ad75a8db-3b09-4966-a44e-1a34b100e8c9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animator\Animator\Animator.cpp">
@@ -101,6 +104,9 @@
     </ClCompile>
     <ClCompile Include="Fighter\Fighter.cpp">
       <Filter>Source Files\Fighter</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager\InputManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +184,12 @@
     </ClInclude>
     <ClInclude Include="Fighter\Fighter.h">
       <Filter>Header Files\Fighter</Filter>
+    </ClInclude>
+    <ClInclude Include="Source.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager\InputManager.h">
+      <Filter>Header Files\InputManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

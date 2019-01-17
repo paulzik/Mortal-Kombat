@@ -46,17 +46,22 @@ public:
 	static void Cancel(Animator* a) { suspended.remove(a); }
 	static void MarkAsRunning(Animator* a)
 	{
-		a->isSuspended = false;
-		a->Resume();
-		suspended.remove(a); 
-		running.push_back(a);
+		if (a->isSuspended == true)
+		{
+			a->isSuspended = false;
+			a->Resume();
+			suspended.remove(a);
+			running.push_back(a);
+		}
 	}
 	static void MarkAsSuspended(Animator* a)
 	{
-		a->isSuspended = true;
-		a->Pause();
-		running.remove(a); 
-		suspended.push_back(a);
+		if (a->isSuspended == false) {
+			a->isSuspended = true;
+			a->Pause();
+			running.remove(a);
+			suspended.push_back(a);
+		}
 	}
 	static void Progress(timestamp_t currTime) {
 		if (ToBeRunning != NULL) {
