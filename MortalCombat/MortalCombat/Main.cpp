@@ -8,6 +8,7 @@
 #include <algorithm>
 #include "Animator/SDL_Helper.h"
 #include "Fighter/Fighter.h"
+#include "Arena/Arena.h"
 
 #define SCREEN_WIDTH  800
 #define SCREEN_HEIGHT 508
@@ -37,9 +38,12 @@ int main(int argc, char ** argv)
 	layerRenderer->InitializeImageElement("./Bitmaps/BattleElements/lifebar.png", LayerRenderer::Layer::Foreground, { 42,58,163 * 2,12 * 2 });
 	layerRenderer->InitializeImageElement("./Bitmaps/BattleElements/lifebar.png", LayerRenderer::Layer::Foreground, { 412,58,163 * 2,12 * 2 });
 
+	//Generate Arena
+	Arena* arena = new Arena(renderer);
 	//Generate 2 Players
 	Fighter* player1 = new Fighter(FighterTag::Scorpion, renderer);
 	//Fighter* player2 = new Fighter(FighterTag::SubZero);
+
 
 	while (!quit)
 	{

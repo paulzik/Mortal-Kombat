@@ -1,4 +1,5 @@
 #include "Animator.h"
+#include "AnimatorHolder.h"
 #include <time.h>
 
 void Animator::Stop(void) {
@@ -21,6 +22,7 @@ void Animator::Pause()
 void Animator::NotifyStopped(void) {
 	if (onFinish)
 		(*onFinish)(this, finishClosure);
+	AnimatorHolder::MarkAsSuspended(this);
 }
 
 void Animator::TimeShift(timestamp_t offset)

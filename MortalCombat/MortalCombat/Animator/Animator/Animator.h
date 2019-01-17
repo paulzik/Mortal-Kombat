@@ -9,6 +9,12 @@ enum animatorstate_t {
 	ANIMATOR_STOPPED = 2
 };
 
+enum animatortype_t {
+	action,
+	movement,
+	idle
+};
+
 class Animator {
 public:
 	typedef void(*FinishCallback)(Animator*, void*);
@@ -39,6 +45,10 @@ public:
 		return state;
 	}
 
+	animatortype_t GetType() {
+		return type;
+	}
+
 	bool isSuspended = true;
 
 	Animator(void); 
@@ -47,6 +57,7 @@ public:
 protected:
 	timestamp_t lastTime;
 	animatorstate_t state;
+	animatortype_t type;
 	FinishCallback onFinish;
 	void* finishClosure;
 	void NotifyStopped(void);

@@ -19,7 +19,10 @@ public:
 		sprite->SetFrame(currFrame = anim->GetStartFrame());
 	}
 
-
+	FrameRangeAnimator* SetType(animatortype_t _animType) {
+		type = _animType;
+		return this;
+	}
 
 	FrameRangeAnimator(void) :
 		sprite((Sprite*)0),

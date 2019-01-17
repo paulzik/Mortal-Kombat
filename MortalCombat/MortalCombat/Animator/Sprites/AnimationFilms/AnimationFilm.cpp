@@ -3,7 +3,7 @@
 void AnimationFilm::DisplayFrame(SDL_Texture *dest, const SDL_Rect& at, BYTE frameNo, SDL_Renderer* rend) const {
 	//MaskedBlit(bitmap, GetFrameBox(frameNo), dest, at);
 
-
+	//if (frameNo >= boxes.size()) frameNo = boxes.size() - 1;
 	SDL_RenderCopy(rend, dest, &boxes[frameNo], &at);
 }
 

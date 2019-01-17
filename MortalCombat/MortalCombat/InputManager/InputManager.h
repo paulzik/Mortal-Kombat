@@ -6,13 +6,14 @@ namespace input {
 
 	using key_combination = std::list<int32_t>;
 
-	extern bool test_key(int32_t);
+	extern bool test_key(int32_t, key_combination);
 
-	inline bool test_keys(const key_combination& keys) {
+	inline bool test_keys(const key_combination& keys, key_combination _buttons) {
+		int count = 0;
 		for (auto& key : keys)
-			if (!test_key(key))
-				return false;
-		return true;
+			if (test_key(key, _buttons))
+				count++;
+		return count == _buttons.size() && count > 0 && _buttons.size() == keys.size();
 	}
 
 	class InputManager final {
@@ -27,6 +28,8 @@ namespace input {
 		void SetLogical(const std::string& id) { logical.insert(id); }
 
 	public:
+		std::list< int32_t > buttons;
+
 		void AddAction(const input::key_combination& keys, const std::string& logical)
 		{
 			actions.push_back(std::make_pair(keys, logical));
@@ -34,7 +37,7 @@ namespace input {
 		void Handle(void) {
 			logical.clear();
 			for (auto& i : actions) {
-				if (input::test_keys(i.first))
+				if (input::test_keys(i.first, buttons))
 					SetLogical(i.second);
 			}
 

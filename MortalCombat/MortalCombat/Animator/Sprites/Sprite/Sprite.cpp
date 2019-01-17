@@ -1,13 +1,16 @@
 #include "Sprite.h"
 
+float Scale = 2.5f;
+
 void Sprite::Display(BITMAP * dest, const SDL_Rect& da, SDL_Renderer *rend)
 {
 	//SDL_RenderCopy(rend, dest, &frameBox, &da);
+	
 	SDL_Rect pos;
 	pos.x = x;
-	pos.y = y;
-	pos.w = 89;
-	pos.h = 149;
+	pos.y = y - 89 * Scale;
+	pos.w = 89 * Scale;
+	pos.h = 149 * Scale;
 	currFilm->DisplayFrame(currFilm->GetBitmap(), pos, frameNo, rend);
 
 	//SDL_Rect visibleArea;
@@ -40,8 +43,8 @@ void Sprite::Display(BITMAP * dest, const SDL_Rect& da, SDL_Renderer *rend)
 void Sprite::Move(int dx, int dy)
 {
 	//TODO: Make Sprite Movement
-	x += dx;
-	y += dy;
+	x += dx * Scale;
+	y += dy * Scale;
 }
 
 void Sprite::SetAnimFilm(AnimationFilm * _film, bool _reverseAnim)

@@ -28,6 +28,7 @@ private:
 	AnimatorHolder* animator;
 	typedef std::map<std::string, Animator*> Animators;
 	Animators* animators;
+	void UpdateKeys();
 
 	float health;
 	FighterTag tag;
@@ -41,12 +42,15 @@ private:
 
 		//TODO: check json for animators
 
-		sprite = new Sprite(0, 0, AFH.GetFilm("Idle"));
+
+		sprite = new Sprite(50, 350, AFH.GetFilm("Idle"));
+
 		animators = new Animators();
-		animators->insert(std::pair<std::string, Animator*>("idle", new FrameRangeAnimator()));
-		animators->insert(std::pair<std::string, Animator*>("walk", new FrameRangeAnimator()));
-		animators->insert(std::pair<std::string, Animator*>("walkReverse", new FrameRangeAnimator()));
-		animators->insert(std::pair<std::string, Animator*>("punchrighthigh", new FrameRangeAnimator()));
+		animators->insert(std::pair<std::string, Animator*>("idle", new FrameRangeAnimator()->SetType(animatortype_t::idle)));
+		animators->insert(std::pair<std::string, Animator*>("walk", new FrameRangeAnimator()->SetType(animatortype_t::movement)));
+		animators->insert(std::pair<std::string, Animator*>("walkReverse", new FrameRangeAnimator()->SetType(animatortype_t::movement)));
+		animators->insert(std::pair<std::string, Animator*>("punchrighthigh", new FrameRangeAnimator()->SetType(animatortype_t::action)));
+		animators->insert(std::pair<std::string, Animator*>("punchlefthigh", new FrameRangeAnimator()->SetType(animatortype_t::action)));
 		//animators->at("punchrighthigh")->SetOnFinish([](Animator*, void* fighter = this) {
 		//	ToBeRunning = ((Fighter*)fighter)->animators->at("idle");
 		//	ToBeSuspended = ((Fighter*)fighter)->animators->at("punchrighthigh");
@@ -56,14 +60,15 @@ private:
 
 		std::map<std::string, Animation*> animations;
 		animations.insert(std::pair<std::string, Animation*>("idle", new FrameRangeAnimation(0, 6, 0, 0, 0.075f, true, 1)));
-		animations.insert(std::pair<std::string, Animation*>("walk", new FrameRangeAnimation(0, 8, 4, 0, 0.075f, true, 0)));
-		animations.insert(std::pair<std::string, Animation*>("walkReverse", new FrameRangeAnimation(0, 8, -4, 0, 0.075f, true, 3)));
-		animations.insert(std::pair<std::string, Animation*>("punchrighthigh", new FrameRangeAnimation(0, 2, 0, 0, 0.5f, false, 2)));
+		animations.insert(std::pair<std::string, Animation*>("walk", new FrameRangeAnimation(0, 8, 6, 0, 0.075f, true, 0)));
+		animations.insert(std::pair<std::string, Animation*>("walkReverse", new FrameRangeAnimation(0, 8, -6, 0, 0.075f, true, 3)));
+		animations.insert(std::pair<std::string, Animation*>("punchrighthigh", new FrameRangeAnimation(0, 2, 0, 0, 0.06f, false, 2)));
+		animations.insert(std::pair<std::string, Animation*>("punchlefthigh", new FrameRangeAnimation(0, 5, 0, 0, 0.06f, false, 2)));
 
 		float time = clock() / CLOCKS_PER_SEC;
 		for (auto entry : *animators) {
 			((FrameRangeAnimator*)entry.second)->Start(sprite, (FrameRangeAnimation*)animations.at(entry.first), time);
-			animator->Register(entry.second);
+			AnimatorHolder::Register(entry.second);
 		}
 	}
 

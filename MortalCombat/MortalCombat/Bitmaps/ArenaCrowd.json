@@ -1,0 +1,30 @@
+{
+	"Crowdupclap":
+	{
+		"xoffset":	0,
+		"yoffset":	427,
+		"width":		87,
+		"height":	43
+	},
+	"Crowddownclap":
+	{
+		"xoffset":	0,
+		"yoffset":	470,
+		"width":		87,
+		"height":	43
+	},
+	"Crowdupwatch":
+	{
+		"xoffset":	261,
+		"yoffset":	427,
+		"width":		88,
+		"height":	40
+	},
+	"Crowddownwatch":
+	{
+		"xoffset":	261,
+		"yoffset":	467,
+		"width":		88,
+		"height":	40
+	}
+}
