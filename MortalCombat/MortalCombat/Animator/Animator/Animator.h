@@ -49,6 +49,10 @@ public:
 		return type;
 	}
 
+	int GetID() {
+		return ID;
+	}
+
 	bool isSuspended = true;
 
 	Animator(void); 
@@ -61,5 +65,5 @@ protected:
 	FinishCallback onFinish;
 	void* finishClosure;
 	void NotifyStopped(void);
-
+	int ID;
 };

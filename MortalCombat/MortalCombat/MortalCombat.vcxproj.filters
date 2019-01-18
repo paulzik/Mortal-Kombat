@@ -135,6 +135,9 @@
     <ClCompile Include="UI\BattleUI.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Animator\Animator\AnimatorHolder.cpp">
+      <Filter>Source Files\Animation\Animator</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animator\AnimationTypes\Animation.h">
