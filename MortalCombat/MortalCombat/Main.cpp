@@ -45,7 +45,7 @@ int main(int argc, char ** argv)
 	Fighter* player1 = new Fighter(FighterTag::Scorpion, PlayerIndex::P1, renderer);
 	Fighter* player2 = new Fighter(FighterTag::SubZero, PlayerIndex::P2, renderer);
 
-	BattleUI* bat = new BattleUI(renderer);
+	BattleUI* bat = new BattleUI(renderer, player1, player2);
 	while (!quit)
 	{
 
@@ -57,7 +57,7 @@ int main(int argc, char ** argv)
 		player2->Update();
 
 		layerRenderer->RenderLayer(LayerRenderer::Layer::Foreground);
-
+		bat->RenderUI();
 		
 		SDL_RenderPresent(renderer);
 	}

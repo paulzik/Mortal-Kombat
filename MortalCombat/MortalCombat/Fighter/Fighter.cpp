@@ -150,11 +150,15 @@ void Fighter::DamagePlayer(int damage)
 	health -= damage;
 	
 	//Set health back to zero to avoid visual bugs (lifebar)
+
+
 	if (health < 0)
 		health = 0;
 }
-
-float Fighter::GetHealth()
+Fighter::Fighter()
+{
+}
+int Fighter::GetHealth()
 {
 	return health;
 }
@@ -198,7 +202,6 @@ void Fighter::UpdateKeys() {
 					}
 					else if (_event.key.keysym.sym == SDLK_4) {
 						inputController.buttons.push_back("4");
-
 					}
 					else if (_event.key.keysym.sym == SDLK_5) {
 						inputController.buttons.push_back("5");

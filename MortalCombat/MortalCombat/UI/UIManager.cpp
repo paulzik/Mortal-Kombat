@@ -12,7 +12,7 @@ UIManager* UIManager::Get() {
 	return instance;
 }
 void UIManager::InitializeCurrentScene(SDL_Renderer* _renderer)
-{
+{ 
 	//currentScene
 
 };

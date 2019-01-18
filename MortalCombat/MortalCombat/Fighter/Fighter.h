@@ -32,7 +32,7 @@ private:
 	Animators*									animators;
 	void										UpdateKeys();
 						
-	float										health;
+	int										health;
 	FighterTag									tag;
 	bool										isAlive;
 	int											numberOfWins;
@@ -101,9 +101,10 @@ private:
 
 public:
 	Fighter(FighterTag _tag, int playerIndex, SDL_Renderer *renderer);
+	Fighter();
 	bool PlayerIsAlive();
 	void DamagePlayer(int damage);
-	float GetHealth();
+	int GetHealth();
 
 	void Update();
 	

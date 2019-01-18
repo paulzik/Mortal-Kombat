@@ -79,6 +79,12 @@
     <Filter Include="Source Files\StateTransition">
       <UniqueIdentifier>{ff23b46b-d8cb-46b3-9314-5faec73aa1ed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\UI">
+      <UniqueIdentifier>{d5afdf91-43ac-43b0-bc7d-ccaa83e8a376}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI">
+      <UniqueIdentifier>{0f530741-fbfb-4069-a76e-c8b306e0a07d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animator\Animator\Animator.cpp">
@@ -119,6 +125,15 @@
     </ClCompile>
     <ClCompile Include="Arena\Arena.cpp">
       <Filter>Source Files\Arena</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\UIManager.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\UICanvas.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\BattleUI.cpp">
+      <Filter>Source Files\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -208,6 +223,15 @@
     </ClInclude>
     <ClInclude Include="StateTransition\StateTransition.h">
       <Filter>Header Files\StateTransition</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UICanvas.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UIManager.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\BattleUI.h">
+      <Filter>Header Files\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

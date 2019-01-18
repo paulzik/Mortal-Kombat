@@ -21,7 +21,7 @@ public:
 
 protected:
 	SDL_Renderer* renderer;
-	vector<RenderElement> elementList;
+	vector<RenderElement*> elementList;
 
 	RenderElement* InitializeImageElement(string imagefile, SDL_Rect imageRect);
 
