@@ -64,6 +64,12 @@
     <Filter Include="Source Files\Fighter">
       <UniqueIdentifier>{ca5d2401-8c0a-4fa5-a869-18acf4cdbcec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\UI">
+      <UniqueIdentifier>{6e13facf-8ae4-4786-821c-0883851606ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI">
+      <UniqueIdentifier>{f3efffee-3cdd-47c4-8443-f5a0dfadaab2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animator\Animator\Animator.cpp">
@@ -101,6 +107,15 @@
     </ClCompile>
     <ClCompile Include="Fighter\Fighter.cpp">
       <Filter>Source Files\Fighter</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\UIManager.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\UICanvas.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\BattleUI.cpp">
+      <Filter>Source Files\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +193,15 @@
     </ClInclude>
     <ClInclude Include="Fighter\Fighter.h">
       <Filter>Header Files\Fighter</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UIManager.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UICanvas.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\BattleUI.h">
+      <Filter>Header Files\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

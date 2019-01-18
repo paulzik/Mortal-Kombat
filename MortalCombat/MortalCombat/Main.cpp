@@ -2,6 +2,7 @@
 #include <SDL_image.h>
 #include "LayerRenderer/LayerRenderer.h"
 #include "Fighter/Fighter.h"
+#include "UI/UIManager.h"
 
 #define SCREEN_WIDTH  800
 #define SCREEN_HEIGHT 508
@@ -26,13 +27,12 @@ int main(int argc, char ** argv)
 	//Back Template
 	layerRenderer->InitializeImageElement("./Bitmaps/BattleElements/template.png", LayerRenderer::Layer::Background, { 0,0,SCREEN_WIDTH,SCREEN_HEIGHT});
 	
-	//LifeBars -- TODO: Will be otimized as they are the same texture
-	layerRenderer->InitializeImageElement("./Bitmaps/BattleElements/lifebar.png", LayerRenderer::Layer::Foreground, { 42,58,163 * 2,12 * 2 });
-	layerRenderer->InitializeImageElement("./Bitmaps/BattleElements/lifebar.png", LayerRenderer::Layer::Foreground, { 412,58,163 * 2,12 * 2 });
-
 	//Generate 2 Players
-	Fighter* player1 = new Fighter(FighterTag::Scorpion);
-	Fighter* player2 = new Fighter(FighterTag::SubZero);
+	Fighter* player1 = new Fighter(FighterTag::Scorpion,0);
+	Fighter* player2 = new Fighter(FighterTag::SubZero,1);
+
+	UIManager::Get()->InitializeCurrentScene(renderer);
+	BattleUI* bat = new BattleUI(renderer);
 
 	while (!quit)
 	{
@@ -44,12 +44,12 @@ int main(int argc, char ** argv)
 			quit = true;
 			break;
 		}
-		
+		bat->RenderUI();
 
 		//Render all 3 layers
-		layerRenderer->RenderLayer(LayerRenderer::Layer::Background);
-		layerRenderer->RenderLayer(LayerRenderer::Layer::Action);
-		layerRenderer->RenderLayer(LayerRenderer::Layer::Foreground);
+		//layerRenderer->RenderLayer(LayerRenderer::Layer::Background);
+		//layerRenderer->RenderLayer(LayerRenderer::Layer::Action);
+		//layerRenderer->RenderLayer(LayerRenderer::Layer::Foreground);
 		
 		SDL_RenderPresent(renderer);
 	}

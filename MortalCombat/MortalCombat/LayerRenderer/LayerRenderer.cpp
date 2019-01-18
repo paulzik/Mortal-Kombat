@@ -1,4 +1,25 @@
 #include "LayerRenderer.h"
+#include "../UI/UIManager.h"
+
+#define SCREEN_WIDTH  800
+#define SCREEN_HEIGHT 508
+
+void LayerRenderer::DisplayBattleUI()
+{
+	InitializeImageElement("./Bitmaps/BattleElements/lifebar.png", LayerRenderer::Layer::Foreground, { 42,58,163 * 2,12 * 2 });
+	InitializeImageElement("./Bitmaps/BattleElements/lifebar.png", LayerRenderer::Layer::Foreground, { 412,58,163 * 2,12 * 2 });
+
+	InitializeImageElement("./Bitmaps/BattleElements/lifebarGreen.png", LayerRenderer::Layer::Foreground, { 44,60,120 * 2,10 * 2 });
+	InitializeImageElement("./Bitmaps/BattleElements/lifebarGreen.png", LayerRenderer::Layer::Foreground, { 414,60,120 * 2,10 * 2 });
+
+	InitializeImageElement("./Bitmaps/BattleElements/coin.png", LayerRenderer::Layer::Foreground, { 50,90,10 * 2,10 * 2 });
+	InitializeImageElement("./Bitmaps/BattleElements/coin.png", LayerRenderer::Layer::Foreground, { 80,90,10 * 2,10 * 2 });
+}
+
+void LayerRenderer::DisplayStartScreenUI()
+{
+	InitializeImageElement("./Bitmaps/Menu/StartScreen.png", LayerRenderer::Layer::Background, { 0,0,SCREEN_WIDTH,SCREEN_HEIGHT });
+}
 
 void LayerRenderer::InitializeImageElement(string imagefile, Layer renderLayer, SDL_Rect imageRect)
 {
@@ -53,5 +74,8 @@ void LayerRenderer::ClearLayerRenderer()
 LayerRenderer::LayerRenderer(SDL_Renderer* _renderer)
 {
 	renderer = _renderer;
+
+	//DisplayBattleUI();
+	UIManager::Get()->InitializeCurrentScene(_renderer);
 }
 

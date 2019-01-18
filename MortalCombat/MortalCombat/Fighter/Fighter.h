@@ -17,9 +17,10 @@ private:
 	FighterTag tag;
 	bool isAlive;
 	int numberOfWins;
+	int playerID;
 
 public:
-	Fighter(FighterTag _tag);
+	Fighter(FighterTag _tag, int playerID);
 	bool PlayerIsAlive();
 	void DamagePlayer(int damage);
 	float GetHealth();
