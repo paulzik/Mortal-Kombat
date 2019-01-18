@@ -21,7 +21,7 @@ void BattleUI::InitializeUI()
 	player1UI.lifebarGreen = InitializeImageElement("./Bitmaps/BattleElements/lifebarGreen.png", { 44,60,322,20 });
 	player1UI.name = InitializeImageElement("./Bitmaps/BattleElements/ScorpionName.png", { 59,57,224,25 });
 
-	//player1UI.coins.push_back(InitializeImageElement("./Bitmaps/BattleElements/coin.png", { 50,90,20,20 }));
+	player1UI.coins.push_back(InitializeImageElement("./Bitmaps/BattleElements/coin.png", { 50,90,20,20 }));
 	//player1UI.coins.push_back(InitializeImageElement("./Bitmaps/BattleElements/coin.png", { 75,90,20,20 }));
 
 	player2UI.lifebarRed = InitializeImageElement("./Bitmaps/BattleElements/lifebar.png", { 412,58,163 * 2,24 });

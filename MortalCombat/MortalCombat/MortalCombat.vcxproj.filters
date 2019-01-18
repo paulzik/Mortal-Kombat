@@ -85,6 +85,12 @@
     <Filter Include="Source Files\UI">
       <UniqueIdentifier>{0f530741-fbfb-4069-a76e-c8b306e0a07d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\HorizonLayer">
+      <UniqueIdentifier>{31a0d295-6952-4b48-84f5-1b4bf7107906}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\HorizonLayer">
+      <UniqueIdentifier>{a0d57292-0b80-43ba-b278-33084a5e3703}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animator\Animator\Animator.cpp">
@@ -134,6 +140,9 @@
     </ClCompile>
     <ClCompile Include="UI\BattleUI.cpp">
       <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="HorizonLayer\HorizonLayer.cpp">
+      <Filter>Source Files\HorizonLayer</Filter>
     </ClCompile>
     <ClCompile Include="UI\WelcomeUI.cpp">
       <Filter>Source Files\UI</Filter>
@@ -235,6 +244,9 @@
     </ClInclude>
     <ClInclude Include="UI\BattleUI.h">
       <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="HorizonLayer\HorizonLayer.h">
+      <Filter>Header Files\HorizonLayer</Filter>
     </ClInclude>
     <ClInclude Include="UI\WelcomeUI.h">
       <Filter>Header Files\UI</Filter>

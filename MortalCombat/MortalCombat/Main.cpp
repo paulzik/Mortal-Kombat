@@ -10,6 +10,7 @@
 #include "Fighter/Fighter.h"
 #include "UI/UIManager.h"
 #include "Arena/Arena.h"
+#include "HorizonLayer/HorizonLayer.h"
 
 #define SCREEN_WIDTH  800
 #define SCREEN_HEIGHT 508
@@ -17,6 +18,7 @@
 
 int main(int argc, char ** argv)
 {
+
 	bool quit = false;
 	SDL_Event event;
 
@@ -26,6 +28,7 @@ int main(int argc, char ** argv)
 		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
 	SDL_Renderer * renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
+	HorizonLayer hl(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 	SDL_Rect button_pos = {42,58,163*2,12*2};
 	SDL_Rect button_pos2 = { 412,58,163 * 2,12 * 2 };
@@ -53,7 +56,9 @@ int main(int argc, char ** argv)
 	{
 
 		//Render all 3 layers
-		layerRenderer->RenderLayer(LayerRenderer::Layer::Background);
+		SDL_RenderClear(renderer);
+		hl.DisplayHorizon();
+		//layerRenderer->RenderLayer(LayerRenderer::Layer::Background);
 
 		layerRenderer->RenderLayer(LayerRenderer::Layer::Action);
 		player1->Update();
