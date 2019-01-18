@@ -85,17 +85,23 @@ namespace logic {
 			auto&	edges(i->second);
 
 			std::set<std::string> fired;
-
-			for (auto& edge : edges)
-				if (std::includes(input.begin(), input.end(), edge.begin(), edge.end() )) {	// is subset
-					auto j(table.find(state + MakeKey(edge)));
-					assert(j != table.end());
-					auto& key(j->first);
-					if (useMaximalEdges)
-						InsertByRetainingMaximalEdges(fired, key);
-					else
-						fired.insert(key);
-				}
+			Input inputNOT_CONST = input;
+			inputNOT_CONST.sort();
+			if (input.size() != 0)
+			{
+				if (inputNOT_CONST.size() == 3)
+					int kkkk = 0;
+				for (auto& edge : edges)
+					if (std::includes(edge.begin(), edge.end(), inputNOT_CONST.begin(), inputNOT_CONST.end())) {	// is subset
+						auto j(table.find(state + MakeKey(edge)));
+						assert(j != table.end());
+						auto& key(j->first);
+						if (useMaximalEdges)
+							InsertByRetainingMaximalEdges(fired, key);
+						else
+							fired.insert(key);
+					}
+			}
 			//std::cout << "Animations Triggered: " << fired.size() << std::endl;
 			if (fired.empty())
 				PerformDefaultTransition();

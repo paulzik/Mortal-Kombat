@@ -29,9 +29,13 @@ public:
 		return sprite;
 	}
 
-	FrameRangeAnimator(void) :
+	FrameRangeAnimator(int _id) :
 		sprite((Sprite*)0),
-		anim((FrameRangeAnimation*)0), currFrame(0xFF) {}
+		anim((FrameRangeAnimation*)0), currFrame(0xFF)
+		
+	{
+		ID = _id;
+	}
 	~FrameRangeAnimator() {}
 
 	// Inherited via Animator

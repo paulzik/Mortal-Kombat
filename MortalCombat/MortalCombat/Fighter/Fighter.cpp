@@ -1,4 +1,5 @@
 #include "Fighter.h"
+#include <algorithm>
 #include <future>
 
 Direction direction = Direction::none;
@@ -20,9 +21,15 @@ Fighter::Fighter(FighterTag _tag, int playerIndex, SDL_Renderer *renderer)
 
 
 	//sprite->SetAnimFilm(AFH.GetFilm("Idle"));
-	AnimatorHolder::MarkAsRunning(animators->at("Idle"));
+	//AnimatorHolder::MarkAsRunning(animators->at("Idle"));
 
 	Renderer = renderer;
+
+	input::key_combination test;
+	test.push_back("4");
+	test.push_back("4");
+	test.push_back("4");
+	inputController.AddAction(test, "test");
 
 	input::key_combination moveForward;
 	moveForward.push_back("d");
@@ -55,56 +62,63 @@ Fighter::Fighter(FighterTag _tag, int playerIndex, SDL_Renderer *renderer)
 	state->SetState("Idle");
 
 	stateTransitions.SetTransition("Idle", Input{ }, [s, afh, anim, state](void) {
-		//s->SetAnimFilm(afh->GetFilm("Idle"));
 		AnimatorHolder::MarkAsSuspended(anim->at("Walk"));
 		AnimatorHolder::MarkAsSuspended(anim->at("WalkReverse"));
-		AnimatorHolder::MarkAsSuspended(anim->at("Punchrighthigh"));
-		AnimatorHolder::MarkAsSuspended(anim->at("Punchlefthigh"));
 		AnimatorHolder::MarkAsRunning(anim->at("Idle"));
-	});
-	stateTransitions.SetTransition("Idle", playerIndex == P1 ? Input{ "d" } : Input{ "j" }, [s, afh, anim](void) {
-		//s->SetAnimFilm(afh->GetFilm("Walk"));
 
-		AnimatorHolder::MarkAsSuspended(anim->at("Punchrighthigh"));
-		AnimatorHolder::MarkAsSuspended(anim->at("WalkReverse"));
-		AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
-		AnimatorHolder::MarkAsSuspended(anim->at("Punchlefthigh"));
-		AnimatorHolder::MarkAsRunning(anim->at("Walk"));
-		
 	});
-	stateTransitions.SetTransition("Idle", playerIndex == P1 ? Input{ "a" } : Input{ "l" }, [s, afh, anim](void) {
-		//s->SetAnimFilm(afh->GetFilm("Walk"), true);
-		AnimatorHolder::MarkAsSuspended(anim->at("Punchrighthigh"));
-		AnimatorHolder::MarkAsSuspended(anim->at("Walk"));
+	stateTransitions.SetTransition("Idle", Input{ "4.4.4" }, [s, afh, anim, state](void) {
+		std::cout << "MPIKA" << std::endl;
+
+	});
+	stateTransitions.SetTransition("Idle", Input{ "d" }, [s, afh, anim, state](void) {
 		AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
-		AnimatorHolder::MarkAsSuspended(anim->at("Punchlefthigh"));
+		state->SetState("Walk");
+	});
+	stateTransitions.SetTransition("Walk", Input{ }, [s, afh, anim, state](void) {
+		state->SetState("Idle");
+	});
+	stateTransitions.SetTransition("Idle", Input{ "a" }, [s, afh, anim, state](void) {
+		AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+		state->SetState("WalkRev");
+	});
+	stateTransitions.SetTransition("WalkRev", Input{ }, [s, afh, anim, state](void) {
+		state->SetState("Idle");
+	});
+	stateTransitions.SetTransition("Walk", playerIndex == P1 ? Input{ "d" } : Input{ "j" }, [s, afh, anim, state](void) {
+		AnimatorHolder::MarkAsSuspended(anim->at("WalkReverse"));
+		AnimatorHolder::MarkAsRunning(anim->at("Walk"));
+	});
+	stateTransitions.SetTransition("WalkRev", playerIndex == P1 ? Input{ "a" } : Input{ "l" }, [s, afh, anim, state](void) {
+		AnimatorHolder::MarkAsSuspended(anim->at("Walk"));
 		AnimatorHolder::MarkAsRunning(anim->at("WalkReverse"));
 
 	});
-	stateTransitions.SetTransition("Idle", playerIndex == P1 ? Input{ "4" } : Input{ "8" }, [s, afh, anim, state](void) {
-		//s->SetAnimFilm(afh->GetFilm("Punchrighthigh"));
-		AnimatorHolder::MarkAsSuspended(anim->at("Walk"));
-		AnimatorHolder::MarkAsSuspended(anim->at("WalkReverse"));
-		AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
-		AnimatorHolder::MarkAsSuspended(anim->at("Punchlefthigh"));
-		AnimatorHolder::MarkAsRunning(anim->at("Punchrighthigh"));
-		state->SetState("HighPunch1");
+
+	//stateTransitions.SetTransition("Idle", playerIndex == P1 ? Input{ "4" } : Input{ "8" }, [s, afh, anim, state](void) {
+	//	//s->SetAnimFilm(afh->GetFilm("Punchrighthigh"));
+	//	AnimatorHolder::MarkAsSuspended(anim->at("Walk"));
+	//	AnimatorHolder::MarkAsSuspended(anim->at("WalkReverse"));
+	//	AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+	//	AnimatorHolder::MarkAsSuspended(anim->at("Punchlefthigh"));
+	//	AnimatorHolder::MarkAsRunning(anim->at("Punchrighthigh"));
+	//	state->SetState("HighPunch1");
 
 
-	});
-	stateTransitions.SetTransition("HighPunch1", playerIndex == P1 ? Input{ "4" } : Input{ "8" }, [s, afh, anim, state](void) {
-		//s->SetAnimFilm(afh->GetFilm("Punchlefthigh"));
-		//AnimatorHolder::MarkAsSuspended(anim->at("Walk"));
-		//AnimatorHolder::MarkAsSuspended(anim->at("WalkReverse"));
-		//AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
-		AnimatorHolder::MarkAsSuspended(anim->at("Punchrighthigh"));
-		AnimatorHolder::MarkAsRunning(anim->at("Punchlefthigh"));
-		//state->SetState("Idle");
+	//});
+	//stateTransitions.SetTransition("HighPunch1", playerIndex == P1 ? Input{ "4" } : Input{ "8" }, [s, afh, anim, state](void) {
+	//	//s->SetAnimFilm(afh->GetFilm("Punchlefthigh"));
+	//	//AnimatorHolder::MarkAsSuspended(anim->at("Walk"));
+	//	//AnimatorHolder::MarkAsSuspended(anim->at("WalkReverse"));
+	//	//AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+	//	AnimatorHolder::MarkAsSuspended(anim->at("Punchrighthigh"));
+	//	AnimatorHolder::MarkAsRunning(anim->at("Punchlefthigh"));
+	//	//state->SetState("Idle");
 
-	});
-	stateTransitions.SetTransition("HighPunch1", Input{  }, [s, afh, anim, state](void) {
-		state->SetState("Idle");
-	});
+	//});
+	//stateTransitions.SetTransition("HighPunch1", Input{  }, [s, afh, anim, state](void) {
+	//	state->SetState("Idle");
+	//});
 	//stateTransitions.SetTransition("Idle", Input{ "5" }, [s, afh, anim, state](void) {
 	//	s->SetAnimFilm(afh->GetFilm("Kickmid"));
 	//	AnimatorHolder::MarkAsRunning(anim->at("kickmid"));
@@ -165,48 +179,70 @@ int Fighter::GetHealth()
 
 void Fighter::Update()
 {
+	using Input = logic::StateTransitions::Input;
+
 	AnimationFilmHolder& AFH = AnimationFilmHolder::Get();
 
 	UpdateKeys();
 	inputController.Handle();
-	bool isActionRunning = false;
-	bool isMovementRunning = false;
-	bool isIdleRunning = false;
-	
 
-	stateTransitions.PerformTransitions(inputController.buttons, false);
+	std::string str = "";
+	for (std::list<std::string>::iterator it = inputController.buttons.begin(); it != inputController.buttons.end(); ++it) {
+		if (std::next(it) == inputController.buttons.end()){
+			str.append(*it);
+		}
+		else
+			str.append(*it + ".");
+
+		std::cout << str << std::endl;
+	}
+	stateTransitions.PerformTransitions(Input{ str }, false);
 
 	AnimatorHolder::Progress(float((float)clock() / (float)CLOCKS_PER_SEC));
 	AnimatorHolder::Render(Renderer);
 }
-
+bool kayPressed[500000];
 void Fighter::UpdateKeys() {
 	SDL_Event _event;
-	SDL_PollEvent(&_event);
-	switch (_event.type)
+	while(SDL_PollEvent(&_event))
+	switch (_event.key.state)
 	{
-		case SDL_KEYDOWN: {
+		case SDL_PRESSED: {
 			if (_event.key.state == SDL_PRESSED)
 			{
 				if (playerIndex == P1)
 				{
 					if (_event.key.keysym.sym == SDLK_d) {
 						direction = Direction::right;
-						inputController.buttons.push_back("d");
-
+						//if (!kayPressed[_event.key.keysym.sym])
+						{
+							//inputController.buttons.push_back("d");
+							kayPressed[_event.key.keysym.sym] = true;
+						}
 					}
 					else if (_event.key.keysym.sym == SDLK_a) {
 						direction = Direction::left;
-						inputController.buttons.push_back("a");
-
+						//if (kayPressed[_event.key.keysym.sym])
+						{
+							//inputController.buttons.push_back("a");
+							kayPressed[_event.key.keysym.sym] = true;
+						}
 					}
 					else if (_event.key.keysym.sym == SDLK_4) {
-						inputController.buttons.push_back("4");
+						//if (kayPressed[_event.key.keysym.sym])
+						{
+							inputController.buttons.push_back("4");
+							kayPressed[_event.key.keysym.sym] = true;
+						}
 					}
 					else if (_event.key.keysym.sym == SDLK_5) {
-						inputController.buttons.push_back("5");
-
+						if (kayPressed[_event.key.keysym.sym])
+						{
+							inputController.buttons.push_back("5");
+							kayPressed[_event.key.keysym.sym] = true;
+						}
 					}
+
 				}
 				else
 				{
@@ -230,36 +266,43 @@ void Fighter::UpdateKeys() {
 					}
 				}
 				
-				
 				timer = float((float)clock() / (float)CLOCKS_PER_SEC);
 				return;
 			}	
 			break;
 		}
-		case SDL_KEYUP: {
+		case SDL_RELEASED: {
 			if (_event.key.state == SDL_RELEASED)
 			{
 				if (_event.key.keysym.sym == SDLK_d || _event.key.keysym.sym == SDLK_a) {
 					direction = Direction::none;
 				}
+				if (_event.key.keysym.sym < 500000) {
+					kayPressed[_event.key.keysym.sym] = false;
+					
+				}
+
+
 				return;
 			}
 			break;
 		}
 	}
 	if (float((float)clock() / (float)CLOCKS_PER_SEC) - timer > (float) ((float) FIGHTER_ACTION_DELAY_MSECS / 1000.0f)) {
-		
-		int k = 0;
-		for (auto i : inputController.buttons) {
-			std::cout << i << " - ";
-			if (k == inputController.buttons.size() - 1)
-				std::cout << std::endl;
-			k++;
-		}
+
 
 		inputController.buttons.clear();
-
+		if (kayPressed[SDLK_a]) {
+			inputController.buttons.push_back("a");
+		}
+		if (kayPressed[SDLK_d]) {
+			inputController.buttons.push_back("d");
+		}
 	}
+	
+	//if (kayPressed[SDLK_4]) {
+	//	inputController.buttons.push_back("4");
+	//}
 }
 
 extern bool input::test_key(std::string keyCode, key_combination buttons) {

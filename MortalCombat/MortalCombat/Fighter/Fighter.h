@@ -7,7 +7,7 @@
 #include "../../Libraries/include/SDL.h"
 #include "../StateTransition/StateTransition.h"
 
-#define	FIGHTER_ACTION_DELAY_MSECS	300
+#define	FIGHTER_ACTION_DELAY_MSECS	150
 
 enum FighterTag {SubZero, Scorpion};
 enum Direction { none, left, right };
@@ -48,13 +48,13 @@ private:
 		//sprite = new Sprite(50, 330, AFH.GetFilm("Idle"));
 
 		animators = new Animators();
-		animators->insert(std::pair<std::string, Animator*>("Idle", new FrameRangeAnimator()));
-		animators->insert(std::pair<std::string, Animator*>("Walk", new FrameRangeAnimator()));
-		animators->insert(std::pair<std::string, Animator*>("WalkReverse", new FrameRangeAnimator()));
-		animators->insert(std::pair<std::string, Animator*>("Punchrighthigh", new FrameRangeAnimator()));
-		animators->insert(std::pair<std::string, Animator*>("Punchlefthigh", new FrameRangeAnimator()));
-		animators->insert(std::pair<std::string, Animator*>("Kickmid", new FrameRangeAnimator()));
-		animators->insert(std::pair<std::string, Animator*>("Kickhigh", new FrameRangeAnimator()));
+		animators->insert(std::pair<std::string, Animator*>("Idle", new FrameRangeAnimator(0)));
+		animators->insert(std::pair<std::string, Animator*>("Walk", new FrameRangeAnimator(1)));
+		animators->insert(std::pair<std::string, Animator*>("WalkReverse", new FrameRangeAnimator(2)));
+		animators->insert(std::pair<std::string, Animator*>("Punchrighthigh", new FrameRangeAnimator(3)));
+		animators->insert(std::pair<std::string, Animator*>("Punchlefthigh", new FrameRangeAnimator(4)));
+		animators->insert(std::pair<std::string, Animator*>("Kickmid", new FrameRangeAnimator(5)));
+		animators->insert(std::pair<std::string, Animator*>("Kickhigh", new FrameRangeAnimator(6)));
 		//animators->at("punchrighthigh")->SetOnFinish([](Animator*, void* fighter = this) {
 		//	ToBeRunning = ((Fighter*)fighter)->animators->at("idle");
 		//	ToBeSuspended = ((Fighter*)fighter)->animators->at("punchrighthigh");
