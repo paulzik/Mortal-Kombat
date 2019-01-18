@@ -36,8 +36,8 @@ int main(int argc, char ** argv)
 	layerRenderer->InitializeImageElement("./Bitmaps/BattleElements/template.png", LayerRenderer::Layer::Background, { 0,0,SCREEN_WIDTH,SCREEN_HEIGHT});
 	
 	//LifeBars -- TODO: Will be otimized as they are the same texture
-	layerRenderer->InitializeImageElement("./Bitmaps/BattleElements/lifebar.png", LayerRenderer::Layer::Foreground, { 42,58,163 * 2,12 * 2 });
-	layerRenderer->InitializeImageElement("./Bitmaps/BattleElements/lifebar.png", LayerRenderer::Layer::Foreground, { 412,58,163 * 2,12 * 2 });
+	//layerRenderer->InitializeImageElement("./Bitmaps/BattleElements/lifebar.png", LayerRenderer::Layer::Foreground, { 42,58,163 * 2,12 * 2 });
+	//layerRenderer->InitializeImageElement("./Bitmaps/BattleElements/lifebar.png", LayerRenderer::Layer::Foreground, { 412,58,163 * 2,12 * 2 });
 
 	//Generate Arena
 	Arena* arena = new Arena(renderer);
@@ -45,7 +45,10 @@ int main(int argc, char ** argv)
 	Fighter* player1 = new Fighter(FighterTag::Scorpion, PlayerIndex::P1, renderer);
 	Fighter* player2 = new Fighter(FighterTag::SubZero, PlayerIndex::P2, renderer);
 
-	BattleUI* bat = new BattleUI(renderer, player1, player2);
+	UIManager::Get()->InitializeManager(renderer);
+	UIManager::Get()->InitializeBattleScene(player1, player2);
+	UIManager::Get()->InitializeWelcomeScene();
+
 	while (!quit)
 	{
 
@@ -57,7 +60,9 @@ int main(int argc, char ** argv)
 		player2->Update();
 
 		layerRenderer->RenderLayer(LayerRenderer::Layer::Foreground);
-		bat->RenderUI();
+
+		UIManager::Get()->RenderScene();
+		
 		
 		SDL_RenderPresent(renderer);
 	}

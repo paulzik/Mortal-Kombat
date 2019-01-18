@@ -1,14 +1,10 @@
 #include "UICanvas.h"
-
-
-
-UICanvas::UICanvas()
-{
-}
+#include "UIManager.h"
 
 
 void UICanvas::InitializeUI() {
 }
+
 
 UICanvas::RenderElement* UICanvas::InitializeImageElement(string imagefile, SDL_Rect imageRect)
 {
@@ -18,7 +14,6 @@ UICanvas::RenderElement* UICanvas::InitializeImageElement(string imagefile, SDL_
 	//Preload texture
 	element->texture = IMG_LoadTexture(renderer, imFile);
 	element->imageRect = imageRect;
-	
 	elementList.push_back(element);
 	
 	return elementList[elementList.size()-1];

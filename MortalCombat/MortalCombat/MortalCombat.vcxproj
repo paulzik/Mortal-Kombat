@@ -138,6 +138,7 @@
     <ClCompile Include="UI\BattleUI.cpp" />
     <ClCompile Include="UI\UICanvas.cpp" />
     <ClCompile Include="UI\UIManager.cpp" />
+    <ClCompile Include="UI\WelcomeUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animator\AnimationTypes\Animation.h" />
@@ -172,6 +173,7 @@
     <ClInclude Include="UI\UIManager.h" />
     <ClInclude Include="Source.h" />
     <ClInclude Include="StateTransition\StateTransition.h" />
+    <ClInclude Include="UI\WelcomeUI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

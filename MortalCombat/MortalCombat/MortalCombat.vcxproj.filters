@@ -135,6 +135,9 @@
     <ClCompile Include="UI\BattleUI.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
+    <ClCompile Include="UI\WelcomeUI.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animator\AnimationTypes\Animation.h">
@@ -231,6 +234,9 @@
       <Filter>Header Files\UI</Filter>
     </ClInclude>
     <ClInclude Include="UI\BattleUI.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\WelcomeUI.h">
       <Filter>Header Files\UI</Filter>
     </ClInclude>
   </ItemGroup>

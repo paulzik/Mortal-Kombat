@@ -9,13 +9,13 @@ using namespace std;
 class UICanvas
 {
 public:
-	UICanvas();
 
 	virtual void InitializeUI() = 0;
 	virtual void RenderUI();
 
 	struct RenderElement {
 		SDL_Rect imageRect;
+		SDL_Rect imageSourceRect;
 		SDL_Texture* texture;
 	};
 
