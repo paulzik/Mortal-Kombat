@@ -8,7 +8,7 @@
 
 Arena::Arena(SDL_Renderer *renderer)
 {
-	InitializeArena(renderer);
+	//InitializeArena(renderer);
 }
 
 //Arena::~Arena()
@@ -17,8 +17,8 @@ Arena::Arena(SDL_Renderer *renderer)
 
 void Arena::InitializeArena(SDL_Renderer *renderer)
 {
-	AnimationFilmHolder& AFH = AnimationFilmHolder::Get();
-	AFH.Load("Arena", renderer);
+	//AnimationFilmHolder& AFH = AnimationFilmHolder::Get();
+	//AFH.Load("Arena", renderer);
 
 	//sprite = new Sprite(0, 0, AFH.GetFilm("Sky"));
 
