@@ -51,6 +51,7 @@ int main(int argc, char ** argv)
 	UIManager::Get()->InitializeManager(renderer);
 	UIManager::Get()->InitializeBattleScene(player1, player2);
 	UIManager::Get()->InitializeWelcomeScene();
+	UIManager::Get()->InitializeOptionsScene();
 
 	while (!quit)
 	{

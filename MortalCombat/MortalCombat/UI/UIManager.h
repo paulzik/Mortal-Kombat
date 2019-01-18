@@ -3,6 +3,7 @@
 #include <SDL.h>        
 #include <vector>
 #include <SDL_image.h>
+#include "OptionsUI.h"
 
 using namespace std;
 enum SceneTag { Welcome, Battle, Options };
@@ -16,6 +17,7 @@ public:
 	static void InitializeManager(SDL_Renderer* _renderer);
 	static void InitializeBattleScene(Fighter* player1, Fighter* player2);
 	static void InitializeWelcomeScene();
+	static void InitializeOptionsScene();
 
 	static void RenderScene();
 	static SDL_Renderer* GetRenderer();
@@ -25,6 +27,7 @@ private:
 	static UIManager* instance;
 	static BattleUI* GetBattleUI();
 	static BattleUI* battleScene;
+	static OptionsUI* optionsScene;
 	static void DisplayScene(SceneTag sceneTag);
 	
 };

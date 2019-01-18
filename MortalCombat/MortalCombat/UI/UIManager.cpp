@@ -3,6 +3,7 @@
 UIManager* UIManager::instance;
 SDL_Renderer* UIManager::renderer;
 BattleUI* UIManager::battleScene;
+OptionsUI* UIManager::optionsScene;
 
 UIManager* UIManager::Get() {
 	if (!instance) {
@@ -27,6 +28,10 @@ void UIManager::InitializeBattleScene(Fighter* player1, Fighter* player2)
 void UIManager::InitializeWelcomeScene()
 {
 
+}
+
+void UIManager::InitializeOptionsScene()
+{
 }
 
 void UIManager::RenderScene()

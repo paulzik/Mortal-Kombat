@@ -137,6 +137,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="SoundEngine\SoundEngine.cpp" />
     <ClCompile Include="UI\BattleUI.cpp" />
+    <ClCompile Include="UI\OptionsUI.cpp" />
     <ClCompile Include="UI\UICanvas.cpp" />
     <ClCompile Include="UI\UIManager.cpp" />
     <ClCompile Include="UI\WelcomeUI.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="LayerRenderer\LayerRenderer.h" />
     <ClInclude Include="SoundEngine\SoundEngine.h" />
     <ClInclude Include="UI\BattleUI.h" />
+    <ClInclude Include="UI\OptionsUI.h" />
     <ClInclude Include="UI\UICanvas.h" />
     <ClInclude Include="UI\UIManager.h" />
     <ClInclude Include="Source.h" />
