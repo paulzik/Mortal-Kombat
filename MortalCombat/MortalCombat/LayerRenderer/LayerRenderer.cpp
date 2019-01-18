@@ -76,6 +76,6 @@ LayerRenderer::LayerRenderer(SDL_Renderer* _renderer)
 	renderer = _renderer;
 
 	//DisplayBattleUI();
-	UIManager::Get()->InitializeCurrentScene(_renderer);
+	//UIManager::Get()->InitializeCurrentScene(_renderer);
 }
 

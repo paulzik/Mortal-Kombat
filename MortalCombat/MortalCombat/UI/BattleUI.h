@@ -7,18 +7,23 @@
 class BattleUI : public UICanvas
 {
 public:
-	BattleUI(SDL_Renderer* _renderer, Fighter* player1, Fighter* player2);
+	struct PlayerUI
+	{
+		RenderElement* lifebarRed;
+		RenderElement* lifebarGreen;
+		RenderElement* name;
+		vector<RenderElement*> coins;
+	};
+
+	
+
+	BattleUI(Fighter* player1, Fighter* player2);
 	
 	virtual void InitializeUI();
 	void RenderUI();
 private:
 	Fighter *player1, *player2;
-
-	RenderElement* player1Lifebar;
-	RenderElement* player1Coins;
-
-	RenderElement* player2Lifebar;
-	RenderElement* player2Coins;
+	PlayerUI player1UI, player2UI;
 
 };
 

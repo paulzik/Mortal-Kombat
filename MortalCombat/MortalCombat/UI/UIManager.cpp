@@ -1,6 +1,8 @@
 #include "UIManager.h"
 
 UIManager* UIManager::instance;
+SDL_Renderer* UIManager::renderer;
+BattleUI* UIManager::battleScene;
 
 UIManager* UIManager::Get() {
 	if (!instance) {
@@ -11,8 +13,33 @@ UIManager* UIManager::Get() {
 
 	return instance;
 }
-void UIManager::InitializeCurrentScene(SDL_Renderer* _renderer)
+void UIManager::InitializeManager(SDL_Renderer* _renderer)
 { 
-	//currentScene
+	//SelectScene(SceneTag::Welcome);
+	renderer = _renderer;
+}
 
-};
+void UIManager::InitializeBattleScene(Fighter* player1, Fighter* player2)
+{
+	battleScene = new BattleUI(player1, player2);
+}
+
+void UIManager::InitializeWelcomeScene()
+{
+
+}
+
+void UIManager::RenderScene()
+{
+	battleScene->RenderUI();
+}
+
+void UIManager::DisplayScene(SceneTag sceneTag)
+{
+	
+}
+SDL_Renderer * UIManager::GetRenderer()
+{
+	return renderer;
+}
+;

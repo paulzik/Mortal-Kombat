@@ -8,8 +8,10 @@ bool HorizonLayer::ClippedEntirely(SDL_Rect& area, SDL_Rect& in, SDL_Rect* out)
 }
 
 
-void HorizonLayer::DisplayHorizon(SDL_Rect& vw, SDL_Rect& da) {
-	
+void HorizonLayer::DisplayHorizon(SDL_Rect& vw, SDL_Rect& da)
+{
+	SD
+
 	for (int i = 0; i < TOTAL_HOBJECTS; ++i) {
 		SDL_Rect clipRect;
 		if (!ClippedEntirely(vw, hRects[i], &clipRect)) {

@@ -1,11 +1,12 @@
 #include "BattleUI.h"
+#include "../UI/UIManager.h"
 #include <string>
 
 using namespace std;
 
-BattleUI::BattleUI(SDL_Renderer* _renderer, Fighter* _player1, Fighter* _player2)
+BattleUI::BattleUI(Fighter* _player1, Fighter* _player2)
 {
-	renderer = _renderer;
+	renderer = UIManager::Get()->GetRenderer();
 	player1 = _player1;
 	player2 = _player2;
 
@@ -16,20 +17,24 @@ BattleUI::BattleUI(SDL_Renderer* _renderer, Fighter* _player1, Fighter* _player2
 
 void BattleUI::InitializeUI() 
 {
-	InitializeImageElement("./Bitmaps/BattleElements/lifebar.png", { 42,58,163 * 2,12 * 2 });
-	InitializeImageElement("./Bitmaps/BattleElements/lifebar.png",  { 412,58,163 * 2,12 * 2 });
+	player1UI.lifebarRed = InitializeImageElement("./Bitmaps/BattleElements/lifebar.png", {42,58,163 * 2,24 });
+	player1UI.lifebarGreen = InitializeImageElement("./Bitmaps/BattleElements/lifebarGreen.png", { 44,60,322,20 });
+	player1UI.name = InitializeImageElement("./Bitmaps/BattleElements/ScorpionName.png", { 59,57,224,25 });
 
-	player1Lifebar = InitializeImageElement("./Bitmaps/BattleElements/lifebarGreen.png",  { 44,60,322,20 });
-	player2Lifebar = InitializeImageElement("./Bitmaps/BattleElements/lifebarGreen.png", { 414,60,322,20 });
+	player1UI.coins.push_back(InitializeImageElement("./Bitmaps/BattleElements/coin.png", { 50,90,20,20 }));
+	//player1UI.coins.push_back(InitializeImageElement("./Bitmaps/BattleElements/coin.png", { 75,90,20,20 }));
 
-	player1Coins = InitializeImageElement("./Bitmaps/BattleElements/coin.png",  { 50,90,10 * 2,10 * 2 });
-	player2Coins = InitializeImageElement("./Bitmaps/BattleElements/coin.png",  { 80,90,10 * 2,10 * 2 });
+	player2UI.lifebarRed = InitializeImageElement("./Bitmaps/BattleElements/lifebar.png", { 412,58,163 * 2,24 });
+	player2UI.lifebarGreen = InitializeImageElement("./Bitmaps/BattleElements/lifebarGreen.png", { 414,60,322,20 });
+	player2UI.name = InitializeImageElement("./Bitmaps/BattleElements/SubzeroName.png", { 570,57,224,25 });
+
 }
 
 void BattleUI::RenderUI()
 {
-	player1Lifebar->imageRect = { 44,60, (322 * player1->GetHealth())/100,10 * 2 };
-	player2Lifebar->imageRect = { 414 + 322 - (322 * player1->GetHealth())/100,60, (322 * player1->GetHealth()) / 100,10 * 2 };
+
+	player1UI.lifebarGreen->imageRect = { 44,60, (322 * player1->GetHealth())/100,20 };
+	player2UI.lifebarGreen->imageRect = { 414 + 322 - (322 * player1->GetHealth())/100,60, (322 * player1->GetHealth()) / 100,20 };
 
 	UICanvas::RenderUI();
 }
