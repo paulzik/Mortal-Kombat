@@ -282,7 +282,7 @@ void Fighter::UpdateKeys() {
 					
 				}
 
-				
+
 				return;
 			}
 			break;
@@ -290,15 +290,16 @@ void Fighter::UpdateKeys() {
 	}
 	if (float((float)clock() / (float)CLOCKS_PER_SEC) - timer > (float) ((float) FIGHTER_ACTION_DELAY_MSECS / 1000.0f)) {
 
+
 		inputController.buttons.clear();
-		//stateTransitions.SetState("Idle");
+		if (kayPressed[SDLK_a]) {
+			inputController.buttons.push_back("a");
+		}
+		if (kayPressed[SDLK_d]) {
+			inputController.buttons.push_back("d");
+		}
 	}
-	if (kayPressed[SDLK_a]) {
-		inputController.buttons.push_back("a");
-	}
-	if (kayPressed[SDLK_d]) {
-		inputController.buttons.push_back("d");
-	}
+	
 	//if (kayPressed[SDLK_4]) {
 	//	inputController.buttons.push_back("4");
 	//}
