@@ -11,7 +11,8 @@ void Sprite::Display(BITMAP * dest, const SDL_Rect& da, SDL_Renderer *rend)
 	pos.y = y - 89 * Scale;
 	pos.w = 89 * Scale;
 	pos.h = 149 * Scale;
-	currFilm->DisplayFrame(currFilm->GetBitmap(), pos, frameNo, rend);
+	if (isVisible)
+		currFilm->DisplayFrame(currFilm->GetBitmap(), pos, frameNo, rend);
 
 	//SDL_Rect visibleArea;
 	//SDL_Rect spriteArea;

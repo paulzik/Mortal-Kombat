@@ -11,17 +11,22 @@ class FrameRangeAnimator : public Animator {
 public:
 	void Progress(timestamp_t currTime);
 	
-	void Start(Sprite* s, FrameRangeAnimation* a, timestamp_t t) {
+	void Start(Sprite* s, FrameRangeAnimation* a, timestamp_t t, bool isReverse = false) {
 		sprite = s;
 		anim = a;
 		lastTime = t;
 		state = ANIMATOR_RUNNING;
 		sprite->SetFrame(currFrame = anim->GetStartFrame());
+		sprite->GetAnimationFilm()->SetReverseAnimation(isReverse);
 	}
 
 	FrameRangeAnimator* SetType(animatortype_t _animType) {
 		type = _animType;
 		return this;
+	}
+
+	Sprite* GetSprite() {
+		return sprite;
 	}
 
 	FrameRangeAnimator(void) :

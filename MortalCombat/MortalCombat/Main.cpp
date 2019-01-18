@@ -41,8 +41,8 @@ int main(int argc, char ** argv)
 	//Generate Arena
 	Arena* arena = new Arena(renderer);
 	//Generate 2 Players
-	Fighter* player1 = new Fighter(FighterTag::Scorpion, renderer);
-	//Fighter* player2 = new Fighter(FighterTag::SubZero);
+	Fighter* player1 = new Fighter(FighterTag::Scorpion, PlayerIndex::P1, renderer);
+	Fighter* player2 = new Fighter(FighterTag::SubZero, PlayerIndex::P2, renderer);
 
 
 	while (!quit)
@@ -55,6 +55,7 @@ int main(int argc, char ** argv)
 
 		layerRenderer->RenderLayer(LayerRenderer::Layer::Action);
 		player1->Update();
+		player2->Update();
 
 		layerRenderer->RenderLayer(LayerRenderer::Layer::Foreground);
 

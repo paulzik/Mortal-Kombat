@@ -2,6 +2,7 @@
 #include <list>
 #include <algorithm>
 #include "Animator.h"
+#include "FrameRangeAnimator.h"
 
 static std::list<Animator*> running, suspended;
 static Animator* ToBeRunning, *ToBeSuspended;
@@ -60,6 +61,8 @@ public:
 			a->Resume();
 			suspended.remove(a);
 			running.push_back(a);
+			((FrameRangeAnimator*)a)->GetSprite()->SetVisibility(true);
+
 		}
 	}
 	static void MarkAsSuspended(Animator* a)
@@ -70,7 +73,7 @@ public:
 			a->Pause();
 			running.remove(a);
 			suspended.push_back(a);
-
+			((FrameRangeAnimator*)a)->GetSprite()->SetVisibility(false);
 		}
 	}
 	static void Progress(timestamp_t currTime) {
