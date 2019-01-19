@@ -63,7 +63,7 @@ int main(int argc, char ** argv)
 
 		layerRenderer->RenderLayer(LayerRenderer::Layer::Action);
 		player1->Update();
-		player2->Update();
+		//player2->Update();
 
 		layerRenderer->RenderLayer(LayerRenderer::Layer::Foreground);
 

@@ -2,6 +2,7 @@
 #include "Animator.h"
 #include "../Sprites/Sprite/Sprite.h"
 #include "../AnimationTypes/FrameRangeAnimation.h"
+#include "../../StateTransition/StateTransition.h"
 
 class FrameRangeAnimator : public Animator {
 	Sprite* sprite;
@@ -9,7 +10,9 @@ class FrameRangeAnimator : public Animator {
 	frame_t currFrame;
 
 public:
-	void Progress(timestamp_t currTime);
+	void Progress(timestamp_t currTime) ;
+
+	void SetLogicState(logic::StateTransitions& state) override;
 	
 	void Start(Sprite* s, FrameRangeAnimation* a, timestamp_t t, bool isReverse = false) {
 		sprite = s;

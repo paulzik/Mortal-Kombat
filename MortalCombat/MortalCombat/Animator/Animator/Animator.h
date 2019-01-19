@@ -1,5 +1,6 @@
 #pragma once
 #include "SDL.h"
+#include "../../StateTransition/StateTransition.h"
 typedef long float timestamp_t;
 
 
@@ -25,6 +26,8 @@ public:
 
 	void Pause();
 
+	virtual void SetLogicState(logic::StateTransitions& state) = 0;
+
 	bool HasFinished(void) const
 	{
 		return state != ANIMATOR_RUNNING;
@@ -43,6 +46,10 @@ public:
 
 	animatorstate_t GetState() {
 		return state;
+	}
+
+	void SetState(animatorstate_t _state) {
+		state = _state;
 	}
 
 	animatortype_t GetType() {
@@ -66,4 +73,5 @@ protected:
 	void* finishClosure;
 	void NotifyStopped(void);
 	int ID;
+	logic::StateTransitions* State;
 };

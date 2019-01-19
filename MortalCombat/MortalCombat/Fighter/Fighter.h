@@ -20,6 +20,7 @@ private:
 	Sprite*			sprite = nullptr;
 	std::string FighterName[2] = { "SubZero", "Scorpion" };
 	int x = 50, y = 330;
+	static int index;
 
 	std::string		nextAction;
 	//engine2d::TickAnimator*		tickAnimator = nullptr;	// deferred firing actions; always dynamic
@@ -48,13 +49,15 @@ private:
 		//sprite = new Sprite(50, 330, AFH.GetFilm("Idle"));
 
 		animators = new Animators();
-		animators->insert(std::pair<std::string, Animator*>("Idle", new FrameRangeAnimator(0)));
-		animators->insert(std::pair<std::string, Animator*>("Walk", new FrameRangeAnimator(1)));
-		animators->insert(std::pair<std::string, Animator*>("WalkReverse", new FrameRangeAnimator(2)));
-		animators->insert(std::pair<std::string, Animator*>("Punchrighthigh", new FrameRangeAnimator(3)));
-		animators->insert(std::pair<std::string, Animator*>("Punchlefthigh", new FrameRangeAnimator(4)));
-		animators->insert(std::pair<std::string, Animator*>("Kickmid", new FrameRangeAnimator(5)));
-		animators->insert(std::pair<std::string, Animator*>("Kickhigh", new FrameRangeAnimator(6)));
+		animators->insert(std::pair<std::string, Animator*>("Idle", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("Walk", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("WalkReverse", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("Punchrighthigh", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("Punchlefthigh", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("Kickmid", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("Kickhigh", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("Kickround", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("Uppercut", new FrameRangeAnimator(index++)));
 		//animators->at("punchrighthigh")->SetOnFinish([](Animator*, void* fighter = this) {
 		//	ToBeRunning = ((Fighter*)fighter)->animators->at("idle");
 		//	ToBeSuspended = ((Fighter*)fighter)->animators->at("punchrighthigh");
@@ -70,9 +73,11 @@ private:
 			animations.insert(std::pair<std::string, Animation*>("WalkReverse", new FrameRangeAnimation(0, 8, -6, 0, 0.075f, true, 3)));
 
 			animations.insert(std::pair<std::string, Animation*>("Punchrighthigh", new FrameRangeAnimation(0, 2, 0, 0, 0.06f, false, 2)));
-			animations.insert(std::pair<std::string, Animation*>("Punchlefthigh", new FrameRangeAnimation(0, 5, 0, 0, 0.06f, false, 2)));
-			animations.insert(std::pair<std::string, Animation*>("Kickmid", new FrameRangeAnimation(0, 11, 0, 0, 0.03f, false, 2)));
+			animations.insert(std::pair<std::string, Animation*>("Punchlefthigh", new FrameRangeAnimation(0, 2, 0, 0, 0.06f, false, 2)));
+			animations.insert(std::pair<std::string, Animation*>("Kickmid", new FrameRangeAnimation(0, 5, 0, 0, 0.06f, false, 2)));
 			animations.insert(std::pair<std::string, Animation*>("Kickhigh", new FrameRangeAnimation(0, 5, 0, 0, 0.06f, false, 2)));
+			animations.insert(std::pair<std::string, Animation*>("Kickround", new FrameRangeAnimation(0, 8, 0, 0, 0.085f, false, 2)));
+			animations.insert(std::pair<std::string, Animation*>("Uppercut", new FrameRangeAnimation(0, 5, 0, 0, 0.085f, false, 2)));
 		}
 		else {
 			animations.insert(std::pair<std::string, Animation*>("Idle", new FrameRangeAnimation(0, 11, 0, 0, 0.07f, true, 1)));
@@ -83,6 +88,8 @@ private:
 			animations.insert(std::pair<std::string, Animation*>("Punchlefthigh", new FrameRangeAnimation(0, 5, 0, 0, 0.055f, false, 2)));
 			animations.insert(std::pair<std::string, Animation*>("Kickmid", new FrameRangeAnimation(0, 11, 0, 0, 0.03f, false, 2)));
 			animations.insert(std::pair<std::string, Animation*>("Kickhigh", new FrameRangeAnimation(0, 5, 0, 0, 0.06f, false, 2)));
+			animations.insert(std::pair<std::string, Animation*>("Kickround", new FrameRangeAnimation(0, 8, 0, 0, 0.085f, false, 2)));
+			animations.insert(std::pair<std::string, Animation*>("Uppercut", new FrameRangeAnimation(0, 5, 0, 0, 0.085f, false, 2)));
 
 			x = 580;
 
@@ -93,11 +100,15 @@ private:
 				AnimationFilm* walkReverse = new AnimationFilm(*AFH->GetFilm("Walk"));
 				((FrameRangeAnimator*)entry.second)->Start(new Sprite(x, y, walkReverse), (FrameRangeAnimation*)animations.at(entry.first), time, true);
 			}
-			else
+			else {
 				((FrameRangeAnimator*)entry.second)->Start(new Sprite(x, y, AFH->GetFilm(entry.first)), (FrameRangeAnimation*)animations.at(entry.first), time);
+				((FrameRangeAnimator*)entry.second)->SetLogicState(stateTransitions);
+			}
 			AnimatorHolder::Register(entry.second);
 		}
 	}
+
+	void InitializeStateMachine(logic::StateTransitions* ST);
 
 public:
 	Fighter(FighterTag _tag, int playerIndex, SDL_Renderer *renderer);

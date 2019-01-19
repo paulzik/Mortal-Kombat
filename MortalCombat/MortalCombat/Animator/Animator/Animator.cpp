@@ -22,7 +22,8 @@ void Animator::Pause()
 void Animator::NotifyStopped(void) {
 	if (onFinish)
 		(*onFinish)(this, finishClosure);
-	AnimatorHolder::MarkAsSuspended(this);
+	if (State != NULL)
+		State->SetState("Idle");
 }
 
 void Animator::TimeShift(timestamp_t offset)

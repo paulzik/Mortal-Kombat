@@ -83,11 +83,18 @@ public:
 		std::list<Animator*> &tmp = suspended;
 		std::list<Animator*> &tmpRun = running;
 
-		//std::for_each(tmp.begin(), tmp.end(), ComparatorSuspended(a->GetID()));
+		for (std::list<Animator*>::const_iterator it = tmpRun.begin(); it != tmpRun.end(); ++it) {
+			if (((Animator*)(*it))->GetID() == a->GetID()) {
+				//if exists in running do nothing
+				return;
+			}
+		}
+
 		for (std::list<Animator*>::const_iterator it = tmp.begin(); it != tmp.end(); ++it) {
 			if (((Animator*)(*it))->GetID() == a->GetID()) {
 				//suspended.remove(*it);
 				//running.push_back(a);
+				((Animator*)(*it))->SetState(animatorstate_t::ANIMATOR_RUNNING);
 				tmpRun.insert(tmpRun.end(), *it);
 				tmp.remove(*it);
 				break;
@@ -99,7 +106,12 @@ public:
 
 		std::list<Animator*> &tmp = suspended;
 		std::list<Animator*> &tmpRun = running;
-
+		for (std::list<Animator*>::const_iterator it = tmp.begin(); it != tmp.end(); ++it) {
+			if (((Animator*)(*it))->GetID() == a->GetID()) {
+				//if exists in suspended do nothing
+				return;
+			}
+		}
 		//std::for_each(tmp.begin(), tmp.end(), ComparatorSuspended(a->GetID()));
 		for (std::list<Animator*>::const_iterator it = tmpRun.begin(); it != tmpRun.end(); ++it) {
 			if (((Animator*)(*it))->GetID() == a->GetID()) {
