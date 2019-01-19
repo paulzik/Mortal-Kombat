@@ -134,12 +134,23 @@ public:
 			}
 
 			for (int k = 0; k < Array[0]; k++) {
-				SDL_Rect box;
-				box.x = (k)*offsetX + Array[1];
-				box.y = Array[2];
-				box.w = offsetX;
-				box.h = offsetY;
-				rects.push_back(box);
+				if (i.name() == "Rope"){
+					SDL_Rect box;
+					box.x = (k)*offsetX*3 + Array[1];
+					box.y = Array[2];
+					box.w = offsetX*3;
+					box.h = offsetY;
+					rects.push_back(box);
+				}
+				else {
+					SDL_Rect box;
+					box.x = (k)*offsetX + Array[1];
+					box.y = Array[2];
+					box.w = offsetX;
+					box.h = offsetY;
+					rects.push_back(box);
+				}
+
 			}
 
 		

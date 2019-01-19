@@ -4,6 +4,7 @@
 #include <queue>
 
 Direction direction = Direction::none;
+SDL_Joystick *joystick;
 
 float timer = 0;
 
@@ -14,6 +15,10 @@ bool canDoAction = true;
 
 Fighter::Fighter(FighterTag _tag, int playerIndex, SDL_Renderer *renderer)
 {
+
+	SDL_JoystickEventState(SDL_ENABLE);
+	joystick = SDL_JoystickOpen(0);
+
 	using Input = logic::StateTransitions::Input;
 	
 	AnimationFilmHolder& AFH = AnimationFilmHolder::Get();
@@ -67,6 +72,22 @@ Fighter::Fighter(FighterTag _tag, int playerIndex, SDL_Renderer *renderer)
 	Uppercut.push_back("s");
 	Uppercut.push_back("4");
 	inputController.AddAction(Uppercut, "Uppercut");
+
+	input::key_combination tackle;
+	tackle.push_back("a");
+	tackle.push_back("5");
+	inputController.AddAction(tackle, "tackle");
+
+	input::key_combination Throw;
+	Throw.push_back("d");
+	Throw.push_back("5");
+	inputController.AddAction(Throw, "tackle");
+
+	input::key_combination Rope;
+	Rope.push_back("a");
+	Rope.push_back("a");
+	Rope.push_back("3");
+	inputController.AddAction(Rope, "Rope");
 
 	stateTransitions.SetState("Idle");
 
@@ -176,7 +197,7 @@ void Fighter::Update()
 		else
 			str.append(*it + ".");
 
-		//std::cout << str << std::endl;
+		std::cout << str << std::endl;
 	}
 
 	stateTransitions.PerformTransitions(Input{ str }, false);
@@ -209,14 +230,15 @@ bool kayPressed[500000];
 void Fighter::UpdateKeys() {
 	SDL_Event _event;
 	while(SDL_PollEvent(&_event))
-	switch (_event.key.state)
+	switch (_event.type)
 	{
-		case SDL_PRESSED: {
+		case SDL_KEYDOWN: {
 			if (_event.key.state == SDL_PRESSED)
 			{
+
 				if (playerIndex == P1)
 				{
-					if (_event.key.keysym.sym == SDLK_d) {
+					if (_event.key.keysym.sym == SDLK_d ) {
 						direction = Direction::right;
 						//if (!kayPressed[_event.key.keysym.sym])
 						{
@@ -229,6 +251,13 @@ void Fighter::UpdateKeys() {
 						//if (kayPressed[_event.key.keysym.sym])
 						{
 							//inputController.buttons.push_back("a");
+							kayPressed[SDLK_a] = true;
+						}
+					}
+					else if (_event.key.keysym.sym == SDLK_3) {
+						if (!kayPressed[_event.key.keysym.sym])
+						{
+							inputController.buttons.push_back("3");
 							kayPressed[_event.key.keysym.sym] = true;
 						}
 					}
@@ -247,10 +276,10 @@ void Fighter::UpdateKeys() {
 						}
 					}
 					else if (_event.key.keysym.sym == SDLK_6) {
-						if (!kayPressed[_event.key.keysym.sym])
+						if (!kayPressed[SDLK_6])
 						{
 							inputController.buttons.push_back("6");
-							kayPressed[_event.key.keysym.sym] = true;
+							kayPressed[SDLK_6] = true;
 						}
 					}
 					else if (_event.key.keysym.sym == SDLK_s) {
@@ -289,21 +318,103 @@ void Fighter::UpdateKeys() {
 			}	
 			break;
 		}
-		case SDL_RELEASED: {
+		case SDL_KEYUP: {
 			if (_event.key.state == SDL_RELEASED)
 			{
-				if (_event.key.keysym.sym == SDLK_d || _event.key.keysym.sym == SDLK_a) {
-					direction = Direction::none;
-				}
 				if (_event.key.keysym.sym < 500000) {
 					kayPressed[_event.key.keysym.sym] = false;
 					
 				}
-
-
 				return;
 			}
 			break;
+		}
+		case SDL_JOYBUTTONDOWN: {
+			std::cout << (int)_event.jbutton.button;
+			if ((int)_event.jbutton.button == SDL_CONTROLLER_BUTTON_X) {
+				if (!kayPressed[SDLK_6])
+				{
+					inputController.buttons.push_back("6");
+					kayPressed[SDLK_6] = true;
+				}
+			}
+			if ((int)_event.jbutton.button == SDL_CONTROLLER_BUTTON_A) {
+				if (!kayPressed[SDLK_5])
+				{
+					inputController.buttons.push_back("5");
+					kayPressed[SDLK_5] = true;
+				}
+			}
+			if ((int)_event.jbutton.button == SDL_CONTROLLER_BUTTON_Y) {
+				if (!kayPressed[SDLK_4])
+				{
+					inputController.buttons.push_back("4");
+					kayPressed[SDLK_4] = true;
+				}
+			}
+			if ((int)_event.jbutton.button == SDL_CONTROLLER_BUTTON_B) {
+				if (!kayPressed[SDLK_3])
+				{
+					inputController.buttons.push_back("3");
+					kayPressed[SDLK_3] = true;
+				}
+			}
+			timer = float((float)clock() / (float)CLOCKS_PER_SEC);
+
+		}
+		case SDL_JOYBUTTONUP: {
+			if ((int)_event.jbutton.button == SDL_CONTROLLER_BUTTON_X) {
+				{
+					kayPressed[SDLK_6] = false;
+				}
+			}
+			if ((int)_event.jbutton.button == SDL_CONTROLLER_BUTTON_A) {
+				{
+					kayPressed[SDLK_5] = false;
+				}
+			}
+			if ((int)_event.jbutton.button == SDL_CONTROLLER_BUTTON_Y) {
+				{
+					kayPressed[SDLK_4] = false;
+				}
+			}
+			if ((int)_event.jbutton.button == SDL_CONTROLLER_BUTTON_B) {
+				{
+					kayPressed[SDLK_3] = false;
+				}
+			}
+			
+		}
+		case SDL_JOYHATMOTION: {
+			timer = float((float)clock() / (float)CLOCKS_PER_SEC);
+
+			if ((int)_event.jhat.value == SDL_HAT_LEFT) {
+				if (!kayPressed[SDLK_a])
+				{
+					inputController.buttons.push_back("a");
+					kayPressed[SDLK_a] = true;
+				}
+			}
+			if ((int)_event.jhat.value == SDL_HAT_RIGHT) {
+				if (!kayPressed[SDLK_d])
+				{
+					inputController.buttons.push_back("d");
+					kayPressed[SDLK_d] = true;
+				}
+			}
+			if ((int)_event.jhat.value == SDL_HAT_DOWN) {
+				if (!kayPressed[SDLK_s])
+				{
+					inputController.buttons.push_back("s");
+					kayPressed[SDLK_s] = true;
+				}
+			}
+			if ((int)_event.jhat.value == SDL_HAT_CENTERED) {
+				kayPressed[SDLK_d] = false;
+				kayPressed[SDLK_a] = false;
+				kayPressed[SDLK_s] = false;
+				kayPressed[SDLK_w] = false;
+			}
 		}
 	}
 	if (float((float)clock() / (float)CLOCKS_PER_SEC) - timer > (float) ((float) FIGHTER_ACTION_DELAY_MSECS / 1000.0f)) {
@@ -390,6 +501,24 @@ void Fighter::InitializeStateMachine(logic::StateTransitions* ST) {
 		}
 
 	});
+	ST->SetTransition("Idle", Input{ "a.5" }, [anim, ST](void) {
+		//AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+		if (canDoAction) {
+			AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+			RunningQueue.push(anim->at("Tackle"));
+			canDoAction = false;
+		}
+
+	});
+	ST->SetTransition("Idle", Input{ "a.a.3" }, [anim, ST](void) {
+		//AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+		if (canDoAction) {
+			AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+			RunningQueue.push(anim->at("Rope"));
+			canDoAction = false;
+		}
+
+	});
 	//ST->SetTransition("Punchrighthigh", Input{ }, [anim, ST](void) {
 	//	//AnimatorHolder::MarkAsRunning(anim->at("Punchrighthigh"));
 
@@ -420,9 +549,23 @@ void Fighter::InitializeStateMachine(logic::StateTransitions* ST) {
 	ST->SetTransition("Walk", playerIndex == P1 ? Input{ "d" } : Input{ "j" }, [anim, ST](void) {
 		AnimatorHolder::MarkAsRunning(anim->at("Walk"));
 	});
+	ST->SetTransition("Walk", playerIndex == P1 ? Input{ "d.5" } : Input{ "j" }, [anim, ST](void) {
+		if (canDoAction) {
+			AnimatorHolder::MarkAsSuspended(anim->at("Walk"));
+			RunningQueue.push(anim->at("Throw"));
+			canDoAction = false;
+		}	});
 	ST->SetTransition("WalkRev", playerIndex == P1 ? Input{ "a" } : Input{ "l" }, [anim, ST](void) {
 		AnimatorHolder::MarkAsRunning(anim->at("WalkReverse"));
 
+	});
+	ST->SetTransition("WalkRev", playerIndex == P1 ? Input{ "a.3" } : Input{ "l" }, [anim, ST](void) {
+		if (canDoAction) {
+			AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+			RunningQueue.push(anim->at("Getoverhere"));
+			RunningQueue.push(anim->at("Rope"));
+			canDoAction = false;
+		}	
 	});
 }
 

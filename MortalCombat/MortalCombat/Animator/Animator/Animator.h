@@ -60,6 +60,10 @@ public:
 		return ID;
 	}
 
+	void SetPosition(int _x, int _y) {
+
+	}
+
 	bool isSuspended = true;
 
 	Animator(void); 

@@ -11,8 +11,15 @@ void AnimationFilm::DisplayFrame(SDL_Texture *dest, const SDL_Rect& at, BYTE fra
 	//point.y = at.y * 1.65f;
 
 	//SDL_RenderCopyEx(rend, dest, &boxes[frameNo], &at, 180, &point, flip);
-
-	SDL_RenderCopy(rend, dest, &boxes[frameNo], &at);
+	SDL_Rect rect;
+	rect = at;
+	if (id == "Rope") {
+		rect.x = 120 + at.x;
+		rect.y = at.y - 150;
+		rect.w = at.w;
+		rect.h = at.h;
+	}
+	SDL_RenderCopy(rend, dest, &boxes[frameNo], &rect);
 
 }
 
