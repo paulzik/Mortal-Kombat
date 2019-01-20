@@ -64,6 +64,33 @@
     <Filter Include="Source Files\Fighter">
       <UniqueIdentifier>{ca5d2401-8c0a-4fa5-a869-18acf4cdbcec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\InputManager">
+      <UniqueIdentifier>{ad75a8db-3b09-4966-a44e-1a34b100e8c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Arena">
+      <UniqueIdentifier>{8a1b65be-8128-42e4-9c4b-455255e74b79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Arena">
+      <UniqueIdentifier>{13fc2179-f64c-48fb-8cf0-15a2f38bfb28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\StateTransition">
+      <UniqueIdentifier>{c50eff30-c509-4e0f-8e2c-fff9f8f688bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\StateTransition">
+      <UniqueIdentifier>{ff23b46b-d8cb-46b3-9314-5faec73aa1ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\UI">
+      <UniqueIdentifier>{d5afdf91-43ac-43b0-bc7d-ccaa83e8a376}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI">
+      <UniqueIdentifier>{0f530741-fbfb-4069-a76e-c8b306e0a07d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\HorizonLayer">
+      <UniqueIdentifier>{31a0d295-6952-4b48-84f5-1b4bf7107906}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\HorizonLayer">
+      <UniqueIdentifier>{a0d57292-0b80-43ba-b278-33084a5e3703}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animator\Animator\Animator.cpp">
@@ -101,6 +128,30 @@
     </ClCompile>
     <ClCompile Include="Fighter\Fighter.cpp">
       <Filter>Source Files\Fighter</Filter>
+    </ClCompile>
+    <ClCompile Include="Arena\Arena.cpp">
+      <Filter>Source Files\Arena</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\UIManager.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\UICanvas.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\BattleUI.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator\Animator\AnimatorHolder.cpp">
+      <Filter>Source Files\Animation\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="HorizonLayer\HorizonLayer.cpp">
+      <Filter>Source Files\HorizonLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\WelcomeUI.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\OptionsUI.cpp">
+      <Filter>Source Files\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +229,36 @@
     </ClInclude>
     <ClInclude Include="Fighter\Fighter.h">
       <Filter>Header Files\Fighter</Filter>
+    </ClInclude>
+    <ClInclude Include="Source.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager\InputManager.h">
+      <Filter>Header Files\InputManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Arena.h">
+      <Filter>Header Files\Arena</Filter>
+    </ClInclude>
+    <ClInclude Include="StateTransition\StateTransition.h">
+      <Filter>Header Files\StateTransition</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UICanvas.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UIManager.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\BattleUI.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="HorizonLayer\HorizonLayer.h">
+      <Filter>Header Files\HorizonLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\WelcomeUI.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\OptionsUI.h">
+      <Filter>Header Files\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

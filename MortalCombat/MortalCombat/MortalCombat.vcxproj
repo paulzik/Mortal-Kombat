@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{C9230398-2FCB-4351-B18E-B3AC37E3CE90}</ProjectGuid>
     <RootNamespace>MortalCombat</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -101,10 +101,13 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>..\Libraries\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>..\Libraries;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;irrKlang.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -123,17 +126,25 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animator\Animator\Animator.cpp" />
+    <ClCompile Include="Animator\Animator\AnimatorHolder.cpp" />
     <ClCompile Include="Animator\Animator\FrameRangeAnimator.cpp" />
     <ClCompile Include="Animator\Animator\MovingAnimator.cpp" />
     <ClCompile Include="Animator\Sprites\AnimationFilms\AnimationFilm.cpp" />
     <ClCompile Include="Animator\Sprites\Sprite\Sprite.cpp" />
+    <ClCompile Include="Arena\Arena.cpp" />
     <ClCompile Include="Configuration\ConfigAPI.cpp" />
     <ClCompile Include="Configuration\ConfigAPIs.cpp" />
     <ClCompile Include="Configuration\JSONParser\jsoncpp.cpp" />
     <ClCompile Include="Fighter\Fighter.cpp" />
+    <ClCompile Include="HorizonLayer\HorizonLayer.cpp" />
     <ClCompile Include="LayerRenderer\LayerRenderer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="SoundEngine\SoundEngine.cpp" />
+    <ClCompile Include="UI\BattleUI.cpp" />
+    <ClCompile Include="UI\OptionsUI.cpp" />
+    <ClCompile Include="UI\UICanvas.cpp" />
+    <ClCompile Include="UI\UIManager.cpp" />
+    <ClCompile Include="UI\WelcomeUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animator\AnimationTypes\Animation.h" />
@@ -153,15 +164,24 @@
     <ClInclude Include="Animator\Sprites\AnimationFilms\BitmapLoader.h" />
     <ClInclude Include="Animator\Sprites\Sprite\Sprite.h" />
     <ClInclude Include="Animator\Sprites\Sprite\SpritesHolder.h" />
+    <ClInclude Include="Arena.h" />
     <ClInclude Include="Configuration\ConfigAPI.h" />
     <ClInclude Include="Configuration\ConfigAPIs.h" />
     <ClInclude Include="Configuration\ConfigData.h" />
     <ClInclude Include="Configuration\JSONParser\json\json-forwards.h" />
     <ClInclude Include="Configuration\JSONParser\json\json.h" />
     <ClInclude Include="Fighter\Fighter.h" />
+    <ClInclude Include="HorizonLayer\HorizonLayer.h" />
+    <ClInclude Include="InputManager\InputManager.h" />
     <ClInclude Include="LayerRenderer\LayerRenderer.h" />
     <ClInclude Include="SoundEngine\SoundEngine.h" />
+    <ClInclude Include="UI\BattleUI.h" />
+    <ClInclude Include="UI\OptionsUI.h" />
+    <ClInclude Include="UI\UICanvas.h" />
+    <ClInclude Include="UI\UIManager.h" />
     <ClInclude Include="Source.h" />
+    <ClInclude Include="StateTransition\StateTransition.h" />
+    <ClInclude Include="UI\WelcomeUI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

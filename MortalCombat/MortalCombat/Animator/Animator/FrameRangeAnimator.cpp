@@ -38,6 +38,11 @@ void FrameRangeAnimator::Progress(timestamp_t currTime)
 	}
 }
 
+void FrameRangeAnimator::SetLogicState(logic::StateTransitions & state)
+{
+	State = &state;
+}
+
 void FrameRangeAnimator::Render(SDL_Renderer* rend)
 {
 	SDL_Rect srcrect;

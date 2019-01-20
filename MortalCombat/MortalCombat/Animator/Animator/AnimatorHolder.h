@@ -2,8 +2,8 @@
 #include <list>
 #include <algorithm>
 #include "Animator.h"
+#include "FrameRangeAnimator.h"
 
-static std::list<Animator*> running, suspended;
 static Animator* ToBeRunning, *ToBeSuspended;
 
 template<class ArgumentType, class ResultType>
@@ -16,6 +16,7 @@ struct unary_function
 class AnimatorHolder {
 
 private:
+
 	class ProgressFunctor : public unary_function<Animator*, void> {
 	private:
 		timestamp_t t;
@@ -40,43 +41,104 @@ private:
 		RenderFunctor(SDL_Renderer* rend) : rend(rend) {}
 	};
 
+	class ComparatorSuspended : public unary_function<Animator*, void> {
+	private:
+		int id;
+	public:
+		void operator()(Animator* a) const {
+			if (a->GetID() == id) {
+				suspended.remove(a);
+				running.push_back(a);
+				((FrameRangeAnimator*)a)->GetSprite()->SetVisibility(true);
+
+			}
+		}
+		ComparatorSuspended(int ID) : id(ID) {}
+	};
+
+	class ComparatorRunning : public unary_function<Animator*, void> {
+	private:
+		int id;
+	public:
+		void operator()(Animator* a) const {
+			if (a->GetID() == id) {
+				running.remove(a);
+				suspended.push_back(a);
+				((FrameRangeAnimator*)a)->GetSprite()->SetVisibility(false);
+
+			}
+		}
+		ComparatorRunning(int ID) : id(ID) {}
+	};
+
 
 public:
-	static void Register(Animator* a) { suspended.push_back(a); }
+	static std::list<Animator*> running, suspended;
+
+	static void Register(Animator* a) { suspended.push_back(a); a->isSuspended = true; }
 	static void Cancel(Animator* a) { suspended.remove(a); }
 	static void MarkAsRunning(Animator* a)
 	{
-		a->isSuspended = false;
-		a->Resume();
-		suspended.remove(a); 
-		running.push_back(a);
+
+		std::list<Animator*> &tmp = suspended;
+		std::list<Animator*> &tmpRun = running;
+
+		for (std::list<Animator*>::const_iterator it = tmpRun.begin(); it != tmpRun.end(); ++it) {
+			if (((Animator*)(*it))->GetID() == a->GetID()) {
+				//if exists in running do nothing
+				return;
+			}
+		}
+
+		for (std::list<Animator*>::const_iterator it = tmp.begin(); it != tmp.end(); ++it) {
+			if (((Animator*)(*it))->GetID() == a->GetID()) {
+				//suspended.remove(*it);
+				//running.push_back(a);
+				((Animator*)(*it))->SetState(animatorstate_t::ANIMATOR_RUNNING);
+				tmpRun.insert(tmpRun.end(), *it);
+				tmp.remove(*it);
+				break;
+			}
+		}
 	}
 	static void MarkAsSuspended(Animator* a)
 	{
-		a->isSuspended = true;
-		a->Pause();
-		running.remove(a); 
-		suspended.push_back(a);
+
+		std::list<Animator*> &tmp = suspended;
+		std::list<Animator*> &tmpRun = running;
+		for (std::list<Animator*>::const_iterator it = tmp.begin(); it != tmp.end(); ++it) {
+			if (((Animator*)(*it))->GetID() == a->GetID()) {
+				//if exists in suspended do nothing
+				return;
+			}
+		}
+		//std::for_each(tmp.begin(), tmp.end(), ComparatorSuspended(a->GetID()));
+		for (std::list<Animator*>::const_iterator it = tmpRun.begin(); it != tmpRun.end(); ++it) {
+			if (((Animator*)(*it))->GetID() == a->GetID()) {
+				//suspended.remove(*it);
+				//running.push_back(a);
+				tmp.insert(tmp.end(), *it);
+				tmpRun.remove(*it);
+				break;
+			}
+		}
 	}
 	static void Progress(timestamp_t currTime) {
-		if (ToBeRunning != NULL) {
-			MarkAsRunning(ToBeRunning);
-		}
-		if (ToBeSuspended != NULL) {
-			MarkAsSuspended(ToBeSuspended);
-		}
 
 		ToBeRunning = NULL;
 		ToBeSuspended = NULL;
+		std::list<Animator*> &tmp = running;
 
 		std::for_each(
-			running.begin(), running.end(), ProgressFunctor(currTime)
+			tmp.begin(), tmp.end(), ProgressFunctor(currTime)
 		);
 	}
 
 	static void Render(SDL_Renderer* rend) {
+		std::list<Animator*> &tmp = running;
+
 		std::for_each(
-			running.begin(), running.end(), RenderFunctor(rend)
+			tmp.begin(), tmp.end(), RenderFunctor(rend)
 		);
 	}
 };

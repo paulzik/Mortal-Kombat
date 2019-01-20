@@ -29,6 +29,9 @@ private:
 	vector<RenderElement> actionList;
 	vector<RenderElement> foregroundList;
 
+	void DisplayBattleUI();
+	void DisplayStartScreenUI();
+
 public:
 	void InitializeImageElement(string imagefile, Layer renderLayer, SDL_Rect imageRect);
 	void RenderLayer(Layer renderLayer);
