@@ -247,14 +247,8 @@
 	},
 	"Getoverhere":
 	{
-		"xoffset":	801,
-		"yoffset":	1639,
-		"frames":	1
-	},
-	"Rope":
-	{
 		"xoffset":	0,
 		"yoffset":	1788,
-		"frames":	7
+		"frames":	14
 	}
 }
