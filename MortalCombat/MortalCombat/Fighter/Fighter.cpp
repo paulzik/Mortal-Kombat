@@ -14,6 +14,7 @@ std::queue<Animator*> RunningQueue;
 Animator* currAnimator;
 bool canDoAction = true;
 
+float timescale = 1.0f;
 
 Fighter::Fighter(FighterTag _tag, int playerIndex, SDL_Renderer *renderer)
 {
@@ -37,12 +38,6 @@ Fighter::Fighter(FighterTag _tag, int playerIndex, SDL_Renderer *renderer)
 	//AnimatorHolder::MarkAsRunning(animators->at("Idle"));
 
 	Renderer = renderer;
-
-	input::key_combination test;
-	test.push_back("4");
-	test.push_back("4");
-	test.push_back("4");
-	inputController.AddAction(test, "test");
 
 	input::key_combination moveForward;
 	moveForward.push_back("d");
@@ -91,6 +86,11 @@ Fighter::Fighter(FighterTag _tag, int playerIndex, SDL_Renderer *renderer)
 	Rope.push_back("3");
 	inputController.AddAction(Rope, "Rope");
 
+	input::key_combination Fatality;
+	Fatality.push_back("w");
+	Fatality.push_back("w");
+	inputController.AddAction(Fatality, "Fatality");
+
 	stateTransitions.SetState("Idle");
 
 	Sprite* s = sprite;
@@ -100,63 +100,6 @@ Fighter::Fighter(FighterTag _tag, int playerIndex, SDL_Renderer *renderer)
 	logic::StateTransitions *state = &stateTransitions;
 	
 	InitializeStateMachine(&stateTransitions);
-	//stateTransitions.SetTransition("Idle", playerIndex == P1 ? Input{ "4" } : Input{ "8" }, [s, afh, anim, state](void) {
-	//	//s->SetAnimFilm(afh->GetFilm("Punchrighthigh"));
-	//	AnimatorHolder::MarkAsSuspended(anim->at("Walk"));
-	//	AnimatorHolder::MarkAsSuspended(anim->at("WalkReverse"));
-	//	AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
-	//	AnimatorHolder::MarkAsSuspended(anim->at("Punchlefthigh"));
-	//	AnimatorHolder::MarkAsRunning(anim->at("Punchrighthigh"));
-	//	state->SetState("HighPunch1");
-
-
-	//});
-	//stateTransitions.SetTransition("HighPunch1", playerIndex == P1 ? Input{ "4" } : Input{ "8" }, [s, afh, anim, state](void) {
-	//	//s->SetAnimFilm(afh->GetFilm("Punchlefthigh"));
-	//	//AnimatorHolder::MarkAsSuspended(anim->at("Walk"));
-	//	//AnimatorHolder::MarkAsSuspended(anim->at("WalkReverse"));
-	//	//AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
-	//	AnimatorHolder::MarkAsSuspended(anim->at("Punchrighthigh"));
-	//	AnimatorHolder::MarkAsRunning(anim->at("Punchlefthigh"));
-	//	//state->SetState("Idle");
-
-	//});
-	//stateTransitions.SetTransition("HighPunch1", Input{  }, [s, afh, anim, state](void) {
-	//	state->SetState("Idle");
-	//});
-	//stateTransitions.SetTransition("Idle", Input{ "5" }, [s, afh, anim, state](void) {
-	//	s->SetAnimFilm(afh->GetFilm("Kickmid"));
-	//	AnimatorHolder::MarkAsRunning(anim->at("kickmid"));
-	//	AnimatorHolder::MarkAsSuspended(anim->at("walk"));
-	//	AnimatorHolder::MarkAsSuspended(anim->at("walkReverse"));
-	//	AnimatorHolder::MarkAsSuspended(anim->at("punchrighthigh"));
-	//	AnimatorHolder::MarkAsSuspended(anim->at("punchlefthigh"));
-	//	state->SetState("kick1");
-
-	//});
-	//stateTransitions.SetTransition("kick1", Input{ "5" }, [s, afh, anim, state](void) {
-	//	s->SetAnimFilm(afh->GetFilm("Kickhigh"));
-	//	AnimatorHolder::MarkAsRunning(anim->at("kickhigh"));
-	//	AnimatorHolder::MarkAsSuspended(anim->at("kickmid"));
-	//	AnimatorHolder::MarkAsSuspended(anim->at("walk"));
-	//	AnimatorHolder::MarkAsSuspended(anim->at("walkReverse"));
-	//	AnimatorHolder::MarkAsSuspended(anim->at("punchrighthigh"));
-	//	AnimatorHolder::MarkAsSuspended(anim->at("punchlefthigh"));
-	//	AnimatorHolder::MarkAsSuspended(anim->at("idle"));
-	//	//state->SetState("Idle");
-
-	//});
-	//stateTransitions.SetTransition("kick1", Input{  }, [s, afh, anim, state](void) {
-	//	s->SetAnimFilm(afh->GetFilm("Idle"));
-	//	AnimatorHolder::MarkAsRunning(anim->at("idle"));
-	//	AnimatorHolder::MarkAsSuspended(anim->at("walk"));
-	//	AnimatorHolder::MarkAsSuspended(anim->at("walkReverse"));
-	//	AnimatorHolder::MarkAsSuspended(anim->at("kickmid"));
-	//	AnimatorHolder::MarkAsSuspended(anim->at("kickhigh"));
-	//	state->SetState("Idle");
-
-	//});
-
 }
 
 bool Fighter::PlayerIsAlive()
@@ -269,6 +212,13 @@ void Fighter::UpdateKeys() {
 						if (!kayPressed[_event.key.keysym.sym])
 						{
 							inputController.buttons.push_back("5");
+							kayPressed[_event.key.keysym.sym] = true;
+						}
+					}
+					else if (_event.key.keysym.sym == SDLK_w) {
+						if (!kayPressed[_event.key.keysym.sym])
+						{
+							inputController.buttons.push_back("w");
 							kayPressed[_event.key.keysym.sym] = true;
 						}
 					}
@@ -405,6 +355,13 @@ void Fighter::UpdateKeys() {
 					kayPressed[SDLK_s] = true;
 				}
 			}
+			//if ((int)_event.jhat.hat == SDL_HAT_UP) {
+			//	if (!kayPressed[SDLK_w])
+			//	{
+			//		inputController.buttons.push_back("w");
+			//		kayPressed[SDLK_w] = true;
+			//	}
+			//}
 			if ((int)_event.jhat.value == SDL_HAT_CENTERED) {
 				kayPressed[SDLK_d] = false;
 				kayPressed[SDLK_a] = false;
@@ -498,6 +455,7 @@ void Fighter::InitializeStateMachine(logic::StateTransitions* ST) {
 		}
 
 	});
+
 	ST->SetTransition("Idle", Input{ "s.4" }, [anim, ST](void) {
 		//AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
 		if (canDoAction) {
@@ -518,16 +476,15 @@ void Fighter::InitializeStateMachine(logic::StateTransitions* ST) {
 		}
 
 	});
-	//ST->SetTransition("Punchrighthigh", Input{ }, [anim, ST](void) {
-	//	//AnimatorHolder::MarkAsRunning(anim->at("Punchrighthigh"));
+	ST->SetTransition("Idle", Input{ "w.w" }, [anim, ST](void) {
+		//AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+		if (canDoAction) {
+			AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+			RunningQueue.push(anim->at("Burn"));
+			canDoAction = false;
+		}
 
-	//});
-	//ST->SetTransition("Punchrighthigh", Input{ "4" }, [anim, ST](void) {
-	//	//AnimatorHolder::MarkAsSuspended(anim->at("Punchrighthigh"));
-	//	//AnimatorHolder::MarkAsRunning(anim->at("Punchlefthigh"));
-	//	RunningQueue.push(anim->at("Punchlefthigh"));
-
-	//});
+	});
 	ST->SetTransition("Idle", Input{ "d" }, [anim, ST](void) {
 		AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
 		ST->SetState("Walk");
@@ -585,7 +542,7 @@ void Fighter::InitializeStateMachine(logic::StateTransitions* ST) {
 			}
 		}
 	});
-	ST->SetTransition("WalkRev", playerIndex == P1 ? Input{ "a.3" } : Input{ "l" }, [anim, ST](void) {
+	ST->SetTransition("Idle", playerIndex == P1 ? Input{ "a.a.3" } : Input{ "l" }, [anim, ST](void) {
 		if (canDoAction) {
 			AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
 			RunningQueue.push(anim->at("Rope"));
