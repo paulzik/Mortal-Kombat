@@ -38,10 +38,30 @@ void HorizonLayer::DisplayHorizon()
 
 }
 
+void HorizonLayer::InitializeShaolins(SDL_Renderer *renderer)
+{
+	afh = new AnimationFilmHolder();
+	afh->Load("Shaolins", renderer);
+	animators = new Animators();
+	animators->insert(std::pair<std::string, Animator*>("h3", new FrameRangeAnimator(0)));
+	std::map<std::string, Animation*> animations;
+	animations.insert(std::pair<std::string, Animation*>("h3", new FrameRangeAnimation(0, 2, 0, 0, 0.07f, true, 1)));
+
+	float time = clock() / CLOCKS_PER_SEC;
+	for (auto entry : *animators)
+	{
+		if (entry.first == "h3")
+		{
+			AnimationFilm* h3af = new AnimationFilm(*afh->GetFilm("h3"));
+			((FrameRangeAnimator*)entry.second)->Start(new Sprite(x, y, h3af), (FrameRangeAnimation*)animations.at(entry.first), time, true);
+		}
+	}
+}
 
 HorizonLayer::HorizonLayer(SDL_Renderer* _renderer, int sw, int sh)
 {
 	renderer = _renderer;
+	//InitializeShaolins(renderer);
 	screen_w = sw;
 	screen_h = sh;
 	hObjects[0] = LOAD_BITMAP(renderer, "./Bitmaps/h5big.png");

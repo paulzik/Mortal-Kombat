@@ -15,79 +15,7 @@ private:
 	Films films;
 	BitmapLoader loader;
 
-	//void LoadArena(SDL_Renderer* rend)
-	//{
-	//	int Array[4];
-	//	int count;
-	//	Json::Value jsonValue;
-	//	std::ifstream file;
-	//	BITMAP* bm = loader.Load("./Bitmaps/Arena.png", rend);;
-
-	//	//load arena first
-	//	file.open("./Bitmaps/Arena.json");
-	//	file >> jsonValue;
-	//	file.close();
-
-	//	for (Json::ValueIterator i = jsonValue.begin(); i != jsonValue.end(); ++i) {
-	//		std::cout << i.name() << std::endl;
-	//		
-	//		const std::string name = i.name();
-
-	//		Json::Value tmp = *i;
-	//		count = 0;
-	//		for (Json::ValueIterator j = tmp.begin(); j != tmp.end(); ++j) {
-	//			Json::Value temp = *j;
-	//			//tmp.
-	//			std::cout << "\t" << j.name() << ": " << temp.asInt() << std::endl;
-	//		}
-
-	//		SDL_Rect box;
-	//		std::vector<SDL_Rect> rects;
-	//		box.h = Array[0]; //height
-	//		box.w = Array[1]; //width
-	//		box.x = Array[2]; //xoffset
-	//		box.y = Array[3]; //yoffset		
-	//		rects.push_back(box);
-	//	
-	//		AnimationFilm* anim = new AnimationFilm(bm, rects, name);
-	//		films.insert(std::pair<std::string, AnimationFilm*>(name, anim));
-	//	}
-
-	//	//load crowd next
-	//	Json::Value jsonValue2;
-	//	file.open("./Bitmaps/ArenaCrowd.json");
-	//	file >> jsonValue;
-	//	file.close();
-
-	//	for (Json::ValueIterator i = jsonValue2.begin(); i != jsonValue2.end(); ++i)
-	//	{
-	//		std::cout << i.name() << std::endl;
-
-	//		const std::string name = i.name();
-
-	//		Json::Value tmp = *i;
-	//		count = 0;
-	//		for (Json::ValueIterator j = tmp.begin(); j != tmp.end(); ++j)
-	//		{
-	//			Json::Value temp = *j;
-	//			//tmp.
-	//			std::cout << "\t" << j.name() << ": " << temp.asInt() << std::endl;
-	//		}
-
-	//		SDL_Rect box;
-	//		std::vector<SDL_Rect> rects;
-	//		for (int k = 1; k <= 3; k++) //crowd frames
-	//		{
-	//			box.h = Array[0]; //height
-	//			box.w = Array[1]; //width
-	//			box.x = Array[2]*k; //xoffset
-	//			box.y = Array[3]*k; //yoffset		
-	//			rects.push_back(box);
-	//		}
-	//		AnimationFilm* anim = new AnimationFilm(bm, rects, name);
-	//		films.insert(std::pair<std::string, AnimationFilm*>(name, anim));
-	//	}
-	//}
+	void LoadShaolins(SDL_Renderer* rend);
 	
 
 public:
@@ -99,9 +27,9 @@ public:
 	~AnimationFilmHolder() { CleanUp(); }
 	void Load(const std::string& catalogue, SDL_Renderer* rend) {
 
-		/*if (catalogue == "Arena")
+		/*if (catalogue == "Shaolins")
 		{
-			LoadArena(rend);
+			LoadShaolins(rend);
 			return;
 		}*/
 

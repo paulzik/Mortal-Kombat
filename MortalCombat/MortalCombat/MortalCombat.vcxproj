@@ -125,6 +125,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimationFilmHolder.cpp" />
     <ClCompile Include="Animator\Animator\Animator.cpp" />
     <ClCompile Include="Animator\Animator\AnimatorHolder.cpp" />
     <ClCompile Include="Animator\Animator\FrameRangeAnimator.cpp" />

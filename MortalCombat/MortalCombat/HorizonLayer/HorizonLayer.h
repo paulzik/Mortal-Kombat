@@ -1,5 +1,9 @@
 #pragma once
+#include <queue>
+
 #include "../Animator/SDL_Helper.h"
+#include "../Animator/Sprites/AnimationFilms/AnimationFilmHolder.h"
+#include "../Animator/Animator/AnimatorHolder.h"
 #define TOTAL_HOBJECTS	5
 
 
@@ -11,17 +15,27 @@ public:
 	HorizonLayer(SDL_Renderer* _renderer, int sw, int sh);
 	~HorizonLayer();
 private:
+	SDL_Renderer	*renderer;
 	BITMAP		*hObjects[TOTAL_HOBJECTS];
 	SDL_Rect	hRects[TOTAL_HOBJECTS];
-	SDL_Renderer	*renderer;
-	SDL_Rect dstRect[5];
-	SDL_Rect srcRect[5];
+	SDL_Rect	dstRect[TOTAL_HOBJECTS];
+	SDL_Rect	srcRect[TOTAL_HOBJECTS];
 	//SDL_Rect	dstRect;
-	
+	AnimationFilmHolder*	afh;
+	AnimatorHolder*		ah;
+	typedef std::map<std::string, Animator*>	Animators;
+	Animators *animators;
+
+	std::queue<Animator*> RunningQueue;
+	Animator* currAnimator;
 
 	int screen_w;
 	int screen_h;
 
+	int x = 50, y = 330;
+	int px = 20, py = 280;
+
 	bool ClippedEntirely(SDL_Rect& area, SDL_Rect& in, SDL_Rect* out);
+	void InitializeShaolins(SDL_Renderer *renderer);
 };
 

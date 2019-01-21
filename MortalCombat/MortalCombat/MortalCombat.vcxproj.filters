@@ -153,6 +153,9 @@
     <ClCompile Include="UI\OptionsUI.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
+    <ClCompile Include="AnimationFilmHolder.cpp">
+      <Filter>Source Files\Animation\AnimationFilms</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animator\AnimationTypes\Animation.h">
