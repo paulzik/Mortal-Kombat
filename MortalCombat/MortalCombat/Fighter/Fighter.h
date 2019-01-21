@@ -153,6 +153,8 @@ private:
 
 	void InitializeStateMachine(logic::StateTransitions* ST);
 
+	void InitializeKeyCombinations();
+
 public:
 	Fighter(FighterTag _tag, int playerIndex, SDL_Renderer *renderer);
 	Fighter();

@@ -39,57 +39,7 @@ Fighter::Fighter(FighterTag _tag, int playerIndex, SDL_Renderer *renderer)
 
 	Renderer = renderer;
 
-	input::key_combination moveForward;
-	moveForward.push_back("d");
-	inputController.AddAction(moveForward, "moveforward");
-
-	input::key_combination moveBackward;
-	moveBackward.push_back("a");
-	inputController.AddAction(moveBackward, "movebackward");
-
-	input::key_combination punchrighthigh;
-	punchrighthigh.push_back("4");
-	inputController.AddAction(punchrighthigh, "punchrighthigh");
-
-	input::key_combination punchlefthigh;
-	punchlefthigh.push_back("4");
-	punchlefthigh.push_back("4");
-	inputController.AddAction(punchlefthigh, "punchlefthigh");
-
-	input::key_combination kickhigh;
-	kickhigh.push_back("5");
-	inputController.AddAction(kickhigh, "kickhigh");
-
-	input::key_combination kickround;
-	kickround.push_back("a");
-	kickround.push_back("6");
-	inputController.AddAction(kickround, "kickround");
-
-	input::key_combination Uppercut;
-	Uppercut.push_back("s");
-	Uppercut.push_back("4");
-	inputController.AddAction(Uppercut, "Uppercut");
-
-	input::key_combination tackle;
-	tackle.push_back("a");
-	tackle.push_back("5");
-	inputController.AddAction(tackle, "tackle");
-
-	input::key_combination Throw;
-	Throw.push_back("d");
-	Throw.push_back("5");
-	inputController.AddAction(Throw, "tackle");
-
-	input::key_combination Rope;
-	Rope.push_back("a");
-	Rope.push_back("a");
-	Rope.push_back("3");
-	inputController.AddAction(Rope, "Rope");
-
-	input::key_combination Fatality;
-	Fatality.push_back("w");
-	Fatality.push_back("w");
-	inputController.AddAction(Fatality, "Fatality");
+	InitializeKeyCombinations();
 
 	stateTransitions.SetState("Idle");
 
@@ -556,6 +506,66 @@ void Fighter::InitializeStateMachine(logic::StateTransitions* ST) {
 
 		}	
 	});
+}
+
+void Fighter::InitializeKeyCombinations()
+{
+	if (FighterName[playerIndex] == "Scorpion") {
+		input::key_combination moveForward;
+		moveForward.push_back("d");
+		inputController.AddAction(moveForward, "moveforward");
+
+		input::key_combination moveBackward;
+		moveBackward.push_back("a");
+		inputController.AddAction(moveBackward, "movebackward");
+
+		input::key_combination punchrighthigh;
+		punchrighthigh.push_back("4");
+		inputController.AddAction(punchrighthigh, "punchrighthigh");
+
+		input::key_combination punchlefthigh;
+		punchlefthigh.push_back("4");
+		punchlefthigh.push_back("4");
+		inputController.AddAction(punchlefthigh, "punchlefthigh");
+
+		input::key_combination kickhigh;
+		kickhigh.push_back("5");
+		inputController.AddAction(kickhigh, "kickhigh");
+
+		input::key_combination kickround;
+		kickround.push_back("a");
+		kickround.push_back("6");
+		inputController.AddAction(kickround, "kickround");
+
+		input::key_combination Uppercut;
+		Uppercut.push_back("s");
+		Uppercut.push_back("4");
+		inputController.AddAction(Uppercut, "Uppercut");
+
+		input::key_combination tackle;
+		tackle.push_back("a");
+		tackle.push_back("5");
+		inputController.AddAction(tackle, "tackle");
+
+		input::key_combination Throw;
+		Throw.push_back("d");
+		Throw.push_back("5");
+		inputController.AddAction(Throw, "tackle");
+
+		input::key_combination Rope;
+		Rope.push_back("a");
+		Rope.push_back("a");
+		Rope.push_back("3");
+		inputController.AddAction(Rope, "Rope");
+
+		input::key_combination Fatality;
+		Fatality.push_back("w");
+		Fatality.push_back("w");
+		inputController.AddAction(Fatality, "Fatality");
+	}
+	else if (FighterName[playerIndex] == "SubZero") {
+		//TODO: add subzero keys here
+	}
 }
 
 extern bool input::test_key(std::string keyCode, key_combination buttons) {
