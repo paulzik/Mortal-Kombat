@@ -46,7 +46,7 @@ public:
 			//std::cout << i.name() << std::endl;
 			if (i.name() == "Getoverhere") continue;
 			//if (i.name() == "Rope") continue;
-			if (i.name() == "Burn") continue;
+			//if (i.name() == "Burn") continue;
 			if (i.name() == "Freezeball") continue;
 			int Array[50];
 
@@ -68,33 +68,121 @@ public:
 			for (int k = 0; k < tmp["frames"].asInt(); k++) {
 				if (i.name() == "Rope"){
 					SDL_Rect box;
-					if (k < 3) {
-						box.x = (k)*offsetX + jsonValue["Rope"]["yoffset"].asInt();
-						box.w = offsetX;
-					}
-					else if (k < 5) {
-						box.x = (k)*offsetX + jsonValue["Rope"]["yoffset"].asInt() * 2;
-						box.w = offsetX * 2;
-					}
-					else if (k < 7) {
-						box.x = (k)*offsetX + jsonValue["Rope"]["yoffset"].asInt() * 3;
-						box.w = offsetX * 3;
-					}
-					else if (k < 9) {
-						box.x = (k)*offsetX + jsonValue["Rope"]["yoffset"].asInt() * 4;
-						box.w = offsetX * 4;
-					}
-					else if (k < 10) {
-						box.x = (k)*offsetX + jsonValue["Rope"]["yoffset"].asInt() * 5;
-						box.w = offsetX * 5;
-					}
-					else if (k < 11) {
-						box.x = (k)*offsetX + jsonValue["Rope"]["yoffset"].asInt();
-						box.w = offsetX;
-					}
+					box.x = jsonValue["Rope"]["xoffset"].asInt();
+					box.w = offsetX;
 					box.y = jsonValue["Rope"]["yoffset"].asInt();
 					box.h = offsetY;
 					rects.push_back(box);
+
+					box.x = jsonValue["Rope"]["xoffset"].asInt() + offsetX * 1;
+					box.w = offsetX ;
+					rects.push_back(box);
+					box.x = jsonValue["Rope"]["xoffset"].asInt() + offsetX * 2;
+					box.w = offsetX ;
+					rects.push_back(box);
+					box.x = jsonValue["Rope"]["xoffset"].asInt() + offsetX * 3;
+					box.w = offsetX;
+					rects.push_back(box);
+
+					box.x = jsonValue["Rope"]["xoffset"].asInt() + offsetX * 4;
+					box.w = offsetX * 2;
+					rects.push_back(box);
+					box.x = jsonValue["Rope"]["xoffset"].asInt() + offsetX * 6;
+					box.w = offsetX * 2;
+					rects.push_back(box);
+
+					box.x = jsonValue["Rope"]["xoffset"].asInt() + offsetX * 8;
+					box.w = offsetX * 3;
+					rects.push_back(box);
+					box.x = jsonValue["Rope"]["xoffset"].asInt() + offsetX * 11;
+					box.w = offsetX * 3;
+					rects.push_back(box);
+
+					box.x = jsonValue["Rope"]["xoffset"].asInt() + offsetX * 14;
+					box.w = offsetX * 4;
+					rects.push_back(box);
+					box.x = jsonValue["Rope"]["xoffset"].asInt() + offsetX * 18;
+					box.w = offsetX * 4;
+					rects.push_back(box);
+
+					box.x = jsonValue["Rope"]["xoffset"].asInt() + offsetX * 22;
+					box.w = offsetX * 5;
+					rects.push_back(box);
+
+					box.x = jsonValue["Rope"]["xoffset"].asInt() + offsetX * 27;
+					box.w = offsetX * 1;
+					rects.push_back(box);
+
+					break;
+				}
+				else if (i.name() == "Burn") {
+					SDL_Rect box;
+					box.x = jsonValue["Burn"]["xoffset"].asInt();
+					box.w = offsetX;
+					box.y = jsonValue["Burn"]["yoffset"].asInt();
+					box.h = offsetY;
+					rects.push_back(box);
+					box.x = jsonValue["Burn"]["xoffset"].asInt() + offsetX * 1;
+					box.w = offsetX;
+					rects.push_back(box);
+					box.x = jsonValue["Burn"]["xoffset"].asInt() + offsetX * 2;
+					box.w = offsetX;
+					rects.push_back(box);
+					box.x = jsonValue["Burn"]["xoffset"].asInt() + offsetX * 3;
+					box.w = offsetX;
+					rects.push_back(box);
+					box.x = jsonValue["Burn"]["xoffset"].asInt() + offsetX * 4;
+					box.w = offsetX;
+					rects.push_back(box);
+					box.x = jsonValue["Burn"]["xoffset"].asInt() + offsetX * 5;
+					box.w = offsetX;
+					rects.push_back(box);
+					box.x = jsonValue["Burn"]["xoffset"].asInt() + offsetX * 6;
+					box.w = offsetX;
+					rects.push_back(box);
+
+					box.x = jsonValue["Burn"]["xoffset"].asInt() + offsetX * 7;
+					box.w = offsetX;
+					rects.push_back(box);
+					box.x = jsonValue["Burn"]["xoffset"].asInt() + offsetX * 9;
+					box.w = offsetX * 2;
+					rects.push_back(box);
+					box.x = jsonValue["Burn"]["xoffset"].asInt() + offsetX * 11;
+					box.w = offsetX * 2;
+					rects.push_back(box);
+					box.x = jsonValue["Burn"]["xoffset"].asInt() + offsetX * 13;
+					box.w = offsetX * 2;
+					rects.push_back(box);
+					box.x = jsonValue["Burn"]["xoffset"].asInt() + offsetX * 15;
+					box.w = offsetX * 2;
+					rects.push_back(box);
+					box.x = jsonValue["Burn"]["xoffset"].asInt() + offsetX * 17;
+					box.w = offsetX * 2;
+					rects.push_back(box);
+					box.x = jsonValue["Burn"]["xoffset"].asInt() + offsetX * 19;
+					box.w = offsetX * 2;
+					rects.push_back(box);
+					box.x = jsonValue["Burn"]["xoffset"].asInt() + offsetX * 21;
+					box.w = offsetX * 2;
+					rects.push_back(box);
+					box.x = jsonValue["Burn"]["xoffset"].asInt() + offsetX * 23;
+					box.w = offsetX * 2;
+					rects.push_back(box);
+					box.x = jsonValue["Burn"]["xoffset"].asInt() + offsetX * 25;
+					box.w = offsetX * 2;
+					rects.push_back(box);
+					box.x = jsonValue["Burn"]["xoffset"].asInt() + offsetX * 27;
+					box.w = offsetX * 2;
+					rects.push_back(box);
+
+					box.x = jsonValue["Burn"]["xoffset"].asInt() + offsetX * 29;
+					box.w = offsetX;
+					rects.push_back(box);
+					box.x = jsonValue["Burn"]["xoffset"].asInt() + offsetX * 30;
+					box.w = offsetX;
+					rects.push_back(box);
+
+					break;
 				}
 				else {
 					SDL_Rect box;
