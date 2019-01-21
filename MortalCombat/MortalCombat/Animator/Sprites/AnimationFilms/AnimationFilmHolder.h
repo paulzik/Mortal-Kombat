@@ -45,10 +45,10 @@ public:
 		for (Json::ValueIterator i = jsonValue.begin(); i != jsonValue.end(); ++i) {
 			//std::cout << i.name() << std::endl;
 			if (i.name() == "Getoverhere") continue;
-			if (i.name() == "Rope") continue;
+			//if (i.name() == "Rope") continue;
 			if (i.name() == "Burn") continue;
 			if (i.name() == "Freezeball") continue;
-			int Array[3];
+			int Array[50];
 
 			BITMAP* bm = loader.Load(path, rend);
 			const std::string s = i.name();
@@ -65,12 +65,34 @@ public:
 				Array[count++] = temp.asInt();
 			}
 
-			for (int k = 0; k < Array[0]; k++) {
-				if (i.name() == "Getoverhere"){
+			for (int k = 0; k < tmp["frames"].asInt(); k++) {
+				if (i.name() == "Rope"){
 					SDL_Rect box;
-					box.x = (k)*offsetX*3 + Array[1];
-					box.y = Array[2];
-					box.w = offsetX*3;
+					if (k < 3) {
+						box.x = (k)*offsetX + jsonValue["Rope"]["yoffset"].asInt();
+						box.w = offsetX;
+					}
+					else if (k < 5) {
+						box.x = (k)*offsetX + jsonValue["Rope"]["yoffset"].asInt() * 2;
+						box.w = offsetX * 2;
+					}
+					else if (k < 7) {
+						box.x = (k)*offsetX + jsonValue["Rope"]["yoffset"].asInt() * 3;
+						box.w = offsetX * 3;
+					}
+					else if (k < 9) {
+						box.x = (k)*offsetX + jsonValue["Rope"]["yoffset"].asInt() * 4;
+						box.w = offsetX * 4;
+					}
+					else if (k < 10) {
+						box.x = (k)*offsetX + jsonValue["Rope"]["yoffset"].asInt() * 5;
+						box.w = offsetX * 5;
+					}
+					else if (k < 11) {
+						box.x = (k)*offsetX + jsonValue["Rope"]["yoffset"].asInt();
+						box.w = offsetX;
+					}
+					box.y = jsonValue["Rope"]["yoffset"].asInt();
 					box.h = offsetY;
 					rects.push_back(box);
 				}

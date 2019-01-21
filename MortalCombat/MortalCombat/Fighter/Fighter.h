@@ -6,6 +6,7 @@
 #include "../InputManager/InputManager.h"
 #include "../../Libraries/include/SDL.h"
 #include "../StateTransition/StateTransition.h"
+#include "../Animator/Sprites/Sprite/SpritesHolder.h"
 
 #define	FIGHTER_ACTION_DELAY_MSECS	150
 
@@ -18,6 +19,7 @@ private:
 	SDL_Renderer *Renderer;
 	//TODO
 	Sprite*			sprite = nullptr;
+	SpritesHolder* Sprites;
 	std::string FighterName[2] = { "SubZero", "Scorpion" };
 
 	static int index;
@@ -39,9 +41,11 @@ private:
 	bool										isAlive;
 	int											numberOfWins;
 	int											playerIndex;
+	bool isFlipped = false;
 
 	inline void InitializeCharacter(FighterTag _charName, SDL_Renderer * renderer) {
 		AFH = new AnimationFilmHolder();
+		Sprites = new SpritesHolder();
 		//AnimationFilmHolder& AFH = AnimationFilmHolder::Get();
 		AFH->Load("./Bitmaps/Clips/" + FighterName[_charName] + "/" + FighterName[_charName], renderer);
 
@@ -70,6 +74,8 @@ private:
 
 		if (playerIndex == P1)
 		{
+			animators->insert(std::pair<std::string, Animator*>("Rope", new FrameRangeAnimator(index++)));
+
 			animators->insert(std::pair<std::string, Animator*>("WalkR", new FrameRangeAnimator(index++)));
 			animators->insert(std::pair<std::string, Animator*>("WalkL", new FrameRangeAnimator(index++)));
 			animators->insert(std::pair<std::string, Animator*>("WalkReverseR", new FrameRangeAnimator(index++)));
@@ -89,6 +95,7 @@ private:
 			animations.insert(std::pair<std::string, Animation*>("Uppercut", new FrameRangeAnimation(0, 5, 0, 0, 0.085f, false, 2)));
 			animations.insert(std::pair<std::string, Animation*>("Tackle", new FrameRangeAnimation(0, 7, 0, 0, 0.085f, false, 2)));
 			animations.insert(std::pair<std::string, Animation*>("Throw", new FrameRangeAnimation(0, 7, 0, 0, 0.085f, false, 2)));
+			animations.insert(std::pair<std::string, Animation*>("Rope", new FrameRangeAnimation(0, 12, 0, 0, 0.085f, false, 2)));
 			rightIsForward = true;
 
 		}
@@ -113,19 +120,30 @@ private:
 		for (auto entry : *animators) {
 			if (entry.first == "WalkReverseR" || entry.first == "WalkReverseL") {
 				AnimationFilm* walkReverse = new AnimationFilm(*AFH->GetFilm("Walk"));
-				((FrameRangeAnimator*)entry.second)->Start(new Sprite(x, y, walkReverse, playerIndex == P2), (FrameRangeAnimation*)animations.at(entry.first), time, true);
+				Sprite * s = new Sprite(x, y, walkReverse, isFlipped);
+				((FrameRangeAnimator*)entry.second)->Start(s, (FrameRangeAnimation*)animations.at(entry.first), time, true);
+				Sprites->Add(s, 0);
 			}
 			else if(entry.first == "Getoverhere" && playerIndex == P1) {
-				((FrameRangeAnimator*)entry.second)->Start(new Sprite(x, y, AFH->GetFilm(entry.first), playerIndex == P2), (FrameRangeAnimation*)animations.at(entry.first), time);
+				Sprite * s = new Sprite(x, y, AFH->GetFilm(entry.first), isFlipped);
+				((FrameRangeAnimator*)entry.second)->Start(s, (FrameRangeAnimation*)animations.at(entry.first), time);
 				((FrameRangeAnimator*)entry.second)->SetLogicState(stateTransitions);
+				Sprites->Add(s, 0);
+
 			}
 			else if (entry.first == "WalkL" || entry.first == "WalkR") {
-				((FrameRangeAnimator*)entry.second)->Start(new Sprite(x, y, AFH->GetFilm("Walk"), playerIndex == P2), (FrameRangeAnimation*)animations.at(entry.first), time);
+				Sprite* s = new Sprite(x, y, AFH->GetFilm("Walk"), isFlipped);
+				((FrameRangeAnimator*)entry.second)->Start(s, (FrameRangeAnimation*)animations.at(entry.first), time);
 				((FrameRangeAnimator*)entry.second)->SetLogicState(stateTransitions);
+				Sprites->Add(s, 0);
+
 			}
 			else {
-				((FrameRangeAnimator*)entry.second)->Start(new Sprite(x, y, AFH->GetFilm(entry.first), playerIndex == P2), (FrameRangeAnimation*)animations.at(entry.first), time);
+				Sprite* s = new Sprite(x, y, AFH->GetFilm(entry.first), isFlipped);
+				((FrameRangeAnimator*)entry.second)->Start(s, (FrameRangeAnimation*)animations.at(entry.first), time);
 				((FrameRangeAnimator*)entry.second)->SetLogicState(stateTransitions);
+				Sprites->Add(s, 0);
+
 			}
 			AnimatorHolder::Register(entry.second);
 		}
@@ -143,9 +161,14 @@ public:
 	void Update();
 
 	void FlipCharacter(bool _flip) {
-		AFH->FlipFilms(!_flip);
+		//AFH->FlipFilms(!_flip);
+		isFlipped = !_flip;
+		SpritesHolder::SpriteList list;
+		Sprites->GetSprites(0, &list);
+		for (auto entry : list) {
+			entry->SetFlipped(!_flip);
+		}
 		rightIsForward = _flip;
-		AFH->GetFilm("Walk")->SetFliped(!_flip);
 	}
 
 	int x = 50, y = 330;

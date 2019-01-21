@@ -4,7 +4,7 @@ void AnimationFilm::DisplayFrame(SDL_Texture *dest, const SDL_Rect& at, BYTE fra
 	if (id == "Walk") {
 		std::cout << id.c_str() << ": " << fliped << std::endl;
 	}
-	if (fliped) {
+	if (_fliped) {
 		SDL_RendererFlip flip = SDL_FLIP_VERTICAL;
 
 		SDL_RenderCopyEx(rend, dest, &boxes[frameNo], &at, 180, NULL, flip);
@@ -34,5 +34,5 @@ AnimationFilm::AnimationFilm(SDL_Texture* film, const std::vector<SDL_Rect> rect
 
 	id = type;
 
-	fliped = _fliped;
+	//fliped = _fliped;
 }

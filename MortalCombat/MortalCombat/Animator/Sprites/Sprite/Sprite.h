@@ -32,10 +32,13 @@ public:
 	void Move(int dx, int dy);
 	void SetAnimFilm(AnimationFilm* _film, bool _reverseAnim = false);
 
+	void SetFlipped(bool _flip) {
+		fliped = _flip;
+	}
 
 
-	Sprite(int& _x, int& _y, AnimationFilm* film, bool _fliped = false) :
-		x(_x), y(_y), currFilm(film), isVisible(true)
+	Sprite(int& _x, int& _y, AnimationFilm* film, bool& _fliped) :
+		x(_x), y(_y), currFilm(film), isVisible(true), fliped(_fliped)
 	{
 		frameNo = currFilm->GetTotalFrames(); SetFrame(0);
 		currFilm->SetFliped(_fliped);
