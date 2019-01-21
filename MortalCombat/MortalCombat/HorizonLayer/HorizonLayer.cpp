@@ -53,7 +53,7 @@ void HorizonLayer::InitializeShaolins(SDL_Renderer *renderer)
 		if (entry.first == "h3")
 		{
 			AnimationFilm* h3af = new AnimationFilm(*afh->GetFilm("h3"));
-			((FrameRangeAnimator*)entry.second)->Start(new Sprite(x, y, h3af), (FrameRangeAnimation*)animations.at(entry.first), time, true);
+			//((FrameRangeAnimator*)entry.second)->Start(new Sprite(x, y, h3af), (FrameRangeAnimation*)animations.at(entry.first), time, true);
 		}
 	}
 }
