@@ -112,6 +112,9 @@ public:
 					box.x = jsonValue["Rope"]["xoffset"].asInt() + offsetX * 27;
 					box.w = offsetX * 1;
 					rects.push_back(box);
+					box.x = jsonValue["Rope"]["xoffset"].asInt() + offsetX * 27;
+					box.w = offsetX * 1;
+					rects.push_back(box);
 
 					break;
 				}
@@ -181,6 +184,12 @@ public:
 					box.x = jsonValue["Burn"]["xoffset"].asInt() + offsetX * 30;
 					box.w = offsetX;
 					rects.push_back(box);
+					box.x = jsonValue["Burn"]["xoffset"].asInt() + offsetX * 30;
+					box.w = offsetX;
+					rects.push_back(box);
+					box.x = jsonValue["Burn"]["xoffset"].asInt() + offsetX * 30;
+					box.w = offsetX;
+					rects.push_back(box);
 
 					break;
 				}
@@ -192,9 +201,15 @@ public:
 					box.h = offsetY;
 					rects.push_back(box);
 				}
+				
 
 			}
-
+			SDL_Rect box;
+			box.x = (tmp["frames"].asInt() - 1)*offsetX + Array[1];
+			box.y = Array[2];
+			box.w = offsetX;
+			box.h = offsetY;
+			rects.push_back(box);
 		
 		//for (const auto & entry : std::filesystem::directory_iterator(path)) {
 		//	std::cout << entry.path() << std::endl;
