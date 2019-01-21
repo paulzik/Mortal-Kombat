@@ -7,6 +7,7 @@ class Sprite {
 	int &x, &y;
 	bool isVisible;
 	AnimationFilm* currFilm;
+	bool fliped = false;
 	//TileLayer* myLayer;
 	
 public:
@@ -31,9 +32,12 @@ public:
 	void Move(int dx, int dy);
 	void SetAnimFilm(AnimationFilm* _film, bool _reverseAnim = false);
 
-	Sprite(int& _x, int& _y, AnimationFilm* film) :
+
+
+	Sprite(int& _x, int& _y, AnimationFilm* film, bool _fliped = false) :
 		x(_x), y(_y), currFilm(film), isVisible(true)
 	{
 		frameNo = currFilm->GetTotalFrames(); SetFrame(0);
+		currFilm->SetFliped(_fliped);
 	}
 };

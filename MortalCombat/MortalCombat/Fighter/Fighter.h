@@ -19,9 +19,9 @@ private:
 	//TODO
 	Sprite*			sprite = nullptr;
 	std::string FighterName[2] = { "SubZero", "Scorpion" };
-	int x = 50, y = 330;
-	int px = 20, py = 280;
+
 	static int index;
+	bool rightIsForward = false;
 
 	std::string		nextAction;
 	//engine2d::TickAnimator*		tickAnimator = nullptr;	// deferred firing actions; always dynamic
@@ -51,8 +51,7 @@ private:
 
 		animators = new Animators();
 		animators->insert(std::pair<std::string, Animator*>("Idle", new FrameRangeAnimator(index++)));
-		animators->insert(std::pair<std::string, Animator*>("Walk", new FrameRangeAnimator(index++)));
-		animators->insert(std::pair<std::string, Animator*>("WalkReverse", new FrameRangeAnimator(index++)));
+
 		animators->insert(std::pair<std::string, Animator*>("Punchrighthigh", new FrameRangeAnimator(index++)));
 		animators->insert(std::pair<std::string, Animator*>("Punchlefthigh", new FrameRangeAnimator(index++)));
 		animators->insert(std::pair<std::string, Animator*>("Kickmid", new FrameRangeAnimator(index++)));
@@ -71,12 +70,17 @@ private:
 
 		if (playerIndex == P1)
 		{
-			animators->insert(std::pair<std::string, Animator*>("Rope", new FrameRangeAnimator(index++)));
+			animators->insert(std::pair<std::string, Animator*>("WalkR", new FrameRangeAnimator(index++)));
+			animators->insert(std::pair<std::string, Animator*>("WalkL", new FrameRangeAnimator(index++)));
+			animators->insert(std::pair<std::string, Animator*>("WalkReverseR", new FrameRangeAnimator(index++)));
+			animators->insert(std::pair<std::string, Animator*>("WalkReverseL", new FrameRangeAnimator(index++)));
 			animators->insert(std::pair<std::string, Animator*>("Getoverhere", new FrameRangeAnimator(index++)));
 
 			animations.insert(std::pair<std::string, Animation*>("Idle", new FrameRangeAnimation(0, 6, 0, 0, 0.07f, true, 1)));
-			animations.insert(std::pair<std::string, Animation*>("Walk", new FrameRangeAnimation(0, 8, 6, 0, 0.075f, true, 0)));
-			animations.insert(std::pair<std::string, Animation*>("WalkReverse", new FrameRangeAnimation(0, 8, -6, 0, 0.075f, true, 3)));
+			animations.insert(std::pair<std::string, Animation*>("WalkR", new FrameRangeAnimation(0, 8, 6, 0, 0.075f, true, 0)));
+			animations.insert(std::pair<std::string, Animation*>("WalkL", new FrameRangeAnimation(0, 8, -6, 0, 0.075f, true, 0)));
+			animations.insert(std::pair<std::string, Animation*>("WalkReverseR", new FrameRangeAnimation(0, 8, 6, 0, 0.075f, true, 3)));
+			animations.insert(std::pair<std::string, Animation*>("WalkReverseL", new FrameRangeAnimation(0, 8, -6, 0, 0.075f, true, 3)));
 
 			animations.insert(std::pair<std::string, Animation*>("Punchrighthigh", new FrameRangeAnimation(0, 2, 0, 0, 0.06f, false, 2)));
 			animations.insert(std::pair<std::string, Animation*>("Punchlefthigh", new FrameRangeAnimation(0, 2, 0, 0, 0.06f, false, 2)));
@@ -86,13 +90,14 @@ private:
 			animations.insert(std::pair<std::string, Animation*>("Uppercut", new FrameRangeAnimation(0, 5, 0, 0, 0.085f, false, 2)));
 			animations.insert(std::pair<std::string, Animation*>("Tackle", new FrameRangeAnimation(0, 7, 0, 0, 0.085f, false, 2)));
 			animations.insert(std::pair<std::string, Animation*>("Throw", new FrameRangeAnimation(0, 7, 0, 0, 0.085f, false, 2)));
-			animations.insert(std::pair<std::string, Animation*>("Rope", new FrameRangeAnimation(0, 6, 0, 0, 0.085f, false, 2)));
-			animations.insert(std::pair<std::string, Animation*>("Getoverhere", new FrameRangeAnimation(0, 6, 0, 0, 0.085f, false, 2)));
+			animations.insert(std::pair<std::string, Animation*>("Getoverhere", new FrameRangeAnimation(0, 13, 0, 0, 0.085f, false, 2)));
+			rightIsForward = true;
+
 		}
 		else {
 			animations.insert(std::pair<std::string, Animation*>("Idle", new FrameRangeAnimation(0, 11, 0, 0, 0.07f, true, 1)));
-			animations.insert(std::pair<std::string, Animation*>("Walk", new FrameRangeAnimation(0, 8, 6, 0, 0.075f, true, 0)));
-			animations.insert(std::pair<std::string, Animation*>("WalkReverse", new FrameRangeAnimation(0, 8, -6, 0, 0.075f, true, 3)));
+			//animations.insert(std::pair<std::string, Animation*>("Walk", new FrameRangeAnimation(0, 8, 6, 0, 0.075f, true, 0)));
+			//animations.insert(std::pair<std::string, Animation*>("WalkReverse", new FrameRangeAnimation(0, 8, -6, 0, 0.075f, true, 3)));
 
 			animations.insert(std::pair<std::string, Animation*>("Punchrighthigh", new FrameRangeAnimation(0, 2, 0, 0, 0.055f, false, 2)));
 			animations.insert(std::pair<std::string, Animation*>("Punchlefthigh", new FrameRangeAnimation(0, 5, 0, 0, 0.055f, false, 2)));
@@ -104,22 +109,24 @@ private:
 			animations.insert(std::pair<std::string, Animation*>("Throw", new FrameRangeAnimation(0, 7, 0, 0, 0.085f, false, 2)));
 			//animations.insert(std::pair<std::string, Animation*>("Rope", new FrameRangeAnimation(0, 6, 0, 0, 0.085f, false, 2)));
 
-			x = 580;
-
+			x = 350;
 		}
 		float time = clock() / CLOCKS_PER_SEC;
 		for (auto entry : *animators) {
-			if (entry.first == "WalkReverse") {
+			if (entry.first == "WalkReverseR" || entry.first == "WalkReverseL") {
 				AnimationFilm* walkReverse = new AnimationFilm(*AFH->GetFilm("Walk"));
-				((FrameRangeAnimator*)entry.second)->Start(new Sprite(x, y, walkReverse), (FrameRangeAnimation*)animations.at(entry.first), time, true);
+				((FrameRangeAnimator*)entry.second)->Start(new Sprite(x, y, walkReverse, playerIndex == P2), (FrameRangeAnimation*)animations.at(entry.first), time, true);
 			}
-			else if(entry.first == "Rope") {
-				int pos = x + 20;
-				((FrameRangeAnimator*)entry.second)->Start(new Sprite(x, y, AFH->GetFilm(entry.first)), (FrameRangeAnimation*)animations.at(entry.first), time);
+			else if(entry.first == "Getoverhere" && playerIndex == P1) {
+				((FrameRangeAnimator*)entry.second)->Start(new Sprite(x, y, AFH->GetFilm(entry.first), playerIndex == P2), (FrameRangeAnimation*)animations.at(entry.first), time);
+				((FrameRangeAnimator*)entry.second)->SetLogicState(stateTransitions);
+			}
+			else if (entry.first == "WalkL" || entry.first == "WalkR") {
+				((FrameRangeAnimator*)entry.second)->Start(new Sprite(x, y, AFH->GetFilm("Walk"), playerIndex == P2), (FrameRangeAnimation*)animations.at(entry.first), time);
 				((FrameRangeAnimator*)entry.second)->SetLogicState(stateTransitions);
 			}
 			else {
-				((FrameRangeAnimator*)entry.second)->Start(new Sprite(x, y, AFH->GetFilm(entry.first)), (FrameRangeAnimation*)animations.at(entry.first), time);
+				((FrameRangeAnimator*)entry.second)->Start(new Sprite(x, y, AFH->GetFilm(entry.first), playerIndex == P2), (FrameRangeAnimation*)animations.at(entry.first), time);
 				((FrameRangeAnimator*)entry.second)->SetLogicState(stateTransitions);
 			}
 			AnimatorHolder::Register(entry.second);
@@ -136,5 +143,14 @@ public:
 	int GetHealth();
 
 	void Update();
+
+	void FlipCharacter(bool _flip) {
+		AFH->FlipFilms(!_flip);
+		rightIsForward = _flip;
+		AFH->GetFilm("Walk")->SetFliped(!_flip);
+	}
+
+	int x = 50, y = 330;
+	int px = 20, py = 280;
 	
 };

@@ -13,6 +13,7 @@ private:
 	SDL_Texture* bitmap;
 	std::string id;
 	bool reverse;
+	bool fliped = false;
 
 
 public:
@@ -24,6 +25,14 @@ public:
 		reverse = rev;
 	}
 
+	void SetFliped(bool _flip) {
+		fliped = _flip;
+	}
+
+	bool GetIsFliped() {
+		return fliped;
+	}
+
 	bool GetIsAnimationReversed() {
 		return reverse;
 	}
@@ -32,8 +41,8 @@ public:
 	{
 		assert(boxes.size() > frameNo); return boxes[frameNo];
 	}
-	void DisplayFrame(SDL_Texture *d, const SDL_Rect& at, BYTE frameNo, SDL_Renderer*) const;
+	void DisplayFrame(SDL_Texture *d, const SDL_Rect& at, BYTE frameNo, SDL_Renderer*, bool _fliped) const;
 
-	AnimationFilm(SDL_Texture* dest, const std::vector<SDL_Rect>, const std::string&);
+	AnimationFilm(SDL_Texture* dest, const std::vector<SDL_Rect>, const std::string&, bool _fliped = false);
 };
 

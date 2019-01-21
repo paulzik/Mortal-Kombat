@@ -21,6 +21,7 @@ public:
 		state = ANIMATOR_RUNNING;
 		sprite->SetFrame(currFrame = anim->GetStartFrame());
 		sprite->GetAnimationFilm()->SetReverseAnimation(isReverse);
+		
 	}
 
 	FrameRangeAnimator* SetType(animatortype_t _animType) {
@@ -32,7 +33,7 @@ public:
 		return sprite;
 	}
 
-	FrameRangeAnimator(int _id) :
+	FrameRangeAnimator(int _id, bool fliped = false) :
 		sprite((Sprite*)0),
 		anim((FrameRangeAnimation*)0), currFrame(0xFF)
 		

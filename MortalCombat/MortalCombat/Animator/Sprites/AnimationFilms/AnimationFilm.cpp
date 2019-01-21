@@ -1,29 +1,30 @@
 #include "AnimationFilm.h"
-
-void AnimationFilm::DisplayFrame(SDL_Texture *dest, const SDL_Rect& at, BYTE frameNo, SDL_Renderer* rend) const {
-	//MaskedBlit(bitmap, GetFrameBox(frameNo), dest, at);
-
-	//if (frameNo >= boxes.size()) frameNo = boxes.size() - 1;
-	SDL_RendererFlip flip = SDL_FLIP_VERTICAL;
-
-	//SDL_Point point;
-	//point.x = at.x;
-	//point.y = at.y * 1.65f;
-
-	//SDL_RenderCopyEx(rend, dest, &boxes[frameNo], &at, 180, &point, flip);
-	SDL_Rect rect;
-	rect = at;
-	if (id == "Rope") {
-		rect.x = 120 + at.x;
-		rect.y = at.y - 150;
-		rect.w = at.w;
-		rect.h = at.h;
+#include <iostream>
+void AnimationFilm::DisplayFrame(SDL_Texture *dest, const SDL_Rect& at, BYTE frameNo, SDL_Renderer* rend, bool _fliped) const {
+	if (id == "Walk") {
+		std::cout << id.c_str() << ": " << fliped << std::endl;
 	}
-	SDL_RenderCopy(rend, dest, &boxes[frameNo], &rect);
+	if (fliped) {
+		SDL_RendererFlip flip = SDL_FLIP_VERTICAL;
+
+		SDL_RenderCopyEx(rend, dest, &boxes[frameNo], &at, 180, NULL, flip);
+	}
+	else {
+		SDL_Rect rect;
+		rect = at;
+		if (id == "Rope") {
+			rect.x = 120 + at.x;
+			rect.y = at.y - 150;
+			rect.w = at.w;
+			rect.h = at.h;
+		}
+		SDL_RenderCopy(rend, dest, &boxes[frameNo], &rect);
+	}
+
 
 }
 
-AnimationFilm::AnimationFilm(SDL_Texture* film, const std::vector<SDL_Rect> rects, const std::string & type)
+AnimationFilm::AnimationFilm(SDL_Texture* film, const std::vector<SDL_Rect> rects, const std::string & type, bool _fliped)
 {
 	bitmap = film;
 
@@ -32,4 +33,6 @@ AnimationFilm::AnimationFilm(SDL_Texture* film, const std::vector<SDL_Rect> rect
 	}
 
 	id = type;
+
+	fliped = _fliped;
 }

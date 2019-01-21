@@ -11,6 +11,7 @@
 #include "UI/UIManager.h"
 #include "Arena/Arena.h"
 #include "HorizonLayer/HorizonLayer.h"
+#include "SoundEngine\SoundEngine.h"
 
 #define SCREEN_WIDTH  800
 #define SCREEN_HEIGHT 508
@@ -18,7 +19,6 @@
 
 int main(int argc, char ** argv)
 {
-
 	bool quit = false;
 	SDL_Event event;
 
@@ -52,7 +52,7 @@ int main(int argc, char ** argv)
 	UIManager::Get()->InitializeBattleScene(player1, player2);
 	UIManager::Get()->InitializeWelcomeScene();
 	UIManager::Get()->InitializeOptionsScene();
-
+	//SoundEngine::Get()->Play("./SoundEngine/Sounds/Mortal Kombat Theme Song Original.mp3", true);
 	while (!quit)
 	{
 
@@ -63,7 +63,12 @@ int main(int argc, char ** argv)
 
 		layerRenderer->RenderLayer(LayerRenderer::Layer::Action);
 		player1->Update();
-		//player2->Update();
+		player2->Update();
+		player1->FlipCharacter(player1->x < player2->x ? true : false);
+		player2->FlipCharacter(player1->x < player2->x ? false : true);
+
+		AnimatorHolder::Progress(float((float)clock() / (float)CLOCKS_PER_SEC));
+		AnimatorHolder::Render(renderer);
 
 		layerRenderer->RenderLayer(LayerRenderer::Layer::Foreground);
 
@@ -72,7 +77,7 @@ int main(int argc, char ** argv)
 		
 		SDL_RenderPresent(renderer);
 	}
-
+	SoundEngine::Get()->DeleteSoundEngine();
 	layerRenderer->ClearLayerRenderer();
 
 	SDL_DestroyRenderer(renderer);

@@ -134,7 +134,7 @@ public:
 			}
 
 			for (int k = 0; k < Array[0]; k++) {
-				if (i.name() == "Rope"){
+				if (i.name() == "Getoverhere"){
 					SDL_Rect box;
 					box.x = (k)*offsetX*3 + Array[1];
 					box.y = Array[2];
@@ -182,6 +182,12 @@ public:
 			delete (var.second);
 		}
 		films.clear();
+	}
+
+	void FlipFilms(bool _flip) {
+		for (auto film : films) {
+			film.second->SetFliped(_flip);
+		}
 	}
 
 	AnimationFilm* GetFilm(const std::string id) {
