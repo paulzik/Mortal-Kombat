@@ -116,6 +116,10 @@ public:
 
 		for (Json::ValueIterator i = jsonValue.begin(); i != jsonValue.end(); ++i) {
 			//std::cout << i.name() << std::endl;
+			if (i.name() == "Getoverhere") continue;
+			if (i.name() == "Rope") continue;
+			if (i.name() == "Burn") continue;
+			if (i.name() == "Freezeball") continue;
 			int Array[3];
 
 			BITMAP* bm = loader.Load(path, rend);
