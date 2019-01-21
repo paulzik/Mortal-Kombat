@@ -185,21 +185,15 @@
 		"yoffset":	1043,
 		"frames":	7
 	},
-	"Frozen":
-	{
-		"xoffset":	2047,
-		"yoffset":	1043,
-		"frames":	1
-	},
 	"Dmglow":
 	{
-		"xoffset":	2136,
+		"xoffset":	2047,
 		"yoffset":	1043,
 		"frames":	2
 	},
 	"Jesus":
 	{
-		"xoffset":	2314,
+		"xoffset":	2225,
 		"yoffset":	1043,
 		"frames":	3
 	},
@@ -215,6 +209,12 @@
 		"yoffset":	1192,
 		"frames":	6
 	},
+	"Frozen":
+	{
+		"xoffset":	1068,
+		"yoffset":	1192,
+		"frames":	8
+	},
 	"Fallthrow":
 	{
 		"xoffset":	0,
@@ -227,28 +227,51 @@
 		"yoffset":	1341,
 		"frames":	5
 	},
-	"Skull":
+	"Burn":
 	{
 		"xoffset":	0,
 		"yoffset":	1490,
-		"frames":	8
+		"frames":	20,
+		"f0_6":		1,
+		"f7xoffset":	624,
+		"f7_17":		2,
+		"f18xoffset":	2581,
+		"f18_19":	1
 	},
-	"Fire":
-	{
-		"xoffset":	712,
-		"yoffset":	1490,
-		"frames":	11
-	},
-	"Burned":
+	"FatalFrozen":
 	{
 		"xoffset":	0,
 		"yoffset":	1639,
-		"frames":	9
+		"frames":	10
+	},
+	"Rope":
+	{
+		"xoffset":	0,
+		"yoffset":	1788,
+		"frames":	12,
+		"f0_3":		1,
+		"f4xoffset":	356,
+		"f4_5":		2,
+		"f6xoffset":	712,
+		"f6_7":		3,
+		"f8xoffset":	1246,
+		"f8_9":		4,
+		"f10xoffset":	1958,
+		"f10":		5,
+		"f11xoffset":	2403,
+		"f11":		1
 	},
 	"Getoverhere":
 	{
 		"xoffset":	0,
-		"yoffset":	1788,
-		"frames":	14
+		"yoffset":	1937,
+		"frames":	8,
+		"f0_1":		4,
+		"f2xoffset":	712,
+		"f2_3":		3,
+		"f4xoffset":	1246,
+		"f4_5":		2,
+		"f6xoffset":	1602,
+		"f6_7":		1
 	}
 }
