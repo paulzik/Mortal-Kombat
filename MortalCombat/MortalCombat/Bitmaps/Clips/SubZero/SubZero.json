@@ -185,21 +185,15 @@
 		"yoffset":	1043,
 		"frames":	7
 	},
-	"Frozen":
-	{
-		"xoffset":	2047,
-		"yoffset":	1043,
-		"frames":	1
-	},
 	"Dmglow":
 	{
-		"xoffset":	2136,
+		"xoffset":	2047,
 		"yoffset":	1043,
 		"frames":	2
 	},
 	"Jesus":
 	{
-		"xoffset":	2314,
+		"xoffset":	2225,
 		"yoffset":	1043,
 		"frames":	3
 	},
@@ -227,28 +221,31 @@
 		"yoffset":	1341,
 		"frames":	5
 	},
-	"hadouken":
+	"Kickslide":
 	{
-		"xoffset":	0,
-		"yoffset":	1490,
-		"frames":	3
+		"xoffset":	1068,
+		"yoffset":	1341,
+		"frames":	2
 	},
 	"Freezeball":
 	{
-		"xoffset":	267,
+		"xoffset":	0,
 		"yoffset":	1490,
-		"frames":	4
+		"frames":	12,
+		"f0_3":		1,
+		"f4xoffset":	356,
+		"f4_6":		2,
+		"f7xoffset":	890,
+		"f7_8":		3,
+		"f9xoffset":	1424,
+		"f9_10":		4,
+		"f11xoffset":	2136,
+		"f11":		1
 	},
-	"Kickslide":
-	{
-		"xoffset":	623,
-		"yoffset":	1490,
-		"frames":	2
-	},
-	"Frozendead":
+	"Burned":
 	{
 		"xoffset":	0,
 		"yoffset":	1639,
-		"frames":	10
+		"frames":	9
 	}
 }
