@@ -74,6 +74,8 @@ private:
 
 		if (playerIndex == P1)
 		{
+			animators->insert(std::pair<std::string, Animator*>("Rope", new FrameRangeAnimator(index++)));
+
 			animators->insert(std::pair<std::string, Animator*>("WalkR", new FrameRangeAnimator(index++)));
 			animators->insert(std::pair<std::string, Animator*>("WalkL", new FrameRangeAnimator(index++)));
 			animators->insert(std::pair<std::string, Animator*>("WalkReverseR", new FrameRangeAnimator(index++)));
@@ -93,6 +95,7 @@ private:
 			animations.insert(std::pair<std::string, Animation*>("Uppercut", new FrameRangeAnimation(0, 5, 0, 0, 0.085f, false, 2)));
 			animations.insert(std::pair<std::string, Animation*>("Tackle", new FrameRangeAnimation(0, 7, 0, 0, 0.085f, false, 2)));
 			animations.insert(std::pair<std::string, Animation*>("Throw", new FrameRangeAnimation(0, 7, 0, 0, 0.085f, false, 2)));
+			animations.insert(std::pair<std::string, Animation*>("Rope", new FrameRangeAnimation(0, 12, 0, 0, 0.085f, false, 2)));
 			rightIsForward = true;
 
 		}

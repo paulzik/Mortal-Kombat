@@ -588,7 +588,7 @@ void Fighter::InitializeStateMachine(logic::StateTransitions* ST) {
 	ST->SetTransition("WalkRev", playerIndex == P1 ? Input{ "a.3" } : Input{ "l" }, [anim, ST](void) {
 		if (canDoAction) {
 			AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
-			RunningQueue.push(anim->at("Getoverhere"));
+			RunningQueue.push(anim->at("Rope"));
 			canDoAction = false;
 			int r = rand() % 2;
 			if (r == 0)
