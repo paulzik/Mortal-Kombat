@@ -53,7 +53,7 @@ void HorizonLayer::InitializeShaolins(SDL_Renderer *renderer)
 		if (entry.first == "h3")
 		{
 			AnimationFilm* h3af = new AnimationFilm(*afh->GetFilm("h3"));
-			//((FrameRangeAnimator*)entry.second)->Start(new Sprite(x, y, h3af), (FrameRangeAnimation*)animations.at(entry.first), time, true);
+			((FrameRangeAnimator*)entry.second)->Start(new Sprite(hRects[2].x, hRects[2].y, h3af, flipped), (FrameRangeAnimation*)animations.at(entry.first), time, true);
 		}
 	}
 }
@@ -61,6 +61,7 @@ void HorizonLayer::InitializeShaolins(SDL_Renderer *renderer)
 HorizonLayer::HorizonLayer(SDL_Renderer* _renderer, int sw, int sh)
 {
 	renderer = _renderer;
+	flipped = false;
 	//InitializeShaolins(renderer);
 	screen_w = sw;
 	screen_h = sh;
