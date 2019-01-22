@@ -67,25 +67,29 @@ int main(int argc, char ** argv)
 		//keyboardController->Update();
 		//Render all 3 layers
 		SDL_RenderClear(renderer);
-		hl.DisplayHorizon();
-		//layerRenderer->RenderLayer(LayerRenderer::Layer::Background);
+		if (!UIManager::Get()->IsGamePaused()) {
+			hl.DisplayHorizon();
+			//layerRenderer->RenderLayer(LayerRenderer::Layer::Background);
 
-		layerRenderer->RenderLayer(LayerRenderer::Layer::Action);
-		player1->Update();
-		player2->Update();
-		player1->FlipCharacter(player1->positionX < player2->positionX ? true : false);
-		player2->FlipCharacter(player1->positionX < player2->positionX ? false : true);
+			layerRenderer->RenderLayer(LayerRenderer::Layer::Action);
+			player1->Update();
+			player2->Update();
+			player1->FlipCharacter(player1->positionX < player2->positionX ? true : false);
+			player2->FlipCharacter(player1->positionX < player2->positionX ? false : true);
 
-		AnimatorHolder::Progress(float((float)clock() / (float)CLOCKS_PER_SEC));
-		AnimatorHolder::Render(renderer);
+			AnimatorHolder::Progress(float((float)clock() / (float)CLOCKS_PER_SEC));
+			AnimatorHolder::Render(renderer);
+		}
+			
 
-		keyboardController->Update(player1, player2);
+
+		
 
 		layerRenderer->RenderLayer(LayerRenderer::Layer::Foreground);
 
 		UIManager::Get()->RenderScene();
 		
-
+		keyboardController->Update(player1, player2);
 		
 		SDL_RenderPresent(renderer);
 	}

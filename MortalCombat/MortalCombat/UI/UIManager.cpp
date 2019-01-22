@@ -5,6 +5,7 @@ SDL_Renderer* UIManager::renderer;
 BattleUI* UIManager::battleScene;
 OptionsUI* UIManager::optionsScene;
 UICanvas* UIManager::currentScene;
+bool UIManager::paused;
 
 UIManager* UIManager::Get() {
 	if (!instance) {
@@ -19,6 +20,7 @@ void UIManager::InitializeManager(SDL_Renderer* _renderer)
 { 
 	//SelectScene(SceneTag::Welcome);
 	renderer = _renderer;
+	paused = false;
 }
 
 void UIManager::InitializeBattleScene(Fighter* player1, Fighter* player2)
@@ -45,6 +47,16 @@ void UIManager::SetScene(SceneTag scene)
 	}else if (scene == SceneTag::Options) {
 		currentScene = optionsScene;
 	}
+}
+
+bool UIManager::IsGamePaused()
+{
+	return paused;
+}
+
+void UIManager::ToggleGamePause()
+{
+	paused = !paused;
 }
 
 void UIManager::RenderScene()

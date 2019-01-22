@@ -9,7 +9,7 @@ BattleUI::BattleUI(Fighter* _player1, Fighter* _player2)
 	renderer = UIManager::Get()->GetRenderer();
 	player1 = _player1;
 	player2 = _player2;
-
+	tag = SceneTag::Battle;
 	InitializeUI();
 
 }

@@ -9,9 +9,8 @@ using namespace std;
 class UICanvas
 {
 public:
-	//SceneTag tag;
-	
-	//SceneTag GetSceneTag();
+	int tag;
+	int GetSceneTag();
 	virtual void InitializeUI() = 0;
 	virtual void RenderUI();
 	virtual void InvokeMethod(string key);

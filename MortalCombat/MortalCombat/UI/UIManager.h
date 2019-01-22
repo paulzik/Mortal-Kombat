@@ -12,6 +12,7 @@ enum SceneTag { Welcome, Battle, Options };
 class UIManager
 {
 public:
+	
 	static UICanvas* currentScene;
 	static UIManager* Get(void);
 	static SDL_Renderer* renderer;
@@ -20,11 +21,12 @@ public:
 	static void InitializeWelcomeScene();
 	static void InitializeOptionsScene();
 	static void SetScene(SceneTag scene);
+	static bool IsGamePaused();
+	static void ToggleGamePause();
 	static void RenderScene();
 	static SDL_Renderer* GetRenderer();
 private:
-	//static BattleUI* battleScene;
-
+	static bool paused;
 	static UIManager* instance;
 	static BattleUI* battleScene;
 	static OptionsUI* optionsScene;
