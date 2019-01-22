@@ -153,18 +153,6 @@ void Fighter::Update()
 
 		std::cout << str << std::endl;
 	}
-	if (positionY <= 220) {
-		positionY += 2;
-	}
-	else if (positionY <= 280) {
-		positionY += 5;
-	}
-	else if (positionY < 330) {
-		positionY += 7;
-	}
-	else if (positionY > 330) {
-		positionY = 330;
-	}
 
 	stateTransitions.PerformTransitions(Input{ str }, false);
 
