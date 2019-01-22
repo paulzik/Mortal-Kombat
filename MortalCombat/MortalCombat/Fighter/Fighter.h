@@ -28,7 +28,7 @@ private:
 
 	static int index;
 	bool rightIsForward = false;
-
+	Fighter* opponent;
 	std::string		nextAction;
 	//engine2d::TickAnimator*		tickAnimator = nullptr;	// deferred firing actions; always dynamic
 	//engine2d::TickAnimation		tickAnim;
@@ -156,39 +156,39 @@ private:
 			animations.insert(std::pair<std::string, Animation*>("Freezeball", new FrameRangeAnimation(0, 12, 0, 0, 0.085f, false, index++)));
 			//animations.insert(std::pair<std::string, Animation*>("Rope", new FrameRangeAnimation(0, 6, 0, 0, 0.085f, false, index++)));
 
-			x = 350;
+			positionX = 350;
 		}
 		float time = clock() / CLOCKS_PER_SEC;
 		for (auto entry : *animators) {
 			if (entry.first == "WalkReverseR" || entry.first == "WalkReverseL" || entry.first == "WalkReverseRMove" || entry.first == "WalkReverseLMove") {
 				AnimationFilm* walkReverse = new AnimationFilm(*AFH->GetFilm("Walk"));
-				Sprite * s = new Sprite(x, y, walkReverse, isFlipped);
+				Sprite * s = new Sprite(positionX, positionY, walkReverse, isFlipped);
 				((FrameRangeAnimator*)entry.second)->Start(s, (FrameRangeAnimation*)animations.at(entry.first), time, true);
 				Sprites->Add(s, 0);
 			}
 			else if(entry.first == "Getoverhere" && playerIndex == P1) {
-				Sprite * s = new Sprite(x, y, AFH->GetFilm(entry.first), isFlipped);
+				Sprite * s = new Sprite(positionX, positionY, AFH->GetFilm(entry.first), isFlipped);
 				((FrameRangeAnimator*)entry.second)->Start(s, (FrameRangeAnimation*)animations.at(entry.first), time);
 				((FrameRangeAnimator*)entry.second)->SetLogicState(stateTransitions);
 				Sprites->Add(s, 0);
 
 			}
 			else if (entry.first == "WalkL" || entry.first == "WalkR" || entry.first == "WalkLMove" || entry.first == "WalkRMove") {
-				Sprite* s = new Sprite(x, y, AFH->GetFilm("Walk"), isFlipped);
+				Sprite* s = new Sprite(positionX, positionY, AFH->GetFilm("Walk"), isFlipped);
 				((FrameRangeAnimator*)entry.second)->Start(s, (FrameRangeAnimation*)animations.at(entry.first), time);
 				((FrameRangeAnimator*)entry.second)->SetLogicState(stateTransitions);
 				Sprites->Add(s, 0);
 
 			}
 			else if (entry.first == "JumpMove") {
-				Sprite* s = new Sprite(x, y, AFH->GetFilm("Jump"), isFlipped);
+				Sprite* s = new Sprite(positionX, positionY, AFH->GetFilm("Jump"), isFlipped);
 				((MovingPathAnimator*)entry.second)->Start(s, (MovingPathAnimation*)animations.at(entry.first), time);
 				((MovingPathAnimator*)entry.second)->SetLogicState(stateTransitions);
 				Sprites->Add(s, 0);
 
 			}
 			else {
-				Sprite* s = new Sprite(x, y, AFH->GetFilm(entry.first), isFlipped);
+				Sprite* s = new Sprite(positionX, positionY, AFH->GetFilm(entry.first), isFlipped);
 				((FrameRangeAnimator*)entry.second)->Start(s, (FrameRangeAnimation*)animations.at(entry.first), time);
 				((FrameRangeAnimator*)entry.second)->SetLogicState(stateTransitions);
 				Sprites->Add(s, 0);
@@ -220,7 +220,7 @@ public:
 	Fighter(FighterTag _tag, int playerIndex, SDL_Renderer *renderer);
 	Fighter();
 	bool PlayerIsAlive();
-	void DamagePlayer(int damage);
+	void DamageOpponent(int damage);
 	int GetHealth();
 
 	void AddKey(std::string _key) {
@@ -256,6 +256,18 @@ public:
 
 	}
 
+	float CalculateDistanceWithOpponent()
+	{
+		float diffY = positionY - opponent->positionY;
+		float diffX = positionX - opponent->positionX;
+		return sqrt((diffY * diffY) + (diffX * diffX));
+	}
+
+	void SetOpponent(Fighter* _opponent) {
+		opponent = _opponent;
+	}
+
+
 	void Update();
 
 	void FlipCharacter(bool _flip) {
@@ -269,7 +281,6 @@ public:
 		rightIsForward = _flip;
 	}
 
-	int x = 50, y = 330;
-	int px = 20, py = 280;
 
+	int positionX = 50, positionY = 330;
 };

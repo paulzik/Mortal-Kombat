@@ -5,7 +5,7 @@ OptionsUI::OptionsUI()
 {
 	renderer = UIManager::Get()->GetRenderer();
 	selectedOption = 0;
-
+	tag = SceneTag::Options;
 	InitializeUI();
 }
 

@@ -9,7 +9,7 @@ BattleUI::BattleUI(Fighter* _player1, Fighter* _player2)
 	renderer = UIManager::Get()->GetRenderer();
 	player1 = _player1;
 	player2 = _player2;
-
+	tag = SceneTag::Battle;
 	InitializeUI();
 
 }
@@ -34,7 +34,7 @@ void BattleUI::RenderUI()
 {
 
 	player1UI.lifebarGreen->imageRect = { 44,60, (322 * player1->GetHealth())/100,20 };
-	player2UI.lifebarGreen->imageRect = { 414 + 322 - (322 * player1->GetHealth())/100,60, (322 * player1->GetHealth()) / 100,20 };
+	player2UI.lifebarGreen->imageRect = { 414 + 322 - (322 * player2->GetHealth())/100,60, (322 * player2->GetHealth()) / 100,20 };
 
 	UICanvas::RenderUI();
 }

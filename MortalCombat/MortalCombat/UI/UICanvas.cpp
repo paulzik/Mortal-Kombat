@@ -2,6 +2,11 @@
 
 
 
+int UICanvas::GetSceneTag()
+{
+	return tag;
+}
+
 void UICanvas::InitializeUI() {
 }
 

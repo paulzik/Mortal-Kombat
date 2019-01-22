@@ -1,5 +1,6 @@
 #pragma once
 #include "../Fighter/Fighter.h"
+#include "../UI/UIManager.h";
 
 class KeyboardController
 {
