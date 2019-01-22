@@ -11,10 +11,6 @@ private:
 	static list<ConfigAPI*> apis;
 
 public:
-	static void Add(ConfigAPI* api) {
-		apis.push_back(api);
-	};
-	static list<ConfigAPI*>& Get(void) {
-		return apis;
-	};
+	static void Add(ConfigAPI* api);
+	static list<ConfigAPI*>& Get();
 };

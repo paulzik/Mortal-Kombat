@@ -13,6 +13,7 @@
 #include "HorizonLayer/HorizonLayer.h"
 #include "SoundEngine\SoundEngine.h"
 #include "KeyboardController/KeyboardController.h"
+#include "Configuration\ConfigAPIs.h"
 
 #define SCREEN_WIDTH  800
 #define SCREEN_HEIGHT 508
@@ -36,9 +37,10 @@ int main(int argc, char ** argv)
 
 	LayerRenderer* layerRenderer = new LayerRenderer(renderer);
 	
-	//Back Template
-	layerRenderer->InitializeImageElement("./Bitmaps/BattleElements/template.png", LayerRenderer::Layer::Background, { 0,0,SCREEN_WIDTH,SCREEN_HEIGHT});
+	//Configuration Initial setup
+	ConfigAPI* configAPI = new ConfigAPI("ConfigurationFile.json");
 	
+
 	//LifeBars -- TODO: Will be otimized as they are the same texture
 	//layerRenderer->InitializeImageElement("./Bitmaps/BattleElements/lifebar.png", LayerRenderer::Layer::Foreground, { 42,58,163 * 2,12 * 2 });
 	//layerRenderer->InitializeImageElement("./Bitmaps/BattleElements/lifebar.png", LayerRenderer::Layer::Foreground, { 412,58,163 * 2,12 * 2 });
@@ -80,10 +82,6 @@ int main(int argc, char ** argv)
 			AnimatorHolder::Progress(float((float)clock() / (float)CLOCKS_PER_SEC));
 			AnimatorHolder::Render(renderer);
 		}
-			
-
-
-		
 
 		layerRenderer->RenderLayer(LayerRenderer::Layer::Foreground);
 

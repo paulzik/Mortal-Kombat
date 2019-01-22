@@ -9,7 +9,7 @@ ConfigAPI::ConfigAPI(string configFilename)
 	configFile = configFilename;
 	ImportConfigurationData();
 
-	//ConfigAPIs::Add(this);
+	ConfigAPIs::Add(this);
 }
 
 void ConfigAPI::ImportConfigurationData()

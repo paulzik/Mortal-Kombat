@@ -19,9 +19,11 @@ void KeyboardController::Update(Fighter* _p1, Fighter* _p2)
 					UIManager::Get()->ToggleGamePause();
 					if (UIManager::Get()->currentScene->GetSceneTag() == SceneTag::Battle) {
 						UIManager::Get()->SetScene(SceneTag::Options);
+						//Load Options
 					}
 					else if (UIManager::Get()->currentScene->GetSceneTag() == SceneTag::Options) {
 						UIManager::Get()->SetScene(SceneTag::Battle);
+						//Save Changes
 					}
 					optionsOpen = true;
 				}

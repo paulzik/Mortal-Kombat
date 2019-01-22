@@ -2,16 +2,17 @@
 #include <iostream>
 #include <list>
 
-//Add configuration API to list
-//void ConfigAPIs::Add(ConfigAPI * api)
-//{
-//	apis.push_back(api);
-//}
-//
-////Return singleton instance
-//list<ConfigAPI*>& ConfigAPIs::Get(void)
-//{
-//	return apis;
-//}
-//
+list<ConfigAPI*> ConfigAPIs::apis;
+
+void ConfigAPIs::Add(ConfigAPI * api)
+{
+	apis.push_back(api);
+}
+
+//Return singleton instance
+list<ConfigAPI*>& ConfigAPIs::Get(void)
+{
+	return apis;
+}
+
 
