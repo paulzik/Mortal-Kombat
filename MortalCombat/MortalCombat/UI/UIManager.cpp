@@ -4,6 +4,7 @@ UIManager* UIManager::instance;
 SDL_Renderer* UIManager::renderer;
 BattleUI* UIManager::battleScene;
 OptionsUI* UIManager::optionsScene;
+UICanvas* UIManager::currentScene;
 
 UIManager* UIManager::Get() {
 	if (!instance) {
@@ -32,11 +33,24 @@ void UIManager::InitializeWelcomeScene()
 
 void UIManager::InitializeOptionsScene()
 {
+	optionsScene = new OptionsUI();
+}
+
+void UIManager::SetScene(SceneTag scene)
+{
+	if (scene == SceneTag::Battle) {
+		currentScene = battleScene;
+	}else if (scene == SceneTag::Welcome) {
+		//currentScene = welcomeScene;
+	}else if (scene == SceneTag::Options) {
+		currentScene = optionsScene;
+	}
 }
 
 void UIManager::RenderScene()
 {
-	battleScene->RenderUI();
+	currentScene->RenderUI();
+	//optionsScene->RenderUI();
 }
 
 void UIManager::DisplayScene(SceneTag sceneTag)

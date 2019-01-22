@@ -6,6 +6,7 @@
 #include "OptionsUI.h"
 
 using namespace std;
+
 enum SceneTag { Welcome, Battle, Options };
 
 class UIManager
@@ -18,14 +19,13 @@ public:
 	static void InitializeBattleScene(Fighter* player1, Fighter* player2);
 	static void InitializeWelcomeScene();
 	static void InitializeOptionsScene();
-
+	static void SetScene(SceneTag scene);
 	static void RenderScene();
 	static SDL_Renderer* GetRenderer();
 private:
 	//static BattleUI* battleScene;
 
 	static UIManager* instance;
-	static BattleUI* GetBattleUI();
 	static BattleUI* battleScene;
 	static OptionsUI* optionsScene;
 	static void DisplayScene(SceneTag sceneTag);

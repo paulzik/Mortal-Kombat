@@ -138,6 +138,7 @@
     <ClCompile Include="Configuration\JSONParser\jsoncpp.cpp" />
     <ClCompile Include="Fighter\Fighter.cpp" />
     <ClCompile Include="HorizonLayer\HorizonLayer.cpp" />
+    <ClCompile Include="KeyboardController\KeyboardController.cpp" />
     <ClCompile Include="LayerRenderer\LayerRenderer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="SoundEngine\SoundEngine.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="Fighter\Fighter.h" />
     <ClInclude Include="HorizonLayer\HorizonLayer.h" />
     <ClInclude Include="InputManager\InputManager.h" />
+    <ClInclude Include="KeyboardController\KeyboardController.h" />
     <ClInclude Include="LayerRenderer\LayerRenderer.h" />
     <ClInclude Include="SoundEngine\SoundEngine.h" />
     <ClInclude Include="UI\BattleUI.h" />

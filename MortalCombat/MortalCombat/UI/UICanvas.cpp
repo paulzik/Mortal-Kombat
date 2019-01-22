@@ -1,10 +1,12 @@
 #include "UICanvas.h"
-#include "UIManager.h"
+
 
 
 void UICanvas::InitializeUI() {
 }
 
+void UICanvas::InvokeMethod(string key) {
+}
 
 UICanvas::RenderElement* UICanvas::InitializeImageElement(string imagefile, SDL_Rect imageRect)
 {

@@ -1,5 +1,5 @@
 #include "BattleUI.h"
-#include "../UI/UIManager.h"
+#include "UIManager.h"
 #include <string>
 
 using namespace std;

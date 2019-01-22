@@ -91,6 +91,12 @@
     <Filter Include="Source Files\HorizonLayer">
       <UniqueIdentifier>{a0d57292-0b80-43ba-b278-33084a5e3703}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\KeyboardController">
+      <UniqueIdentifier>{0d177e05-b54f-41e4-bb08-a85a49c9133d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KeyboardController">
+      <UniqueIdentifier>{52f22b41-9ea0-4ee7-b62f-1f9efe704cb5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animator\Animator\Animator.cpp">
@@ -155,6 +161,9 @@
     </ClCompile>
     <ClCompile Include="AnimationFilmHolder.cpp">
       <Filter>Source Files\Animation\AnimationFilms</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyboardController\KeyboardController.cpp">
+      <Filter>Source Files\KeyboardController</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -262,6 +271,9 @@
     </ClInclude>
     <ClInclude Include="UI\OptionsUI.h">
       <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyboardController\KeyboardController.h">
+      <Filter>Header Files\KeyboardController</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

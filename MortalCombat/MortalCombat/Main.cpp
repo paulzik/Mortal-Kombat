@@ -12,6 +12,7 @@
 #include "Arena/Arena.h"
 #include "HorizonLayer/HorizonLayer.h"
 #include "SoundEngine\SoundEngine.h"
+#include "KeyboardController/KeyboardController.h"
 
 #define SCREEN_WIDTH  800
 #define SCREEN_HEIGHT 508
@@ -47,15 +48,21 @@ int main(int argc, char ** argv)
 	//Generate 2 Players
 	Fighter* player1 = new Fighter(FighterTag::Scorpion, PlayerIndex::P1, renderer);
 	Fighter* player2 = new Fighter(FighterTag::SubZero, PlayerIndex::P2, renderer);
-
+	//Initialize scenes
 	UIManager::Get()->InitializeManager(renderer);
 	UIManager::Get()->InitializeBattleScene(player1, player2);
 	UIManager::Get()->InitializeWelcomeScene();
 	UIManager::Get()->InitializeOptionsScene();
+	//Setup Battle scene *Replace with welcome scene
+	UIManager::Get()->SetScene(SceneTag::Battle);
+
 	//SoundEngine::Get()->Play("./SoundEngine/Sounds/Mortal Kombat Theme Song Original.mp3", true);
+
+	KeyboardController* keyboardController = new KeyboardController();
+
 	while (!quit)
 	{
-
+		//keyboardController->Update();
 		//Render all 3 layers
 		SDL_RenderClear(renderer);
 		hl.DisplayHorizon();
@@ -74,6 +81,7 @@ int main(int argc, char ** argv)
 
 		UIManager::Get()->RenderScene();
 		
+
 		
 		SDL_RenderPresent(renderer);
 	}
