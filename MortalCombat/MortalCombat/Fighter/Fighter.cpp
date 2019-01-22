@@ -443,11 +443,58 @@ void Fighter::InitializeStateMachineScorpion(logic::StateTransitions* ST) {
 		
 		
 	});
-	ST->SetTransition("Jump", Input{ "5" }, [anim, ST, currAnim](void) {
+	ST->SetTransition("Idle", Input{ "s" }, [anim, ST, RunningQueue](void) {
+		AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+		if (canDoActionP1) {
+			RunningQueue->push(anim->at("Duck"));
+			canDoActionP1 = true;
+			ST->SetState("Duck");
+			//SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
+		}
+
+	});
+	ST->SetTransition("Duck", Input{ "q" }, [anim, ST, RunningQueue](void) {
+		AnimatorHolder::MarkAsSuspended(anim->at("Duck"));
+		if (canDoActionP1) {
+			RunningQueue->push(anim->at("Blocklow"));
+			canDoActionP1 = true;
+			//SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
+		}
+
+	});
+	ST->SetTransition("Idle", Input{ "q" }, [anim, ST, RunningQueue](void) {
+		AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+		if (canDoActionP1) {
+			RunningQueue->push(anim->at("Blockhigh"));
+			canDoActionP1 = false;
+			//SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
+		}
+
+	});
+
+	ST->SetTransition("Idle", Input{ "d.w" }, [anim, ST, RunningQueue](void) {
+		AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+		if (canDoActionP1) {
+			RunningQueue->push(anim->at("JumpForth"));
+			canDoActionP1 = true;
+			//SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
+		}
+
+	});
+	ST->SetTransition("Jump", Input{ "w" }, [anim, ST, currAnim](void) {
 		if (currAnim == NULL) {
 			
 		}
 		//RunningQueue.push(anim->at("Idle"));
+	});
+	ST->SetTransition("Jump", Input{ "w.3" }, [anim, ST, RunningQueue](void) {
+		//AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+		if (canDoActionP1) {
+			RunningQueue->push(anim->at("Punchjump"));
+			canDoActionP1 = false;
+			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
+		}
+
 	});
 	ST->SetTransition("Idle", Input{ "4" }, [anim, ST, RunningQueue, currAnim, thisFighter](void) {
 		if (canDoActionP1 && currAnim == NULL)
@@ -472,6 +519,28 @@ void Fighter::InitializeStateMachineScorpion(logic::StateTransitions* ST) {
 		}
 
 	});
+	ST->SetTransition("Idle", Input{ "3" }, [anim, ST, RunningQueue, currAnim](void) {
+		if (canDoActionP1 && currAnim == NULL)
+		{
+			AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+			if (ST->GetState() == "Idle")
+				RunningQueue->push(anim->at("Punchrightmid"));
+			//canDoAction = false;
+			ST->SetState("Punchrightmid");
+			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
+
+		}
+
+	});
+	ST->SetTransition("Punchrightmid", Input{ "3.3" }, [anim, ST, RunningQueue](void) {
+		//AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+		if (canDoActionP1) {
+			RunningQueue->push(anim->at("Punchleftmid"));
+			canDoActionP1 = false;
+			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
+		}
+
+	});
 	ST->SetTransition("Idle", Input{ "5" }, [anim, ST, RunningQueue, currAnim, thisFighter](void) {
 		if (canDoActionP1 && currAnim == NULL)
 		{
@@ -482,6 +551,18 @@ void Fighter::InitializeStateMachineScorpion(logic::StateTransitions* ST) {
 			ST->SetState("Kickmid");
 			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00193.mp3", false);
 			thisFighter->DamageOpponent(4);
+
+		}
+	});
+	ST->SetTransition("Idle", Input{ "d.5" }, [anim, ST, RunningQueue, currAnim](void) {
+		if (canDoActionP1 && currAnim == NULL)
+		{
+			AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+			if (ST->GetState() == "Idle")
+				RunningQueue->push(anim->at("Throw"));
+			//canDoAction = false;
+			ST->SetState("Throw");
+			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00193.mp3", false);
 
 		}
 	});
@@ -635,6 +716,21 @@ void Fighter::InitializeStateMachineSubZero(logic::StateTransitions * ST)
 	ST->SetTransition("Idle", Input{ }, [anim, ST](void) {
 		canDoActionP2 = true;
 	});
+	ST->SetTransition("Jump", Input{ "i" }, [anim, ST, currAnim](void) {
+		if (currAnim == NULL) {
+
+		}
+		//RunningQueue.push(anim->at("Idle"));
+	});
+	ST->SetTransition("Jump", Input{ "i.7" }, [anim, ST, RunningQueue](void) {
+		//AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+		if (canDoActionP2) {
+			RunningQueue->push(anim->at("Punchjump"));
+			canDoActionP1 = false;
+			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
+		}
+
+	});
 	ST->SetTransition("Idle", Input{ "7" }, [anim, ST, RunningQueue, currAnim, thisFighter](void) {
 		if (canDoActionP2 && currAnim == NULL)
 		{
@@ -645,6 +741,65 @@ void Fighter::InitializeStateMachineSubZero(logic::StateTransitions * ST)
 			ST->SetState("Punchrighthigh");
 			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
 			thisFighter->DamageOpponent(3);
+		}
+
+	});
+	ST->SetTransition("Idle", Input{ "7" }, [anim, ST, RunningQueue, currAnim](void) {
+		if (canDoActionP2 && currAnim == NULL)
+		{
+			AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+			if (ST->GetState() == "Idle")
+				RunningQueue->push(anim->at("Punchrightmid"));
+			//canDoAction = false;
+			ST->SetState("Punchrightmid");
+			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
+
+		}
+
+	});
+	ST->SetTransition("Punchrightmid", Input{ "7.7" }, [anim, ST, RunningQueue](void) {
+		//AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+		if (canDoActionP2) {
+			RunningQueue->push(anim->at("Punchleftmid"));
+			canDoActionP2 = false;
+			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
+		}
+
+	});
+	ST->SetTransition("Idle", Input{ "k" }, [anim, ST, RunningQueue](void) {
+		AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+		if (canDoActionP2) {
+			RunningQueue->push(anim->at("Duck"));
+			canDoActionP2 = true;
+			ST->SetState("Duck");
+			//SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
+		}
+
+	});
+	ST->SetTransition("Duck", Input{ "o" }, [anim, ST, RunningQueue](void) {
+		AnimatorHolder::MarkAsSuspended(anim->at("Duck"));
+		if (canDoActionP2) {
+			RunningQueue->push(anim->at("Blocklow"));
+			canDoActionP2 = true;
+			//SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
+		}
+
+	});
+	ST->SetTransition("Idle", Input{ "o" }, [anim, ST, RunningQueue](void) {
+		AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+		if (canDoActionP2) {
+			RunningQueue->push(anim->at("Blockhigh"));
+			canDoActionP2 = false;
+			//SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
+		}
+
+	});
+	ST->SetTransition("Idle", Input{ "j.i" }, [anim, ST, RunningQueue](void) {
+		AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+		if (canDoActionP2) {
+			RunningQueue->push(anim->at("JumpForth"));
+			canDoActionP2 = false;
+			//SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
 		}
 
 	});
@@ -666,6 +821,16 @@ void Fighter::InitializeStateMachineSubZero(logic::StateTransitions * ST)
 			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
 			thisFighter->DamageOpponent(3);
 		}
+	});
+	ST->SetTransition("Idle", Input{ "l.9" }, [anim, ST, RunningQueue](void) {
+		//AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+		if (canDoActionP2) {
+			AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+			AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+			RunningQueue->push(anim->at("Tackle"));
+			canDoActionP2 = false;
+		}
+
 	});
 	ST->SetTransition("Idle", Input{ "k.7" }, [anim, ST, RunningQueue, thisFighter](void) {
 		AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
@@ -702,11 +867,53 @@ void Fighter::InitializeStateMachineSubZero(logic::StateTransitions * ST)
 			//SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00208.mp3", false);
 		}
 	});
+	ST->SetTransition("Idle", Input{ "j.9" }, [anim, ST, RunningQueue, currAnim](void) {
+		if (canDoActionP2 && currAnim == NULL)
+		{
+			AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+			if (ST->GetState() == "Idle")
+				RunningQueue->push(anim->at("Throw"));
+			//canDoAction = false;
+			ST->SetState("Throw");
+			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00193.mp3", false);
+
+		}
+	});
+	ST->SetTransition("Idle", Input{ "l.k.0" }, [anim, ST, RunningQueue, currAnim](void) {
+		if (canDoActionP2 && currAnim == NULL)
+		{
+			AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+			if (ST->GetState() == "Idle")
+				RunningQueue->push(anim->at("Kickslide"));
+			//canDoAction = false;
+			ST->SetState("Kickslide");
+			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00193.mp3", false);
+
+		}
+	});
 }
 
 void Fighter::InitializeKeyCombinations()
 {
-	if (FighterName[playerIndex] == "Scorpion") {
+	if (FighterName[playerIndex] == "Scorpion")
+	{
+		input::key_combination Duck;
+		Duck.push_back("s");
+		inputController.AddAction(Duck, "Duck");
+
+		input::key_combination Blocklow;
+		Blocklow.push_back("q");
+		inputController.AddAction(Blocklow, "Blocklow");
+
+		input::key_combination Blockhigh;
+		Blockhigh.push_back("q");
+		inputController.AddAction(Blockhigh, "Blockhigh");
+
+		input::key_combination JumpForth;
+		JumpForth.push_back("d");
+		JumpForth.push_back("w");
+		inputController.AddAction(JumpForth, "JumpForth");
+
 		input::key_combination moveForward;
 		moveForward.push_back("d");
 		inputController.AddAction(moveForward, "moveforward");
@@ -724,9 +931,27 @@ void Fighter::InitializeKeyCombinations()
 		punchlefthigh.push_back("4");
 		inputController.AddAction(punchlefthigh, "punchlefthigh");
 
+		input::key_combination punchrightmid;
+		punchrightmid.push_back("3");
+		inputController.AddAction(punchrightmid, "punchrightmid");
+
+		input::key_combination punchleftmid;
+		punchleftmid.push_back("3");
+		punchleftmid.push_back("3");
+		inputController.AddAction(punchleftmid, "punchleftmid");
+
 		input::key_combination kickhigh;
-		kickhigh.push_back("5");
+		kickhigh.push_back("6");
 		inputController.AddAction(kickhigh, "kickhigh");
+
+		input::key_combination kickmid;
+		kickmid.push_back("5");
+		inputController.AddAction(kickmid, "kickmid");
+
+		input::key_combination Throw;
+		Throw.push_back("d");
+		Throw.push_back("5");
+		inputController.AddAction(Throw, "Throw");
 
 		input::key_combination kickround;
 		kickround.push_back("a");
@@ -743,11 +968,6 @@ void Fighter::InitializeKeyCombinations()
 		tackle.push_back("5");
 		inputController.AddAction(tackle, "tackle");
 
-		input::key_combination Throw;
-		Throw.push_back("d");
-		Throw.push_back("5");
-		inputController.AddAction(Throw, "tackle");
-
 		input::key_combination Rope;
 		Rope.push_back("a");
 		Rope.push_back("a");
@@ -762,8 +982,31 @@ void Fighter::InitializeKeyCombinations()
 		input::key_combination jump;
 		jump.push_back("w");
 		inputController.AddAction(jump, "jump");
+
+		input::key_combination jumppunch;
+		jumppunch.push_back("w");
+		jumppunch.push_back("3");
+		inputController.AddAction(jumppunch, "jumppunch");
 	}
-	else if (FighterName[playerIndex] == "SubZero") {
+	else if (FighterName[playerIndex] == "SubZero")
+	{
+		input::key_combination Duck;
+		Duck.push_back("k");
+		inputController.AddAction(Duck, "Duck");
+
+		input::key_combination Blocklow;
+		Blocklow.push_back("o");
+		inputController.AddAction(Blocklow, "Blocklow");
+
+		input::key_combination BlockHigh;
+		BlockHigh.push_back("o");
+		inputController.AddAction(BlockHigh, "BlockHigh");
+
+		input::key_combination JumpForth;
+		JumpForth.push_back("j");
+		JumpForth.push_back("i");
+		inputController.AddAction(JumpForth, "JumpForth");
+
 		input::key_combination moveForward;
 		moveForward.push_back("j");
 		inputController.AddAction(moveForward, "moveforward");
@@ -773,37 +1016,73 @@ void Fighter::InitializeKeyCombinations()
 		inputController.AddAction(moveBackward, "moveBackward");
 
 		input::key_combination highpunch1;
-		highpunch1.push_back("7");
+		highpunch1.push_back("8");
 		inputController.AddAction(highpunch1, "highpunch1");
 
 		input::key_combination highpunch2;
-		highpunch2.push_back("7");
-		highpunch2.push_back("7");
+		highpunch2.push_back("8");
+		highpunch2.push_back("8");
 		inputController.AddAction(highpunch2, "highpunch2");
 
+		input::key_combination midpunch1;
+		midpunch1.push_back("7");
+		inputController.AddAction(midpunch1, "midpunch1");
+
+		input::key_combination midpunch2;
+		midpunch2.push_back("7");
+		midpunch2.push_back("7");
+		inputController.AddAction(midpunch2, "midpunch2");
+
 		input::key_combination kickhigh;
-		kickhigh.push_back("9");
+		kickhigh.push_back("0");
 		inputController.AddAction(kickhigh, "kickhigh");
 
 		input::key_combination Kickmid;
-		Kickmid.push_back("8");
+		Kickmid.push_back("9");
 		inputController.AddAction(Kickmid, "Kickmid");
 
+		input::key_combination tackle;
+		tackle.push_back("l");
+		tackle.push_back("9");
+		inputController.AddAction(tackle, "tackle");
+
+		input::key_combination Throw;
+		Throw.push_back("j");
+		Throw.push_back("9");
+		inputController.AddAction(Throw, "Throw");
+
 		input::key_combination kickround;
-		kickround.push_back("j");
-		kickround.push_back("9");
+		kickround.push_back("l");
+		kickround.push_back("0");
 		inputController.AddAction(kickround, "kickround");
 
 		input::key_combination Uppercut;
 		Uppercut.push_back("k");
-		Uppercut.push_back("7");
+		Uppercut.push_back("8");
 		inputController.AddAction(Uppercut, "Uppercut");
 
+<<<<<<< HEAD
+		input::key_combination jump;
+		jump.push_back("i");
+		inputController.AddAction(jump, "jump");
+
+		input::key_combination jumppunch;
+		jumppunch.push_back("i");
+		jumppunch.push_back("7");
+		inputController.AddAction(jumppunch, "jumppunch");
+
+		input::key_combination kickslide;
+		kickslide.push_back("l");
+		kickslide.push_back("k");
+		kickslide.push_back("0");
+		inputController.AddAction(kickslide, "kickslide");
+=======
 		input::key_combination Freezeball;
 		Freezeball.push_back("k");
 		Freezeball.push_back("j");
 		Freezeball.push_back("8");
 		inputController.AddAction(Freezeball, "Freezeball");
+>>>>>>> b80801e21fe800597e8a661dca320c4ae6f2e838
 	}
 
 }
