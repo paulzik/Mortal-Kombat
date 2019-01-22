@@ -8,6 +8,8 @@
 #include "../StateTransition/StateTransition.h"
 #include "../Animator/Sprites/Sprite/SpritesHolder.h"
 #include "../Animator/Animator/MovingAnimator.h"
+#include "../Animator/Animator/MovingPathAnimator.h"
+#include "../Animator/AnimationTypes/MovingPathAnimation.h"
 #include <queue>
 
 #define	FIGHTER_ACTION_DELAY_MSECS	150
@@ -87,7 +89,7 @@ private:
 			animators->insert(std::pair<std::string, Animator*>("Rope", new FrameRangeAnimator(index++)));
 			animators->insert(std::pair<std::string, Animator*>("Burn", new FrameRangeAnimator(index++)));
 			animators->insert(std::pair<std::string, Animator*>("Jump", new FrameRangeAnimator(index++)));
-			animators->insert(std::pair<std::string, Animator*>("JumpMove", new MovingAnimator(index++)));
+			animators->insert(std::pair<std::string, Animator*>("JumpMove", new MovingPathAnimator(index++)));
 
 			animators->insert(std::pair<std::string, Animator*>("WalkR", new FrameRangeAnimator(index++)));
 			animators->insert(std::pair<std::string, Animator*>("WalkRMove", new MovingAnimator(index++)));
@@ -118,8 +120,8 @@ private:
 			animations.insert(std::pair<std::string, Animation*>("Throw", new FrameRangeAnimation(0, 8, 0, 0, 0.085f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Rope", new FrameRangeAnimation(0, 12, 0, 0, 0.085f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Burn", new FrameRangeAnimation(0, 21, 0, 0, 0.15f, false, index++)));
-			animations.insert(std::pair<std::string, Animation*>("Jump", new FrameRangeAnimation(0, 3, 0, 0, 0.3f, false, index++)));
-			animations.insert(std::pair<std::string, Animation*>("JumpMove", new MovingAnimation(0, -4, 0.04f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Jump", new FrameRangeAnimation(0, 3, 0, 0, 0.35f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("JumpMove", new MovingPathAnimation(0, 0, 0.02f, false, index++)));
 			rightIsForward = true;
 
 		}
@@ -180,8 +182,8 @@ private:
 			}
 			else if (entry.first == "JumpMove") {
 				Sprite* s = new Sprite(x, y, AFH->GetFilm("Jump"), isFlipped);
-				((MovingAnimator*)entry.second)->Start(s, (MovingAnimation*)animations.at(entry.first), time);
-				((MovingAnimator*)entry.second)->SetLogicState(stateTransitions);
+				((MovingPathAnimator*)entry.second)->Start(s, (MovingPathAnimation*)animations.at(entry.first), time);
+				((MovingPathAnimator*)entry.second)->SetLogicState(stateTransitions);
 				Sprites->Add(s, 0);
 
 			}
