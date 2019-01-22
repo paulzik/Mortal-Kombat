@@ -165,6 +165,12 @@
     <ClCompile Include="KeyboardController\KeyboardController.cpp">
       <Filter>Source Files\KeyboardController</Filter>
     </ClCompile>
+    <ClCompile Include="Animator\Animator\MovingPathAnimator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator\AnimationTypes\MovingPathAnimation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animator\AnimationTypes\Animation.h">
@@ -274,6 +280,9 @@
     </ClInclude>
     <ClInclude Include="KeyboardController\KeyboardController.h">
       <Filter>Header Files\KeyboardController</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator\Animator\MovingPathAnimator.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

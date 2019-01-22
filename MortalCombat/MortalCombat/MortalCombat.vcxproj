@@ -126,10 +126,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AnimationFilmHolder.cpp" />
+    <ClCompile Include="Animator\AnimationTypes\MovingPathAnimation.cpp" />
     <ClCompile Include="Animator\Animator\Animator.cpp" />
     <ClCompile Include="Animator\Animator\AnimatorHolder.cpp" />
     <ClCompile Include="Animator\Animator\FrameRangeAnimator.cpp" />
     <ClCompile Include="Animator\Animator\MovingAnimator.cpp" />
+    <ClCompile Include="Animator\Animator\MovingPathAnimator.cpp" />
     <ClCompile Include="Animator\Sprites\AnimationFilms\AnimationFilm.cpp" />
     <ClCompile Include="Animator\Sprites\Sprite\Sprite.cpp" />
     <ClCompile Include="Arena\Arena.cpp" />
@@ -160,6 +162,7 @@
     <ClInclude Include="Animator\Animator\AnimatorHolder.h" />
     <ClInclude Include="Animator\Animator\FrameRangeAnimator.h" />
     <ClInclude Include="Animator\Animator\MovingAnimator.h" />
+    <ClInclude Include="Animator\Animator\MovingPathAnimator.h" />
     <ClInclude Include="Animator\SDL_Helper.h" />
     <ClInclude Include="Animator\Sprites\AnimationFilms\AnimationFilm.h" />
     <ClInclude Include="Animator\Sprites\AnimationFilms\AnimationFilmHolder.h" />
