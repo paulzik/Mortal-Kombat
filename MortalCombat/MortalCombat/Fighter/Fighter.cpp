@@ -1073,7 +1073,6 @@ void Fighter::InitializeKeyCombinations()
 		Uppercut.push_back("8");
 		inputController.AddAction(Uppercut, "Uppercut");
 
-<<<<<<< HEAD
 		input::key_combination jump;
 		jump.push_back("i");
 		inputController.AddAction(jump, "jump");
@@ -1088,13 +1087,12 @@ void Fighter::InitializeKeyCombinations()
 		kickslide.push_back("k");
 		kickslide.push_back("0");
 		inputController.AddAction(kickslide, "kickslide");
-=======
+
 		input::key_combination Freezeball;
 		Freezeball.push_back("k");
 		Freezeball.push_back("j");
 		Freezeball.push_back("8");
 		inputController.AddAction(Freezeball, "Freezeball");
->>>>>>> b80801e21fe800597e8a661dca320c4ae6f2e838
 	}
 
 }
