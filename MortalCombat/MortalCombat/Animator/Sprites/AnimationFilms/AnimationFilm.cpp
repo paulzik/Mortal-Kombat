@@ -6,17 +6,23 @@ void AnimationFilm::DisplayFrame(SDL_Texture *dest, const SDL_Rect& at, BYTE fra
 	}
 	if (_fliped) {
 		SDL_RendererFlip flip = SDL_FLIP_VERTICAL;
+		SDL_Rect rect;
+		rect = at;
+		if (id == "Rope" || id == "Burn") {
+			rect.w = boxes[frameNo].w * 2.5f;
+		}
+		rect.x += 89;
+		SDL_Point point;
+		point.x = 0;
+		point.y = boxes[frameNo].h + 37; // for some reason 37 :|
 
-		SDL_RenderCopyEx(rend, dest, &boxes[frameNo], &at, 180, NULL, flip);
+		SDL_RenderCopyEx(rend, dest, &boxes[frameNo], &rect, 180, &point, flip);
 	}
 	else {
 		SDL_Rect rect;
 		rect = at;
-		if (id == "Rope") {
-			rect.x = 120 + at.x;
-			rect.y = at.y - 150;
-			rect.w = at.w;
-			rect.h = at.h;
+		if (id == "Rope" || id == "Burn") {
+			rect.w = boxes[frameNo].w * 2.5f;
 		}
 		SDL_RenderCopy(rend, dest, &boxes[frameNo], &rect);
 	}

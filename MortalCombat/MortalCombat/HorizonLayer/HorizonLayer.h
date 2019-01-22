@@ -31,9 +31,7 @@ private:
 
 	int screen_w;
 	int screen_h;
-
-	int x = 50, y = 330;
-	int px = 20, py = 280;
+	bool flipped;
 
 	bool ClippedEntirely(SDL_Rect& area, SDL_Rect& in, SDL_Rect* out);
 	void InitializeShaolins(SDL_Renderer *renderer);

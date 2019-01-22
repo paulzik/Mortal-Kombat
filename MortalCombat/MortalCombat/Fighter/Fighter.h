@@ -75,27 +75,29 @@ private:
 		if (playerIndex == P1)
 		{
 			animators->insert(std::pair<std::string, Animator*>("Rope", new FrameRangeAnimator(index++)));
+			animators->insert(std::pair<std::string, Animator*>("Burn", new FrameRangeAnimator(index++)));
 
 			animators->insert(std::pair<std::string, Animator*>("WalkR", new FrameRangeAnimator(index++)));
 			animators->insert(std::pair<std::string, Animator*>("WalkL", new FrameRangeAnimator(index++)));
 			animators->insert(std::pair<std::string, Animator*>("WalkReverseR", new FrameRangeAnimator(index++)));
 			animators->insert(std::pair<std::string, Animator*>("WalkReverseL", new FrameRangeAnimator(index++)));
 
-			animations.insert(std::pair<std::string, Animation*>("Idle", new FrameRangeAnimation(0, 6, 0, 0, 0.07f, true, 1)));
+			animations.insert(std::pair<std::string, Animation*>("Idle", new FrameRangeAnimation(0, 7, 0, 0, 0.07f, true, 1)));
 			animations.insert(std::pair<std::string, Animation*>("WalkR", new FrameRangeAnimation(0, 8, 6, 0, 0.075f, true, 0)));
 			animations.insert(std::pair<std::string, Animation*>("WalkL", new FrameRangeAnimation(0, 8, -6, 0, 0.075f, true, 0)));
 			animations.insert(std::pair<std::string, Animation*>("WalkReverseR", new FrameRangeAnimation(0, 8, 6, 0, 0.075f, true, 3)));
 			animations.insert(std::pair<std::string, Animation*>("WalkReverseL", new FrameRangeAnimation(0, 8, -6, 0, 0.075f, true, 3)));
 
-			animations.insert(std::pair<std::string, Animation*>("Punchrighthigh", new FrameRangeAnimation(0, 2, 0, 0, 0.06f, false, 2)));
-			animations.insert(std::pair<std::string, Animation*>("Punchlefthigh", new FrameRangeAnimation(0, 2, 0, 0, 0.06f, false, 2)));
-			animations.insert(std::pair<std::string, Animation*>("Kickmid", new FrameRangeAnimation(0, 5, 0, 0, 0.06f, false, 2)));
-			animations.insert(std::pair<std::string, Animation*>("Kickhigh", new FrameRangeAnimation(0, 5, 0, 0, 0.06f, false, 2)));
-			animations.insert(std::pair<std::string, Animation*>("Kickround", new FrameRangeAnimation(0, 8, 0, 0, 0.085f, false, 2)));
-			animations.insert(std::pair<std::string, Animation*>("Uppercut", new FrameRangeAnimation(0, 5, 0, 0, 0.085f, false, 2)));
-			animations.insert(std::pair<std::string, Animation*>("Tackle", new FrameRangeAnimation(0, 7, 0, 0, 0.085f, false, 2)));
-			animations.insert(std::pair<std::string, Animation*>("Throw", new FrameRangeAnimation(0, 7, 0, 0, 0.085f, false, 2)));
+			animations.insert(std::pair<std::string, Animation*>("Punchrighthigh", new FrameRangeAnimation(0, 3, 0, 0, 0.06f, false, 2)));
+			animations.insert(std::pair<std::string, Animation*>("Punchlefthigh", new FrameRangeAnimation(0, 3, 0, 0, 0.06f, false, 2)));
+			animations.insert(std::pair<std::string, Animation*>("Kickmid", new FrameRangeAnimation(0, 6, 0, 0, 0.06f, false, 2)));
+			animations.insert(std::pair<std::string, Animation*>("Kickhigh", new FrameRangeAnimation(0, 6, 0, 0, 0.06f, false, 2)));
+			animations.insert(std::pair<std::string, Animation*>("Kickround", new FrameRangeAnimation(0, 9, 0, 0, 0.085f, false, 2)));
+			animations.insert(std::pair<std::string, Animation*>("Uppercut", new FrameRangeAnimation(0, 6, 0, 0, 0.085f, false, 2)));
+			animations.insert(std::pair<std::string, Animation*>("Tackle", new FrameRangeAnimation(0, 8, 0, 0, 0.085f, false, 2)));
+			animations.insert(std::pair<std::string, Animation*>("Throw", new FrameRangeAnimation(0, 8, 0, 0, 0.085f, false, 2)));
 			animations.insert(std::pair<std::string, Animation*>("Rope", new FrameRangeAnimation(0, 12, 0, 0, 0.085f, false, 2)));
+			animations.insert(std::pair<std::string, Animation*>("Burn", new FrameRangeAnimation(0, 21, 0, 0, 0.15f, false, 2)));
 			rightIsForward = true;
 
 		}
@@ -150,6 +152,8 @@ private:
 	}
 
 	void InitializeStateMachine(logic::StateTransitions* ST);
+
+	void InitializeKeyCombinations();
 
 public:
 	Fighter(FighterTag _tag, int playerIndex, SDL_Renderer *renderer);
