@@ -48,9 +48,9 @@ void HorizonLayer::InitializeShaolins(SDL_Renderer *renderer)
 	sprites = new SpritesHolder();
 	afh->Load("Shaolins", renderer);
 	animators = new Animators();
-	animators->insert(std::pair<std::string, Animator*>("h3", new FrameRangeAnimator(15)));
+	animators->insert(std::pair<std::string, Animator*>("h3", new FrameRangeAnimator(1000)));
 	std::map<std::string, Animation*> animations;
-	animations.insert(std::pair<std::string, Animation*>("h3", new FrameRangeAnimation(0, 2, 0, 0, 0.2f, true, 1)));
+	animations.insert(std::pair<std::string, Animation*>("h3", new FrameRangeAnimation(0, 2, 0, 0, 0.2f, true, 1000)));
 	std::cout << "shaolins animations entered\n";
 	float time = clock() / CLOCKS_PER_SEC;
 	for (auto entry : *animators)

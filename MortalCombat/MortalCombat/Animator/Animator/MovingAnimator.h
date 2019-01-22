@@ -1,3 +1,4 @@
+#pragma once
 #include "Animator.h"
 #include "../AnimationTypes/MovingAnimation.h"
 #include "../Sprites/Sprite/Sprite.h"
@@ -19,7 +20,13 @@ public:
 	// Inherited via Animator
 	virtual void Render(SDL_Renderer* rend) override;
 
-	MovingAnimator(void) :
-		sprite((Sprite*)0), anim((MovingAnimation*)0) {}
+	MovingAnimator(int _id) :
+		sprite((Sprite*)0), anim((MovingAnimation*)0)
+	{
+		ID = _id; 
+	}
 	~MovingAnimator() {}
+
+	// Inherited via Animator
+	virtual void SetLogicState(logic::StateTransitions & state) override;
 };

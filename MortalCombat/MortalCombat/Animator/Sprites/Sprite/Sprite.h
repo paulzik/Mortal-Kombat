@@ -4,13 +4,14 @@
 class Sprite {
 	BYTE frameNo;
 	SDL_Rect frameBox;
-	int &x, &y;
 	bool isVisible;
 	AnimationFilm* currFilm;
 	bool fliped = false;
 	//TileLayer* myLayer;
 	
 public:
+	int &x, &y;
+
 	void SetFrame(BYTE i) {
 		if (i != frameNo) {
 			if (i >= currFilm->GetTotalFrames()) i = currFilm->GetTotalFrames()-1;
