@@ -132,6 +132,7 @@ private:
 			animators->insert(std::pair<std::string, Animator*>("WalkReverseRMove", new MovingAnimator(index++)));
 			animators->insert(std::pair<std::string, Animator*>("WalkReverseL", new FrameRangeAnimator(index++)));
 			animators->insert(std::pair<std::string, Animator*>("WalkReverseLMove", new MovingAnimator(index++)));
+			animators->insert(std::pair<std::string, Animator*>("Freezeball", new FrameRangeAnimator(index++)));
 
 			animations.insert(std::pair<std::string, Animation*>("Idle", new FrameRangeAnimation(0, 11, 0, 0, 0.07f, true, index++)));
 			animations.insert(std::pair<std::string, Animation*>("WalkR", new FrameRangeAnimation(0, 8, 0, 0, 0.075f, true, index++)));
@@ -150,6 +151,7 @@ private:
 			animations.insert(std::pair<std::string, Animation*>("Uppercut", new FrameRangeAnimation(0, 5, 0, 0, 0.085f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Tackle", new FrameRangeAnimation(0, 7, 0, 0, 0.085f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Throw", new FrameRangeAnimation(0, 7, 0, 0, 0.085f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Freezeball", new FrameRangeAnimation(0, 12, 0, 0, 0.085f, false, index++)));
 			//animations.insert(std::pair<std::string, Animation*>("Rope", new FrameRangeAnimation(0, 6, 0, 0, 0.085f, false, index++)));
 
 			positionX = 350;

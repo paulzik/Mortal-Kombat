@@ -47,7 +47,7 @@ public:
 			if (i.name() == "Getoverhere") continue;
 			//if (i.name() == "Rope") continue;
 			//if (i.name() == "Burn") continue;
-			if (i.name() == "Freezeball") continue;
+			//if (i.name() == "Freezeball") continue;
 			int Array[50];
 
 			BITMAP* bm = loader.Load(path, rend);
@@ -192,6 +192,51 @@ public:
 					rects.push_back(box);
 
 					break;
+				}
+				else if (i.name() == "Freezeball") {
+					SDL_Rect box;
+					box.x = jsonValue["Freezeball"]["xoffset"].asInt();
+					box.w = offsetX;
+					box.y = jsonValue["Freezeball"]["yoffset"].asInt();
+					box.h = offsetY;
+					rects.push_back(box);
+					box.x = jsonValue["Freezeball"]["xoffset"].asInt() + offsetX * 1;
+					box.w = offsetX;
+					rects.push_back(box);
+					box.x = jsonValue["Freezeball"]["xoffset"].asInt() + offsetX * 2;
+					box.w = offsetX;
+					rects.push_back(box);
+					box.x = jsonValue["Freezeball"]["xoffset"].asInt() + offsetX * 3;
+					box.w = offsetX;
+					rects.push_back(box);
+
+					box.x = jsonValue["Freezeball"]["xoffset"].asInt() + offsetX * 4;
+					box.w = offsetX * 2;
+					rects.push_back(box);
+					box.x = jsonValue["Freezeball"]["xoffset"].asInt() + offsetX * 6;
+					box.w = offsetX * 2;
+					rects.push_back(box);
+					box.x = jsonValue["Freezeball"]["xoffset"].asInt() + offsetX * 8;
+					box.w = offsetX * 2;
+					rects.push_back(box);
+
+					box.x = jsonValue["Freezeball"]["xoffset"].asInt() + offsetX * 10;
+					box.w = offsetX * 3;
+					rects.push_back(box);
+					box.x = jsonValue["Freezeball"]["xoffset"].asInt() + offsetX * 13;
+					box.w = offsetX * 3;
+					rects.push_back(box);
+
+					box.x = jsonValue["Freezeball"]["xoffset"].asInt() + offsetX * 16;
+					box.w = offsetX * 4;
+					rects.push_back(box);
+					box.x = jsonValue["Freezeball"]["xoffset"].asInt() + offsetX * 20;
+					box.w = offsetX * 4;
+					rects.push_back(box);
+
+					box.x = jsonValue["Freezeball"]["xoffset"].asInt() + offsetX * 24;
+					box.w = offsetX * 1;
+					rects.push_back(box);
 				}
 				else {
 					SDL_Rect box;
