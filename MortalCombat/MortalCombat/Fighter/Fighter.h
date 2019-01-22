@@ -65,15 +65,33 @@ private:
 
 		animators = new Animators();
 		animators->insert(std::pair<std::string, Animator*>("Idle", new FrameRangeAnimator(index++)));
-
+		animators->insert(std::pair<std::string, Animator*>("Blockhigh", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("Duck", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("Blocklow", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("JumpForth", new FrameRangeAnimator(index++)));
 		animators->insert(std::pair<std::string, Animator*>("Punchrighthigh", new FrameRangeAnimator(index++)));
 		animators->insert(std::pair<std::string, Animator*>("Punchlefthigh", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("Punchrightmid", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("Punchleftmid", new FrameRangeAnimator(index++)));
 		animators->insert(std::pair<std::string, Animator*>("Kickmid", new FrameRangeAnimator(index++)));
 		animators->insert(std::pair<std::string, Animator*>("Kickhigh", new FrameRangeAnimator(index++)));
 		animators->insert(std::pair<std::string, Animator*>("Kickround", new FrameRangeAnimator(index++))); 
 		animators->insert(std::pair<std::string, Animator*>("Uppercut", new FrameRangeAnimator(index++)));
 		animators->insert(std::pair<std::string, Animator*>("Tackle", new FrameRangeAnimator(index++)));
 		animators->insert(std::pair<std::string, Animator*>("Throw", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("Punchjump", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("Dmgspecial", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("Dmghigh", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("Dmghigh", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("Dmglow", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("Dizzy", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("Jesus", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("Dmgduck", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("Fallback", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("Fallside", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("Fallthrow", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("Getup", new FrameRangeAnimator(index++)));
+
 		//animators->at("punchrighthigh")->SetOnFinish([](Animator*, void* fighter = this) {
 		//	ToBeRunning = ((Fighter*)fighter)->animators->at("idle");
 		//	ToBeSuspended = ((Fighter*)fighter)->animators->at("punchrighthigh");
@@ -97,8 +115,14 @@ private:
 			animators->insert(std::pair<std::string, Animator*>("WalkReverseRMove", new MovingAnimator(index++)));
 			animators->insert(std::pair<std::string, Animator*>("WalkReverseL", new FrameRangeAnimator(index++)));
 			animators->insert(std::pair<std::string, Animator*>("WalkReverseLMove", new MovingAnimator(index++)));
+			animators->insert(std::pair<std::string, Animator*>("Frozen", new FrameRangeAnimator(index++)));
+			animators->insert(std::pair<std::string, Animator*>("FatalFrozen", new FrameRangeAnimator(index++)));
 
 			animations.insert(std::pair<std::string, Animation*>("Idle", new FrameRangeAnimation(0, 7, 0, 0, 0.07f, true, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Blockhigh", new FrameRangeAnimation(0, 3, 0, 0, 0.07f, true, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Duck", new FrameRangeAnimation(0, 3, 0, 0, 0.07f, true, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Blocklow", new FrameRangeAnimation(0, 1, 0, 0, 0.07f, true, index++)));
+			animations.insert(std::pair<std::string, Animation*>("JumpForth", new FrameRangeAnimation(0, 8, 0, 0, 0.07f, true, index++)));
 			animations.insert(std::pair<std::string, Animation*>("WalkR", new FrameRangeAnimation(0, 8, 0, 0, 0.075f, true, index++)));
 			animations.insert(std::pair<std::string, Animation*>("WalkRMove", new MovingAnimation(1, 0, 0.01f, true, index++)));
 			animations.insert(std::pair<std::string, Animation*>("WalkL", new FrameRangeAnimation(0, 8, 0, 0, 0.075f, true, index++)));
@@ -108,8 +132,27 @@ private:
 			animations.insert(std::pair<std::string, Animation*>("WalkReverseL", new FrameRangeAnimation(0, 8, 0, 0, 0.075f, true, index++)));
 			animations.insert(std::pair<std::string, Animation*>("WalkReverseLMove", new MovingAnimation(-1, 0, 0.01f, true, index++)));
 
+			animations.insert(std::pair<std::string, Animation*>("Frozen", new FrameRangeAnimation(0, 8, 0, 0, 0.075f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("FatalFrozen", new FrameRangeAnimation(0, 10, 0, 0, 0.075f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Dmgspecial", new FrameRangeAnimation(0, 3, 0, 0, 0.075f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Dmgmid", new FrameRangeAnimation(0, 4, 0, 0, 0.075f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Dmglow", new FrameRangeAnimation(0, 2, 0, 0, 0.075f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Dmghigh", new FrameRangeAnimation(0, 6, 0, 0, 0.075f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Dizzy", new FrameRangeAnimation(0, 7, 0, 0, 0.075f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Jesus", new FrameRangeAnimation(0, 3, 0, 0, 0.075f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Dmgduck", new FrameRangeAnimation(0, 3, 0, 0, 0.075f, false, index++)));
+
+			animations.insert(std::pair<std::string, Animation*>("Fallback", new FrameRangeAnimation(0, 6, 0, 0, 0.075f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Fallthrow", new FrameRangeAnimation(0, 7, 0, 0, 0.075f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Fallside", new FrameRangeAnimation(0, 6, 0, 0, 0.075f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Getup", new FrameRangeAnimation(0, 5, 0, 0, 0.075f, false, index++)));
+
+			animations.insert(std::pair<std::string, Animation*>("Punchjump", new FrameRangeAnimation(0, 3, 0, 0, 0.06f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Throw", new FrameRangeAnimation(0, 7, 0, 0, 0.06f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Punchrighthigh", new FrameRangeAnimation(0, 3, 0, 0, 0.06f, false, index++)));
-			animations.insert(std::pair<std::string, Animation*>("Punchlefthigh", new FrameRangeAnimation(0, 3, 0, 0, 0.06f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Punchlefthigh", new FrameRangeAnimation(0, 2, 0, 0, 0.06f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Punchrightmid", new FrameRangeAnimation(0, 1, 0, 0, 0.06f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Punchleftmid", new FrameRangeAnimation(0, 2, 0, 0, 0.06f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Kickmid", new FrameRangeAnimation(0, 6, 0, 0, 0.06f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Kickhigh", new FrameRangeAnimation(0, 6, 0, 0, 0.06f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Kickround", new FrameRangeAnimation(0, 9, 0, 0, 0.085f, false, index++)));
@@ -132,8 +175,29 @@ private:
 			animators->insert(std::pair<std::string, Animator*>("WalkReverseRMove", new MovingAnimator(index++)));
 			animators->insert(std::pair<std::string, Animator*>("WalkReverseL", new FrameRangeAnimator(index++)));
 			animators->insert(std::pair<std::string, Animator*>("WalkReverseLMove", new MovingAnimator(index++)));
+			animators->insert(std::pair<std::string, Animator*>("Kickslide", new FrameRangeAnimator(index++)));
+			animators->insert(std::pair<std::string, Animator*>("Burned", new FrameRangeAnimator(index++)));
 
+			animations.insert(std::pair<std::string, Animation*>("Dmgspecial", new FrameRangeAnimation(0, 3, 0, 0, 0.075f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Dmgmid", new FrameRangeAnimation(0, 4, 0, 0, 0.075f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Dmglow", new FrameRangeAnimation(0, 2, 0, 0, 0.075f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Dmghigh", new FrameRangeAnimation(0, 6, 0, 0, 0.075f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Dizzy", new FrameRangeAnimation(0, 7, 0, 0, 0.075f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Jesus", new FrameRangeAnimation(0, 3, 0, 0, 0.075f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Dmgduck", new FrameRangeAnimation(0, 3, 0, 0, 0.075f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Burned", new FrameRangeAnimation(0, 9, 0, 0, 0.075f, false, index++)));
+
+			animations.insert(std::pair<std::string, Animation*>("Fallback", new FrameRangeAnimation(0, 6, 0, 0, 0.075f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Fallthrow", new FrameRangeAnimation(0, 7, 0, 0, 0.075f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Fallside", new FrameRangeAnimation(0, 6, 0, 0, 0.075f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Getup", new FrameRangeAnimation(0, 5, 0, 0, 0.075f, false, index++)));
+
+			animations.insert(std::pair<std::string, Animation*>("Punchjump", new FrameRangeAnimation(0, 3, 0, 0, 0.06f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Idle", new FrameRangeAnimation(0, 11, 0, 0, 0.07f, true, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Blockhigh", new FrameRangeAnimation(0, 3, 0, 0, 0.07f, true, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Duck", new FrameRangeAnimation(0, 3, 0, 0, 0.07f, true, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Blocklow", new FrameRangeAnimation(0, 1, 0, 0, 0.07f, true, index++)));
+			animations.insert(std::pair<std::string, Animation*>("JumpForth", new FrameRangeAnimation(0, 8, 0, 0, 0.07f, true, index++)));
 			animations.insert(std::pair<std::string, Animation*>("WalkR", new FrameRangeAnimation(0, 8, 0, 0, 0.075f, true, index++)));
 			animations.insert(std::pair<std::string, Animation*>("WalkRMove", new MovingAnimation(1, 0, 0.01f, true, index++)));
 			animations.insert(std::pair<std::string, Animation*>("WalkL", new FrameRangeAnimation(0, 8, 0, 0, 0.075f, true, index++)));
@@ -144,12 +208,15 @@ private:
 			animations.insert(std::pair<std::string, Animation*>("WalkReverseLMove", new MovingAnimation(-1, 0, 0.01f, true, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Punchrighthigh", new FrameRangeAnimation(0, 2, 0, 0, 0.055f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Punchlefthigh", new FrameRangeAnimation(0, 5, 0, 0, 0.055f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Punchrightmid", new FrameRangeAnimation(0, 1, 0, 0, 0.06f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Punchleftmid", new FrameRangeAnimation(0, 2, 0, 0, 0.06f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Kickmid", new FrameRangeAnimation(0, 6, 0, 0, 0.06f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Kickhigh", new FrameRangeAnimation(0, 6, 0, 0, 0.06f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Kickround", new FrameRangeAnimation(0, 8, 0, 0, 0.085f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Uppercut", new FrameRangeAnimation(0, 5, 0, 0, 0.085f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Tackle", new FrameRangeAnimation(0, 7, 0, 0, 0.085f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Throw", new FrameRangeAnimation(0, 7, 0, 0, 0.085f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Kickslide", new FrameRangeAnimation(0, 2, 0, 0, 0.085f, false, index++)));
 			//animations.insert(std::pair<std::string, Animation*>("Rope", new FrameRangeAnimation(0, 6, 0, 0, 0.085f, false, index++)));
 
 			x = 350;
