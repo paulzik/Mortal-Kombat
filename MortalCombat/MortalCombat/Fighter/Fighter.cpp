@@ -691,6 +691,14 @@ void Fighter::InitializeStateMachineSubZero(logic::StateTransitions * ST)
 			//SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00208.mp3", false);
 		}
 	});
+	ST->SetTransition("Idle", Input{ "k.j.8" }, [anim, ST, RunningQueue](void) {
+		AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+		if (canDoActionP2) {
+			RunningQueue->push(anim->at("Freezeball"));
+			canDoActionP2 = false;
+			//SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00208.mp3", false);
+		}
+	});
 }
 
 void Fighter::InitializeKeyCombinations()
@@ -787,6 +795,12 @@ void Fighter::InitializeKeyCombinations()
 		Uppercut.push_back("k");
 		Uppercut.push_back("7");
 		inputController.AddAction(Uppercut, "Uppercut");
+
+		input::key_combination Freezeball;
+		Freezeball.push_back("k");
+		Freezeball.push_back("j");
+		Freezeball.push_back("8");
+		inputController.AddAction(Freezeball, "Freezeball");
 	}
 
 }

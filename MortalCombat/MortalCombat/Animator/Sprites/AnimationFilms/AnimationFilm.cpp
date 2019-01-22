@@ -16,7 +16,7 @@ void AnimationFilm::DisplayFrame(SDL_Texture *dest, const SDL_Rect& at, BYTE fra
 		SDL_RendererFlip flip = SDL_FLIP_VERTICAL;
 		SDL_Rect rect;
 		rect = at;
-		if (id == "Rope" || id == "Burn") {
+		if (id == "Rope" || id == "Burn" || id == "Freezeball") {
 			rect.w = boxes[frameNo].w * 2.5f;
 		}
 		rect.x += 89;
