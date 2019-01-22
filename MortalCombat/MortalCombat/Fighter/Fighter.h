@@ -52,6 +52,8 @@ private:
 	std::queue<Animator*> MovingQueue;
 	Animator* currAnimator;
 	bool IsInAction;
+	bool IsCrouching = false;
+	bool IsBlocking = false;
 
 
 
@@ -121,9 +123,9 @@ private:
 			animators->insert(std::pair<std::string, Animator*>("FatalFrozen", new FrameRangeAnimator(index++)));
 
 			animations.insert(std::pair<std::string, Animation*>("Idle", new FrameRangeAnimation(0, 7, 0, 0, 0.07f, true, index++)));
-			animations.insert(std::pair<std::string, Animation*>("Blockhigh", new FrameRangeAnimation(0, 3, 0, 0, 0.07f, true, index++)));
-			animations.insert(std::pair<std::string, Animation*>("Duck", new FrameRangeAnimation(0, 3, 0, 0, 0.07f, true, index++)));
-			animations.insert(std::pair<std::string, Animation*>("Blocklow", new FrameRangeAnimation(0, 1, 0, 0, 0.07f, true, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Blockhigh", new FrameRangeAnimation(0, 4, 0, 0, 0.07f, false, index++, true)));
+			animations.insert(std::pair<std::string, Animation*>("Duck", new FrameRangeAnimation(0, 4, 0, 0, 0.07f, false, index++, true)));
+			animations.insert(std::pair<std::string, Animation*>("Blocklow", new FrameRangeAnimation(0, 2, 0, 0, 0.07f, false, index++, true)));
 			animations.insert(std::pair<std::string, Animation*>("JumpForth", new FrameRangeAnimation(0, 8, 0, 0, 0.07f, true, index++)));
 			animations.insert(std::pair<std::string, Animation*>("WalkR", new FrameRangeAnimation(0, 8, 0, 0, 0.075f, true, index++)));
 			animations.insert(std::pair<std::string, Animation*>("WalkRMove", new MovingAnimation(1, 0, 0.01f, true, index++)));
@@ -163,7 +165,7 @@ private:
 			animations.insert(std::pair<std::string, Animation*>("Throw", new FrameRangeAnimation(0, 8, 0, 0, 0.085f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Rope", new FrameRangeAnimation(0, 12, 0, 0, 0.085f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Burn", new FrameRangeAnimation(0, 21, 0, 0, 0.15f, false, index++)));
-			animations.insert(std::pair<std::string, Animation*>("Jump", new FrameRangeAnimation(0, 3, 0, 0, 0.35f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Jump", new FrameRangeAnimation(0, 4, 0, 0, 0.35f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("JumpMove", new MovingPathAnimation(0, 0, 0.02f, false, index++)));
 			rightIsForward = true;
 
@@ -198,9 +200,9 @@ private:
 			animators->insert(std::pair<std::string, Animator*>("Freezeball", new FrameRangeAnimator(index++)));
 
 			animations.insert(std::pair<std::string, Animation*>("Idle", new FrameRangeAnimation(0, 11, 0, 0, 0.07f, true, index++)));
-			animations.insert(std::pair<std::string, Animation*>("Blockhigh", new FrameRangeAnimation(0, 3, 0, 0, 0.07f, true, index++)));
-			animations.insert(std::pair<std::string, Animation*>("Duck", new FrameRangeAnimation(0, 3, 0, 0, 0.07f, true, index++)));
-			animations.insert(std::pair<std::string, Animation*>("Blocklow", new FrameRangeAnimation(0, 1, 0, 0, 0.07f, true, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Blockhigh", new FrameRangeAnimation(0, 4, 0, 0, 0.07f, false, index++, true)));
+			animations.insert(std::pair<std::string, Animation*>("Duck", new FrameRangeAnimation(0, 4, 0, 0, 0.07f, false, index++, true)));
+			animations.insert(std::pair<std::string, Animation*>("Blocklow", new FrameRangeAnimation(0, 2, 0, 0, 0.07f, false, index++, true)));
 			animations.insert(std::pair<std::string, Animation*>("JumpForth", new FrameRangeAnimation(0, 8, 0, 0, 0.07f, true, index++)));
 			animations.insert(std::pair<std::string, Animation*>("WalkR", new FrameRangeAnimation(0, 8, 0, 0, 0.075f, true, index++)));
 			animations.insert(std::pair<std::string, Animation*>("WalkRMove", new MovingAnimation(1, 0, 0.01f, true, index++)));
@@ -304,6 +306,29 @@ public:
 		else if (_key == "a" || _key == "j") {
 			direction = Direction::left;
 		}
+		else if ((_key == "q" || _key == "o") && !IsBlocking) {
+			IsBlocking = true;
+			//AnimatorHolder::MarkAsSuspended(animators->at("Idle"));
+			//AnimatorHolder::MarkAsRunning(animators->at("Blockhigh"));
+			inputController.buttons.push_back(_key);
+			pressed = true;
+			timer = float((float)clock() / (float)CLOCKS_PER_SEC);
+			if (!IsCrouching)
+				animators->at("Blockhigh")->SetState(animatorstate_t::ANIMATOR_RUNNING);
+			else {
+				AnimatorHolder::MarkAsSuspended(animators->at("Duck"));
+
+				animators->at("Duck")->SetState(animatorstate_t::ANIMATOR_FINISHED);
+				animators->at("Blocklow")->SetState(animatorstate_t::ANIMATOR_RUNNING);
+				AnimatorHolder::MarkAsSuspended(animators->at("Idle"));
+			}
+		}
+		else if ((_key == "s" || _key == "k") && !IsCrouching) {
+			IsCrouching = true;
+			//AnimatorHolder::MarkAsSuspended(animators->at("Idle"));
+			//AnimatorHolder::MarkAsRunning(animators->at("Blockhigh"));
+			animators->at("Duck")->SetState(animatorstate_t::ANIMATOR_RUNNING);
+		}
 
 		if (!pressed) {
 			inputController.buttons.push_back(_key);
@@ -320,6 +345,33 @@ public:
 		}
 		else if ((_key == "a" || _key == "j") && direction == Direction::left) {
 			direction = Direction::none;
+		}
+		else if ((_key == "q" || _key == "o") ) {
+			IsBlocking = false;
+			/*AnimatorHolder::MarkAsSuspended(animators->at("Blockhigh"));
+			AnimatorHolder::MarkAsRunning(animators->at("Idle"));
+			stateTransitions.SetState("Idle");*/
+			if (!IsCrouching)
+				animators->at("Blockhigh")->SetState(animatorstate_t::ANIMATOR_FINISHED);
+			else {
+				AnimatorHolder::MarkAsRunning(animators->at("Duck"));
+				stateTransitions.SetState("Duck");
+				animators->at("Blocklow")->SetState(animatorstate_t::ANIMATOR_FINISHED);
+				//animators->at("Blocklow")->Stop();
+			}
+		}
+		else if ((_key == "s" || _key == "k")) {
+			IsCrouching = false;
+			/*AnimatorHolder::MarkAsSuspended(animators->at("Blockhigh"));
+			AnimatorHolder::MarkAsRunning(animators->at("Idle"));
+			stateTransitions.SetState("Idle");*/
+			animators->at("Duck")->SetState(animatorstate_t::ANIMATOR_FINISHED);
+			//animators->at("Duck")->Stop();
+			//AnimatorHolder::MarkAsRunning(animators->at("Idle"));
+			stateTransitions.SetState("Idle");
+			AnimatorHolder::MarkAsSuspended(animators->at("Blockhigh"));
+			AnimatorHolder::MarkAsSuspended(animators->at("Blocklow"));
+			AnimatorHolder::MarkAsSuspended(animators->at("Duck"));
 		}
 		pressed = false;
 

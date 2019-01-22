@@ -44,6 +44,9 @@ void KeyboardController::Update(Fighter* _p1, Fighter* _p2)
 				UIManager::Get()->currentScene->InvokeMethod("d");
 				AddKey(_p1, "d");
 				break;
+			case SDLK_q:
+				AddKey(_p1, "q");
+				break;
 			case SDLK_3:
 				AddKey(_p1, "3");
 				break;
@@ -82,6 +85,9 @@ void KeyboardController::Update(Fighter* _p1, Fighter* _p2)
 			case SDLK_0:
 				AddKey(_p2, "0"); //low kick
 				break;
+			case SDLK_o:
+				AddKey(_p2, "o"); //low kick
+				break;
 			default:
 				break;
 			}
@@ -117,6 +123,9 @@ void KeyboardController::Update(Fighter* _p1, Fighter* _p2)
 				//UIManager::Get()->currentScene->InvokeMethod("d");
 				RemoveKey(_p1, "d");
 				break;
+			case SDLK_q:
+				RemoveKey(_p1, "q");
+				break;
 
 			//Player2
 			case SDLK_i:
@@ -135,6 +144,10 @@ void KeyboardController::Update(Fighter* _p1, Fighter* _p2)
 				//UIManager::Get()->currentScene->InvokeMethod("d");
 				RemoveKey(_p2, "l");
 				break;
+			case SDLK_o:
+				//UIManager::Get()->currentScene->InvokeMethod("d");
+				RemoveKey(_p2, "o");
+				break;
 			default:
 				break;
 		}
@@ -148,7 +161,7 @@ void KeyboardController::AddKey(Fighter* _fighter, std::string _key)
 {
 	if (UIManager::Get()->IsGamePaused())
 		return;
-	if (_key == "d" || _key == "s" || _key == "a" || _key == "w" || _key == "i" || _key == "l" || _key == "k" || _key == "j") {
+	if (_key == "d" || _key == "s" || _key == "a" || _key == "w" || _key == "i" || _key == "l" || _key == "k" || _key == "j" || _key == "q" || _key == "o") {
 		_fighter->AddMove(_key);
 	}
 	else
@@ -159,7 +172,7 @@ void KeyboardController::RemoveKey(Fighter * _fighter, std::string _key)
 {
 	if (UIManager::Get()->IsGamePaused())
 		return;
-	if (_key == "d" || _key == "s" || _key == "a" || _key == "w" || _key == "i" || _key == "l" || _key == "k" || _key == "j") {
+	if (_key == "d" || _key == "s" || _key == "a" || _key == "w" || _key == "i" || _key == "l" || _key == "k" || _key == "j" || _key == "q" || _key == "o") {
 		_fighter->RemoveMove(_key);
 	}
 	else

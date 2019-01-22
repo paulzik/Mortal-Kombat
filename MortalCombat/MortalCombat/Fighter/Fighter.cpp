@@ -82,6 +82,8 @@ void Fighter::Update()
 {
 	using Input = logic::StateTransitions::Input;
 
+
+
 	AnimationFilmHolder& AFH = AnimationFilmHolder::Get();
 
 	//UpdateKeys();
@@ -453,13 +455,30 @@ void Fighter::InitializeStateMachineScorpion(logic::StateTransitions* ST) {
 		}
 
 	});
+	ST->SetTransition("Duck", Input{  }, [anim, ST, RunningQueue](void) {
+		//Do Nothing
+		AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+		AnimatorHolder::MarkAsSuspended(anim->at("Blocklow"));
+
+	});
 	ST->SetTransition("Duck", Input{ "q" }, [anim, ST, RunningQueue](void) {
+		AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
 		AnimatorHolder::MarkAsSuspended(anim->at("Duck"));
 		if (canDoActionP1) {
-			RunningQueue->push(anim->at("Blocklow"));
-			canDoActionP1 = true;
+			AnimatorHolder::MarkAsRunning(anim->at("Blocklow"));
+			canDoActionP1 = false;
+			ST->SetState("Blocklow");
 			//SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
 		}
+
+	});
+	ST->SetTransition("Blocklow", Input{ }, [anim, ST, RunningQueue](void) {
+		//Do Nothing
+		AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+
+	});
+	ST->SetTransition("Blocklow", Input{ "1212" }, [anim, ST, RunningQueue](void) {
+		//Do Nothing
 
 	});
 	ST->SetTransition("Idle", Input{ "q" }, [anim, ST, RunningQueue](void) {
@@ -774,15 +793,31 @@ void Fighter::InitializeStateMachineSubZero(logic::StateTransitions * ST)
 			ST->SetState("Duck");
 			//SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
 		}
+	});
+	ST->SetTransition("Duck", Input{  }, [anim, ST, RunningQueue](void) {
+		//Do Nothing
+		AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+		AnimatorHolder::MarkAsSuspended(anim->at("Blocklow"));
 
 	});
 	ST->SetTransition("Duck", Input{ "o" }, [anim, ST, RunningQueue](void) {
+		AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
 		AnimatorHolder::MarkAsSuspended(anim->at("Duck"));
 		if (canDoActionP2) {
 			RunningQueue->push(anim->at("Blocklow"));
 			canDoActionP2 = true;
+			ST->SetState("Blocklow");
 			//SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
 		}
+
+	});
+	ST->SetTransition("Blocklow", Input{ }, [anim, ST, RunningQueue](void) {
+		//Do Nothing
+		AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+
+	});
+	ST->SetTransition("Blocklow", Input{ "1243" }, [anim, ST, RunningQueue](void) {
+		//Do Nothing
 
 	});
 	ST->SetTransition("Idle", Input{ "o" }, [anim, ST, RunningQueue](void) {
@@ -859,7 +894,7 @@ void Fighter::InitializeStateMachineSubZero(logic::StateTransitions * ST)
 			thisFighter->DamageOpponent(4);
 		}
 	});
-	ST->SetTransition("Idle", Input{ "k.j.8" }, [anim, ST, RunningQueue](void) {
+	ST->SetTransition("Duck", Input{ "k.j.8" }, [anim, ST, RunningQueue](void) {
 		AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
 		if (canDoActionP2) {
 			RunningQueue->push(anim->at("Freezeball"));

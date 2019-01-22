@@ -6,8 +6,9 @@ typedef unsigned char frame_t;
 class FrameRangeAnimation : public MovingAnimation {
 private:
 	frame_t start, end;
-
 public:
+	bool HoldLastFrame;
+	
 	frame_t GetStartFrame(void) const {
 		return start;
 	}
@@ -28,8 +29,8 @@ public:
 		return new FrameRangeAnimation(start, end, GetDx(), GetDy(), GetDelay(), GetContinuous(), newId);
 	}
 
-	FrameRangeAnimation(frame_t s, frame_t e, offset_t dx, offset_t dy, delay_t d, bool c, animid_t id) :
+	FrameRangeAnimation(frame_t s, frame_t e, offset_t dx, offset_t dy, delay_t d, bool c, animid_t id, bool hold = false) :
 		start(s), end(e), MovingAnimation(dx, dy, d, c, id) {
-
+		HoldLastFrame = hold;
 	}
 };
