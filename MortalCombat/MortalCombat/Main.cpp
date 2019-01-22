@@ -77,6 +77,8 @@ int main(int argc, char ** argv)
 		AnimatorHolder::Progress(float((float)clock() / (float)CLOCKS_PER_SEC));
 		AnimatorHolder::Render(renderer);
 
+		keyboardController->Update(player1, player2);
+
 		layerRenderer->RenderLayer(LayerRenderer::Layer::Foreground);
 
 		UIManager::Get()->RenderScene();
