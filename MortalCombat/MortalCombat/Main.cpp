@@ -48,6 +48,8 @@ int main(int argc, char ** argv)
 	//Generate 2 Players
 	Fighter* player1 = new Fighter(FighterTag::Scorpion, PlayerIndex::P1, renderer);
 	Fighter* player2 = new Fighter(FighterTag::SubZero, PlayerIndex::P2, renderer);
+	player1->SetOpponent(player2);
+	player2->SetOpponent(player1);
 	//Initialize scenes
 	UIManager::Get()->InitializeManager(renderer);
 	UIManager::Get()->InitializeBattleScene(player1, player2);
@@ -71,8 +73,8 @@ int main(int argc, char ** argv)
 		layerRenderer->RenderLayer(LayerRenderer::Layer::Action);
 		player1->Update();
 		player2->Update();
-		player1->FlipCharacter(player1->x < player2->x ? true : false);
-		player2->FlipCharacter(player1->x < player2->x ? false : true);
+		player1->FlipCharacter(player1->positionX < player2->positionX ? true : false);
+		player2->FlipCharacter(player1->positionX < player2->positionX ? false : true);
 
 		AnimatorHolder::Progress(float((float)clock() / (float)CLOCKS_PER_SEC));
 		AnimatorHolder::Render(renderer);

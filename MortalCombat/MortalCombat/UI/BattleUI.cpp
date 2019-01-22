@@ -34,7 +34,7 @@ void BattleUI::RenderUI()
 {
 
 	player1UI.lifebarGreen->imageRect = { 44,60, (322 * player1->GetHealth())/100,20 };
-	player2UI.lifebarGreen->imageRect = { 414 + 322 - (322 * player1->GetHealth())/100,60, (322 * player1->GetHealth()) / 100,20 };
+	player2UI.lifebarGreen->imageRect = { 414 + 322 - (322 * player2->GetHealth())/100,60, (322 * player2->GetHealth()) / 100,20 };
 
 	UICanvas::RenderUI();
 }

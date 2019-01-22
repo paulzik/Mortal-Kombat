@@ -58,15 +58,17 @@ bool Fighter::PlayerIsAlive()
 	return isAlive;
 }
 
-void Fighter::DamagePlayer(int damage)
+void Fighter::DamageOpponent(int damage)
 {
-	health -= damage;
-	
-	//Set health back to zero to avoid visual bugs (lifebar)
+	//Collisions
+	if (CalculateDistanceWithOpponent() < 165) {
+		opponent->health -= damage;
 
+		//Set health back to zero to avoid visual bugs (lifebar)
+		if (opponent->health < 0)
+			opponent->health = 0;
+	}
 
-	if (health < 0)
-		health = 0;
 }
 Fighter::Fighter()
 {
@@ -151,17 +153,17 @@ void Fighter::Update()
 
 		std::cout << str << std::endl;
 	}
-	if (y <= 220) {
-		y += 2;
+	if (positionY <= 220) {
+		positionY += 2;
 	}
-	else if (y <= 280) {
-		y += 5;
+	else if (positionY <= 280) {
+		positionY += 5;
 	}
-	else if (y < 330) {
-		y += 7;
+	else if (positionY < 330) {
+		positionY += 7;
 	}
-	else if (y > 330) {
-		y = 330;
+	else if (positionY > 330) {
+		positionY = 330;
 	}
 
 	stateTransitions.PerformTransitions(Input{ str }, false);
@@ -437,6 +439,7 @@ void Fighter::InitializeStateMachineScorpion(logic::StateTransitions* ST) {
 	std::queue<Animator*> *RunningQueue = &this->RunningQueue;
 	std::queue<Animator*> *MovingQueue = &this->MovingQueue;;
 	Animator* currAnim = currAnimator;
+	Fighter* thisFighter = this;
 	ST->SetTransition("Idle", Input{ }, [anim, ST](void) {
 		canDoActionP1 = true;
 	});
@@ -449,6 +452,8 @@ void Fighter::InitializeStateMachineScorpion(logic::StateTransitions* ST) {
 			canDoActionP1 = true;
 		}
 		//RunningQueue.push(anim->at("Idle"));
+		
+		
 	});
 	ST->SetTransition("Jump", Input{ "5" }, [anim, ST, currAnim](void) {
 		if (currAnim == NULL) {
@@ -456,7 +461,7 @@ void Fighter::InitializeStateMachineScorpion(logic::StateTransitions* ST) {
 		}
 		//RunningQueue.push(anim->at("Idle"));
 	});
-	ST->SetTransition("Idle", Input{ "4" }, [anim, ST, RunningQueue, currAnim](void) {
+	ST->SetTransition("Idle", Input{ "4" }, [anim, ST, RunningQueue, currAnim, thisFighter](void) {
 		if (canDoActionP1 && currAnim == NULL)
 		{
 			AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
@@ -465,20 +470,21 @@ void Fighter::InitializeStateMachineScorpion(logic::StateTransitions* ST) {
 			//canDoAction = false;
 			ST->SetState("Punchrighthigh");
 			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
-
+			thisFighter->DamageOpponent(3);
 		}
 
 	});
-	ST->SetTransition("Punchrighthigh", Input{ "4.4" }, [anim, ST, RunningQueue](void) {
+	ST->SetTransition("Punchrighthigh", Input{ "4.4" }, [anim, ST, RunningQueue, thisFighter](void) {
 		//AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
 		if (canDoActionP1) {
 			RunningQueue->push(anim->at("Punchlefthigh"));
 			canDoActionP1 = false;
 			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
+			thisFighter->DamageOpponent(3);
 		}
 
 	});
-	ST->SetTransition("Idle", Input{ "5" }, [anim, ST, RunningQueue, currAnim](void) {
+	ST->SetTransition("Idle", Input{ "5" }, [anim, ST, RunningQueue, currAnim, thisFighter](void) {
 		if (canDoActionP1 && currAnim == NULL)
 		{
 			AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
@@ -487,45 +493,49 @@ void Fighter::InitializeStateMachineScorpion(logic::StateTransitions* ST) {
 			//canDoAction = false;
 			ST->SetState("Kickmid");
 			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00193.mp3", false);
+			thisFighter->DamageOpponent(4);
 
 		}
 	});
-	ST->SetTransition("Kickmid", Input{ "5.5" }, [anim, ST, RunningQueue](void) {
+	ST->SetTransition("Kickmid", Input{ "5.5" }, [anim, ST, RunningQueue, thisFighter](void) {
 		//AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
 		if (canDoActionP1) {
 			RunningQueue->push(anim->at("Kickhigh"));
 			canDoActionP1 = false;
+			thisFighter->DamageOpponent(4);
 		}
 
 	});
-	ST->SetTransition("Idle", Input{ "a.6" }, [anim, ST, RunningQueue](void) {
+	ST->SetTransition("Idle", Input{ "a.6" }, [anim, ST, RunningQueue, thisFighter](void) {
 		//AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
 		if (canDoActionP1) {
 			RunningQueue->push(anim->at("Kickround"));
 			canDoActionP1 = false;
 			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00193.mp3", false);
+			thisFighter->DamageOpponent(4);
 		}
 
 	});
 
-	ST->SetTransition("Idle", Input{ "s.4" }, [anim, ST, RunningQueue](void) {
+	ST->SetTransition("Idle", Input{ "s.4" }, [anim, ST, RunningQueue, thisFighter](void) {
 		//AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
 		if (canDoActionP1) {
 			AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
 			RunningQueue->push(anim->at("Uppercut"));
 			canDoActionP1 = false;
 			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00208.mp3", false);
-
+			thisFighter->DamageOpponent(4);
 		}
 
 	});
-	ST->SetTransition("Idle", Input{ "a.5" }, [anim, ST, RunningQueue](void) {
+	ST->SetTransition("Idle", Input{ "a.5" }, [anim, ST, RunningQueue, thisFighter](void) {
 		//AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
 		if (canDoActionP1) {
 			AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
 			AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
 			RunningQueue->push(anim->at("Tackle"));
 			canDoActionP1 = false;
+			thisFighter->DamageOpponent(3);
 		}
 
 	});
@@ -633,11 +643,11 @@ void Fighter::InitializeStateMachineSubZero(logic::StateTransitions * ST)
 	std::queue<Animator*> *RunningQueue = &this->RunningQueue;
 	std::queue<Animator*> *MovingQueue = &this->MovingQueue;;
 	Animator* currAnim = currAnimator;
-
+	Fighter* thisFighter = this;
 	ST->SetTransition("Idle", Input{ }, [anim, ST](void) {
 		canDoActionP2 = true;
 	});
-	ST->SetTransition("Idle", Input{ "7" }, [anim, ST, RunningQueue, currAnim](void) {
+	ST->SetTransition("Idle", Input{ "7" }, [anim, ST, RunningQueue, currAnim, thisFighter](void) {
 		if (canDoActionP2 && currAnim == NULL)
 		{
 			AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
@@ -646,49 +656,54 @@ void Fighter::InitializeStateMachineSubZero(logic::StateTransitions * ST)
 			//canDoAction = false;
 			ST->SetState("Punchrighthigh");
 			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
-
+			thisFighter->DamageOpponent(3);
 		}
 
 	});
-	ST->SetTransition("Punchrighthigh", Input{ "7.7" }, [anim, ST, RunningQueue](void) {
+	ST->SetTransition("Punchrighthigh", Input{ "7.7" }, [anim, ST, RunningQueue, thisFighter](void) {
 		AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
 		if (canDoActionP2) {
 			RunningQueue->push(anim->at("Punchlefthigh"));
 			canDoActionP2 = false;
 			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
+			thisFighter->DamageOpponent(3);
 		}
 
 	});
-	ST->SetTransition("Idle", Input{ "j.9" }, [anim, ST, RunningQueue](void) {
+	ST->SetTransition("Idle", Input{ "j.9" }, [anim, ST, RunningQueue, thisFighter](void) {
 		AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
 		if (canDoActionP2) {
 			RunningQueue->push(anim->at("Kickround"));
 			canDoActionP2 = false;
 			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
+			thisFighter->DamageOpponent(3);
 		}
 	});
-	ST->SetTransition("Idle", Input{ "k.7" }, [anim, ST, RunningQueue](void) {
+	ST->SetTransition("Idle", Input{ "k.7" }, [anim, ST, RunningQueue, thisFighter](void) {
 		AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
 		if (canDoActionP2) {
 			RunningQueue->push(anim->at("Uppercut"));
 			canDoActionP2 = false;
 			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00208.mp3", false);
+			thisFighter->DamageOpponent(4);
 		}
 	});
-	ST->SetTransition("Idle", Input{ "9" }, [anim, ST, RunningQueue](void) {
+	ST->SetTransition("Idle", Input{ "9" }, [anim, ST, RunningQueue, thisFighter](void) {
 		AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
 		if (canDoActionP2) {
 			RunningQueue->push(anim->at("Kickhigh"));
 			canDoActionP2 = false;
 			//SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00208.mp3", false);
+			thisFighter->DamageOpponent(4);
 		}
 	});
-	ST->SetTransition("Idle", Input{ "8" }, [anim, ST, RunningQueue](void) {
+	ST->SetTransition("Idle", Input{ "8" }, [anim, ST, RunningQueue, thisFighter](void) {
 		AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
 		if (canDoActionP2) {
 			RunningQueue->push(anim->at("Kickmid"));
 			canDoActionP2 = false;
 			//SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00208.mp3", false);
+			thisFighter->DamageOpponent(4);
 		}
 	});
 }
