@@ -7,10 +7,23 @@ void Sprite::Display(BITMAP * dest, const SDL_Rect& da, SDL_Renderer *rend)
 	//SDL_RenderCopy(rend, dest, &frameBox, &da);
 	
 	SDL_Rect pos;
-	pos.x = x;
-	pos.y = y - 89 * Scale;
-	pos.w = 89 * Scale;
-	pos.h = 149 * Scale;
+	if (currFilm->GetId() == "h3")
+	{
+		SDL_Rect fb;
+		fb = currFilm->GetFrameBox(frameNo);
+		pos.w = fb.w;
+		pos.h = fb.h;
+
+		pos.x = x;
+		pos.y = y;
+	}
+	else
+	{
+		pos.x = x;
+		pos.y = y - 89 * Scale;
+		pos.w = 89 * Scale;
+		pos.h = 149 * Scale;
+	}
 	if (isVisible)
 		currFilm->DisplayFrame(currFilm->GetBitmap(), pos, frameNo, rend, fliped);
 

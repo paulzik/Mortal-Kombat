@@ -1,6 +1,14 @@
 #include "AnimationFilm.h"
 #include <iostream>
 void AnimationFilm::DisplayFrame(SDL_Texture *dest, const SDL_Rect& at, BYTE frameNo, SDL_Renderer* rend, bool _fliped) const {
+	if (id == "h3")
+	{
+		SDL_Rect rect;
+		rect = at;
+		SDL_RenderCopy(rend, dest, &boxes[frameNo], &rect);
+		return;
+	}
+	
 	if (id == "Walk") {
 		std::cout << id.c_str() << ": " << fliped << std::endl;
 	}

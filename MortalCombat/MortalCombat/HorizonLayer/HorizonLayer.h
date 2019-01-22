@@ -4,6 +4,7 @@
 #include "../Animator/SDL_Helper.h"
 #include "../Animator/Sprites/AnimationFilms/AnimationFilmHolder.h"
 #include "../Animator/Animator/AnimatorHolder.h"
+#include "../Animator/Sprites/Sprite/SpritesHolder.h"
 #define TOTAL_HOBJECTS	5
 
 
@@ -25,6 +26,7 @@ private:
 	AnimatorHolder*		ah;
 	typedef std::map<std::string, Animator*>	Animators;
 	Animators *animators;
+	SpritesHolder* sprites;
 
 	std::queue<Animator*> RunningQueue;
 	Animator* currAnimator;

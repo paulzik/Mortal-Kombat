@@ -27,11 +27,11 @@ public:
 	~AnimationFilmHolder() { CleanUp(); }
 	void Load(const std::string& catalogue, SDL_Renderer* rend) {
 
-		/*if (catalogue == "Shaolins")
+		if (catalogue == "Shaolins")
 		{
 			LoadShaolins(rend);
 			return;
-		}*/
+		}
 
 		std::string path = catalogue + ".png";
 		int offsetX = 89, offsetY = 149;

@@ -6,7 +6,7 @@ void AnimationFilmHolder::LoadShaolins(SDL_Renderer *rend)
 	int width, height;
 	std::vector<SDL_Rect> rects;
 
-	const std::string s = "h3big";
+	const std::string s = "h3";
 	bm = loader.Load("./Bitmaps/h3big.png", rend);
 	SDL_QueryTexture(bm, NULL, NULL, &width, &height);
 	for (int i = 0; i < 3; ++i)
