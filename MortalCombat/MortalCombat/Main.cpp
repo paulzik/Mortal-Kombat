@@ -52,6 +52,8 @@ int main(int argc, char ** argv)
 	Fighter* player2 = new Fighter(FighterTag::SubZero, PlayerIndex::P2, renderer);
 	player1->SetOpponent(player2);
 	player2->SetOpponent(player1);
+	player1->InitializeStateMachineScorpion(player1->GetState());
+	player2->InitializeStateMachineSubZero(player2->GetState());
 	//Initialize scenes
 	UIManager::Get()->InitializeManager(renderer);
 	UIManager::Get()->InitializeBattleScene(player1, player2);

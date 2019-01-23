@@ -80,8 +80,8 @@ namespace logic {
 		StateTransitions&	PerformTransitions(const Input& input, bool useMaximalEdges) {
 
 			auto	i(inputs.find(state));
-			//if (i == inputs.end()) return  *this;
-			assert(i != inputs.end());
+			if (i == inputs.end()) return  *this;
+			//assert(i != inputs.end());
 			auto&	edges(i->second);
 
 			std::set<std::string> fired;
