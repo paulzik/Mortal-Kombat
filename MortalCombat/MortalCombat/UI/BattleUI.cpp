@@ -12,11 +12,12 @@ BattleUI::BattleUI(Fighter* _player1, Fighter* _player2)
 	player2 = _player2;
 	tag = SceneTag::Battle;
 	flipped = false;
-	bmXs[0] = 400;
-	bmXs[1] = 400;
-	bmXs[2] = 400;
-	bmXs[3] = 400;
-	bmYs[0] = 250;
+	bmXs[0] = 320;
+	bmXs[1] = 300;
+	bmXs[2] = 300;
+	bmXs[3] = 300;
+
+	bmYs[0] = 150;
 	bmYs[1] = 250;
 	bmYs[2] = 250;
 	bmYs[3] = 250;
@@ -113,10 +114,10 @@ void BattleUI::InitializeBattleUIAnimations(SDL_Renderer *renderer)
 
 	index = 2000;
 	std::map<std::string, Animation*> animations;
-	animations.insert(std::pair<std::string, Animation*>("fight", new FrameRangeAnimation(0, 22, 0, 0, 0.2f, true, index++)));
-	animations.insert(std::pair<std::string, Animation*>("finishhim", new FrameRangeAnimation(0, 21, 0, 0, 0.2f, true, index++)));
-	animations.insert(std::pair<std::string, Animation*>("scorpionwins", new FrameRangeAnimation(0, 2, 0, 0, 0.2f, true, index++)));
-	animations.insert(std::pair<std::string, Animation*>("subzerowins", new FrameRangeAnimation(0, 2, 0, 0, 0.2f, true, index++)));
+	animations.insert(std::pair<std::string, Animation*>("fight", new FrameRangeAnimation(0, 22, 0, 0, 0.065f, true, index++)));
+	animations.insert(std::pair<std::string, Animation*>("finishhim", new FrameRangeAnimation(0, 21, 0, 0, 0.1f, true, index++)));
+	animations.insert(std::pair<std::string, Animation*>("scorpionwins", new FrameRangeAnimation(0, 2, 0, 0, 0.1f, true, index++)));
+	animations.insert(std::pair<std::string, Animation*>("subzerowins", new FrameRangeAnimation(0, 2, 0, 0, 0.1f, true, index++)));
 
 	float time = clock() / CLOCKS_PER_SEC;
 
@@ -130,7 +131,7 @@ void BattleUI::InitializeBattleUIAnimations(SDL_Renderer *renderer)
 		((FrameRangeAnimator*)entry.second)->Start(s, (FrameRangeAnimation*)animations.at(entry.first), time, true);
 
 		AnimatorHolder::Register(entry.second);
-		AnimatorHolder::MarkAsRunning(animators->at(bmnames[k]));
+		AnimatorHolder::MarkAsSuspended(animators->at(bmnames[k]));
 		sprites->Add(s, 0);
 	
 		++k;

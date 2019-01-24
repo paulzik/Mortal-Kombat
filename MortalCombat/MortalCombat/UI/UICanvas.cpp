@@ -1,5 +1,5 @@
 #include "UICanvas.h"
-
+#include "../Animator/Animator/AnimatorHolder.h"
 
 
 int UICanvas::GetSceneTag()
@@ -24,6 +24,16 @@ UICanvas::RenderElement* UICanvas::InitializeImageElement(string imagefile, SDL_
 	elementList.push_back(element);
 	
 	return elementList[elementList.size()-1];
+}
+
+void UICanvas::FireAnimation(string animationNamde, int destroytime)
+{
+	AnimatorHolder::MarkAsRunning(animators->at(animationNamde));
+}
+
+void UICanvas::KillAnimation(string animationNamde)
+{
+	AnimatorHolder::MarkAsSuspended(animators->at(animationNamde));
 }
 
 void UICanvas::RenderUI()

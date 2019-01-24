@@ -58,8 +58,8 @@ int main(int argc, char ** argv)
 	UIManager::Get()->InitializeOptionsScene();
 
 	//Setup Battle scene *Replace with welcome scene
-	//UIManager::Get()->SetScene(SceneTag::Welcome);
-	UIManager::Get()->SetScene(SceneTag::Battle);
+	UIManager::Get()->SetScene(SceneTag::Welcome);
+	//UIManager::Get()->SetScene(SceneTag::Battle);
 
 	KeyboardController* keyboardController = new KeyboardController();
 

@@ -8,7 +8,8 @@ void Sprite::Display(BITMAP * dest, const SDL_Rect& da, SDL_Renderer *rend)
 	
 	SDL_Rect pos;
 	if (	currFilm->GetId() == "h0" || currFilm->GetId() == "h1" || currFilm->GetId() == "h2" ||
-		currFilm->GetId() == "h3" || currFilm->GetId() == "h4")
+		currFilm->GetId() == "h3" || currFilm->GetId() == "h4" || currFilm->GetId() == "fight" || currFilm->GetId() == "finishhim"
+		|| currFilm->GetId() == "scorpionwins" || currFilm->GetId() == "subzerowins")
 	{
 		SDL_Rect fb;
 		fb = currFilm->GetFrameBox(frameNo);
@@ -21,7 +22,7 @@ void Sprite::Display(BITMAP * dest, const SDL_Rect& da, SDL_Renderer *rend)
 	else
 	{
 		pos.x = x;
-		pos.y = y - 89 * Scale;
+		pos.y = y - 89 *Scale;
 		pos.w = 89 * Scale;
 		pos.h = 149 * Scale;
 	}

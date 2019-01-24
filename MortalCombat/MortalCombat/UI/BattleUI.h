@@ -29,10 +29,11 @@ private:
 
 	AnimationFilmHolder*	afh;
 	AnimatorHolder*		ah;
-	typedef std::map<std::string, Animator*>	Animators;
-	Animators *animators;
+	
+	
 	SpritesHolder* sprites;
 	bool flipped;
 	int bmXs[4], bmYs[4];
+	
 };
 
