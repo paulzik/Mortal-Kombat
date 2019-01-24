@@ -40,6 +40,7 @@ void KeyboardController::Update(Fighter* _p1, Fighter* _p2)
 					UIManager::reset = true;
 					//UIManager::Get()->SetScene(SceneTag::Welcome);
 				}
+				break;
 			case SDLK_w:
 				UIManager::Get()->currentScene->InvokeMethod("w");
 				AddKey(_p1, "w");

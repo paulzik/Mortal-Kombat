@@ -34,6 +34,7 @@ void UICanvas::FireAnimation(string animationNamde, int destroytime)
 void UICanvas::KillAnimation(string animationNamde)
 {
 	AnimatorHolder::MarkAsSuspended(animators->at(animationNamde));
+	AnimatorHolder::Cancel(animators->at(animationNamde));
 }
 
 void UICanvas::RenderUI()

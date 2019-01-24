@@ -100,6 +100,11 @@ void UIManager::RenderScene()
 	currentScene->RenderUI();
 }
 
+void UIManager::ResetTimer()
+{
+	stopAnimationTime = 0;
+}
+
 void UIManager::DisplayScene(SceneTag sceneTag)
 {
 	

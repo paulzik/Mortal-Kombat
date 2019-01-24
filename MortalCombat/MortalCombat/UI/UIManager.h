@@ -26,6 +26,7 @@ public:
 	static bool KeyBoardBlocked();
 	static void BlockKeyboard();
 	static void RenderScene();
+	static void ResetTimer();
 	static SDL_Renderer* GetRenderer();
 	static bool reset;
 

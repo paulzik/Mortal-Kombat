@@ -92,6 +92,8 @@ INITIALIZE:
 		if ((player1->GetHealth() <= 0 || player2->GetHealth() <= 0) && UIManager::Get()->reset) {
 			player1->StopAll();
 			player2->StopAll();
+			UIManager::Get()->currentScene->KillAnimation("scorpionwins");
+			UIManager::Get()->currentScene->KillAnimation("subzerowins");
 			goto INITIALIZE;
 		}
 
