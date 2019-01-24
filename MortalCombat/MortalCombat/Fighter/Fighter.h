@@ -123,7 +123,7 @@ private:
 
 			animations.insert(std::pair<std::string, Animation*>("Idle", new FrameRangeAnimation(0, 7, 0, 0, 0.07f, true, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Blockhigh", new FrameRangeAnimation(0, 4, 0, 0, 0.07f, false, index++, true)));
-			animations.insert(std::pair<std::string, Animation*>("Duck", new FrameRangeAnimation(0, 4, 0, 0, 0.07f, false, index++, true)));
+			animations.insert(std::pair<std::string, Animation*>("Duck", new FrameRangeAnimation(0, 4, 0, 0, 0.03f, false, index++, true)));
 			animations.insert(std::pair<std::string, Animation*>("Blocklow", new FrameRangeAnimation(0, 2, 0, 0, 0.07f, false, index++, true)));
 			animations.insert(std::pair<std::string, Animation*>("JumpForth", new FrameRangeAnimation(0, 9, 0, 0, 0.07f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("WalkR", new FrameRangeAnimation(0, 8, 0, 0, 0.065f, true, index++)));
@@ -200,7 +200,7 @@ private:
 
 			animations.insert(std::pair<std::string, Animation*>("Idle", new FrameRangeAnimation(0, 11, 0, 0, 0.07f, true, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Blockhigh", new FrameRangeAnimation(0, 4, 0, 0, 0.07f, false, index++, true)));
-			animations.insert(std::pair<std::string, Animation*>("Duck", new FrameRangeAnimation(0, 4, 0, 0, 0.07f, false, index++, true)));
+			animations.insert(std::pair<std::string, Animation*>("Duck", new FrameRangeAnimation(0, 4, 0, 0, 0.03f, false, index++, true)));
 			animations.insert(std::pair<std::string, Animation*>("Blocklow", new FrameRangeAnimation(0, 2, 0, 0, 0.07f, false, index++, true)));
 			animations.insert(std::pair<std::string, Animation*>("JumpForth", new FrameRangeAnimation(0, 8, 0, 0, 0.07f, true, index++)));
 			animations.insert(std::pair<std::string, Animation*>("WalkR", new FrameRangeAnimation(0, 8, 0, 0, 0.065f, true, index++)));
@@ -334,6 +334,7 @@ public:
 			IsCrouching = true;
 			//AnimatorHolder::MarkAsSuspended(animators->at("Idle"));
 			//AnimatorHolder::MarkAsRunning(animators->at("Blockhigh"));
+			AnimatorHolder::MarkAsRunning(animators->at("Duck"));
 			animators->at("Duck")->SetState(animatorstate_t::ANIMATOR_RUNNING);
 		}
 
@@ -374,11 +375,11 @@ public:
 			stateTransitions.SetState("Idle");*/
 			animators->at("Duck")->SetState(animatorstate_t::ANIMATOR_FINISHED);
 			//animators->at("Duck")->Stop();
-			//AnimatorHolder::MarkAsRunning(animators->at("Idle"));
 			stateTransitions.SetState("Idle");
 			AnimatorHolder::MarkAsSuspended(animators->at("Blockhigh"));
 			AnimatorHolder::MarkAsSuspended(animators->at("Blocklow"));
 			AnimatorHolder::MarkAsSuspended(animators->at("Duck"));
+			AnimatorHolder::MarkAsRunning(animators->at("Idle"));
 		}
 		pressed = false;
 

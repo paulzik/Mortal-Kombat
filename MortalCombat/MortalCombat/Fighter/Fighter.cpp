@@ -475,7 +475,7 @@ void Fighter::InitializeStateMachineScorpion(logic::StateTransitions* ST) {
 	ST->SetTransition("Idle", Input{ "s" }, [anim, ST, RunningQueue, crouch](void) {
 		AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
 		if (canDoActionP1 && !crouch) {
-			RunningQueue->push(anim->at("Duck"));
+			//RunningQueue->push(anim->at("Duck"));
 			canDoActionP1 = true;
 			ST->SetState("Duck");
 			//SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
