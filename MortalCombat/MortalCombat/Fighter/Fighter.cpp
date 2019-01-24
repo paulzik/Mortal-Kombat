@@ -69,6 +69,13 @@ void Fighter::DamageOpponent(int damage, std::queue<Animator*> animQueue)
 			opponent->RunningQueue.push(animQueue.front());
 			animQueue.pop();
 		}
+		else if (animQueue.size() == 3)
+		{
+			opponent->RunningQueue.push(animQueue.front());
+			animQueue.pop();
+			opponent->MovingQueue.push(animQueue.front());
+			animQueue.pop();
+		}
 		AnimatorHolder::MarkAsRunning(animQueue.front());
 		opponent->currAnimator = animQueue.front();
 		animQueue.pop();
@@ -517,13 +524,16 @@ void Fighter::InitializeStateMachineScorpion(logic::StateTransitions* ST) {
 
 	});
 
-	ST->SetTransition("Idle", Input{ "d.w" }, [anim, ST, RunningQueue](void) {
-		AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
-		if (canDoActionP1) {
+	ST->SetTransition("Idle", Input{ "d.w" }, [anim, ST, RunningQueue, MovingQueue, currAnim](void) {
+		if (currAnim == NULL) {
+			AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
+			ST->SetState("JumpForth");
 			RunningQueue->push(anim->at("JumpForth"));
+			MovingQueue->push(anim->at("JumpForthMove"));
 			canDoActionP1 = true;
-			//SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
 		}
+		//RunningQueue.push(anim->at("Idle"));
+
 
 	});
 	ST->SetTransition("Jump", Input{ "w" }, [anim, ST, currAnim](void) {
@@ -654,7 +664,9 @@ void Fighter::InitializeStateMachineScorpion(logic::StateTransitions* ST) {
 			canDoActionP1 = false;
 			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00208.mp3", false);
 			queue<Animator*> animeQueue;
-			animeQueue.push(opposingFighter->GetAnimators()->at("Dmghigh"));
+			animeQueue.push(opposingFighter->GetAnimators()->at("Getup"));
+			animeQueue.push(opposingFighter->GetAnimators()->at("FallbackMove"));
+			animeQueue.push(opposingFighter->GetAnimators()->at("Fallback"));
 			thisFighter->DamageOpponent(4, animeQueue);
 		}
 
