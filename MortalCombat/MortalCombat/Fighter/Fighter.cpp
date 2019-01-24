@@ -4,6 +4,7 @@
 #include <future>
 #include <queue>
 #include "../Configuration/ConfigAPIs.h"
+#include "../UI/UIManager.h"
 
 SDL_Joystick *joystick;
 
@@ -86,10 +87,15 @@ void Fighter::DamageOpponent(int damage, std::queue<Animator*> animQueue)
 		//Set health back to zero to avoid visual bugs (lifebar)
 		if (opponent->health < 0) {
 			opponent->health = 0;
-			if (tag == FighterTag::Scorpion)
+			if (tag == FighterTag::Scorpion) {
+				UIManager::Get()->FireAnimation("scorpionwins", 0);
 				SoundEngine::Get()->Play("./SoundEngine/Sounds/announcer/ScorpionWins.mp3");
-			else
+			}
+			else {
+				UIManager::Get()->FireAnimation("subzerowins", 0);
 				SoundEngine::Get()->Play("./SoundEngine/Sounds/announcer/SubzeroWins.mp3");
+			}
+				
 		}
 	}
 	else if (CalculateDistanceWithOpponent() < 165 && opponent->IsBlocking == true) {
