@@ -14,13 +14,13 @@ BattleUI::BattleUI(Fighter* _player1, Fighter* _player2)
 	flipped = false;
 	bmXs[0] = 320;
 	bmXs[1] = 300;
-	bmXs[2] = 300;
-	bmXs[3] = 300;
+	bmXs[2] = 280;
+	bmXs[3] = 280;
 
 	bmYs[0] = 150;
-	bmYs[1] = 250;
-	bmYs[2] = 250;
-	bmYs[3] = 250;
+	bmYs[1] = 150;
+	bmYs[2] = 150;
+	bmYs[3] = 150;
 	InitializeUI();
 
 	InitializeBattleUIAnimations(renderer);
@@ -33,7 +33,7 @@ void BattleUI::InitializeUI()
 	player1UI.lifebarGreen = InitializeImageElement("./Bitmaps/BattleElements/lifebarGreen.png", { 44,60,322,20 });
 	player1UI.name = InitializeImageElement("./Bitmaps/BattleElements/ScorpionName.png", { 59,57,224,25 });
 
-	player1UI.coins.push_back(InitializeImageElement("./Bitmaps/BattleElements/coin.png", { 50,90,20,20 }));
+	//player1UI.coins.push_back(InitializeImageElement("./Bitmaps/BattleElements/coin.png", { 50,90,20,20 }));
 	//player1UI.coins.push_back(InitializeImageElement("./Bitmaps/BattleElements/coin.png", { 75,90,20,20 }));
 
 	player2UI.lifebarRed = InitializeImageElement("./Bitmaps/BattleElements/lifebar.png", { 412,58,163 * 2,24 });
