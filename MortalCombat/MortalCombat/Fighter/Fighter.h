@@ -126,14 +126,14 @@ private:
 			animations.insert(std::pair<std::string, Animation*>("Duck", new FrameRangeAnimation(0, 4, 0, 0, 0.07f, false, index++, true)));
 			animations.insert(std::pair<std::string, Animation*>("Blocklow", new FrameRangeAnimation(0, 2, 0, 0, 0.07f, false, index++, true)));
 			animations.insert(std::pair<std::string, Animation*>("JumpForth", new FrameRangeAnimation(0, 9, 0, 0, 0.07f, false, index++)));
-			animations.insert(std::pair<std::string, Animation*>("WalkR", new FrameRangeAnimation(0, 8, 0, 0, 0.075f, true, index++)));
-			animations.insert(std::pair<std::string, Animation*>("WalkRMove", new MovingAnimation(1, 0, 0.01f, true, index++)));
-			animations.insert(std::pair<std::string, Animation*>("WalkL", new FrameRangeAnimation(0, 8, 0, 0, 0.075f, true, index++)));
-			animations.insert(std::pair<std::string, Animation*>("WalkLMove", new MovingAnimation(-1, 0, 0.01f, true, index++)));
-			animations.insert(std::pair<std::string, Animation*>("WalkReverseR", new FrameRangeAnimation(0, 8, 0, 0, 0.075f, true, index++)));
-			animations.insert(std::pair<std::string, Animation*>("WalkReverseRMove", new MovingAnimation(1, 0, 0.01f, true, index++)));
-			animations.insert(std::pair<std::string, Animation*>("WalkReverseL", new FrameRangeAnimation(0, 8, 0, 0, 0.075f, true, index++)));
-			animations.insert(std::pair<std::string, Animation*>("WalkReverseLMove", new MovingAnimation(-1, 0, 0.01f, true, index++)));
+			animations.insert(std::pair<std::string, Animation*>("WalkR", new FrameRangeAnimation(0, 8, 0, 0, 0.065f, true, index++)));
+			animations.insert(std::pair<std::string, Animation*>("WalkRMove", new MovingAnimation(2, 0, 0.01f, true, index++)));
+			animations.insert(std::pair<std::string, Animation*>("WalkL", new FrameRangeAnimation(0, 8, 0, 0, 0.065f, true, index++)));
+			animations.insert(std::pair<std::string, Animation*>("WalkLMove", new MovingAnimation(-2, 0, 0.01f, true, index++)));
+			animations.insert(std::pair<std::string, Animation*>("WalkReverseR", new FrameRangeAnimation(0, 8, 0, 0, 0.065f, true, index++)));
+			animations.insert(std::pair<std::string, Animation*>("WalkReverseRMove", new MovingAnimation(2, 0, 0.01f, true, index++)));
+			animations.insert(std::pair<std::string, Animation*>("WalkReverseL", new FrameRangeAnimation(0, 8, 0, 0, 0.065f, true, index++)));
+			animations.insert(std::pair<std::string, Animation*>("WalkReverseLMove", new MovingAnimation(-2, 0, 0.01f, true, index++)));
 
 			animations.insert(std::pair<std::string, Animation*>("Frozen", new FrameRangeAnimation(0, 8, 0, 0, 0.075f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("FatalFrozen", new FrameRangeAnimation(0, 10, 0, 0, 0.075f, false, index++)));
@@ -203,14 +203,14 @@ private:
 			animations.insert(std::pair<std::string, Animation*>("Duck", new FrameRangeAnimation(0, 4, 0, 0, 0.07f, false, index++, true)));
 			animations.insert(std::pair<std::string, Animation*>("Blocklow", new FrameRangeAnimation(0, 2, 0, 0, 0.07f, false, index++, true)));
 			animations.insert(std::pair<std::string, Animation*>("JumpForth", new FrameRangeAnimation(0, 8, 0, 0, 0.07f, true, index++)));
-			animations.insert(std::pair<std::string, Animation*>("WalkR", new FrameRangeAnimation(0, 8, 0, 0, 0.075f, true, index++)));
-			animations.insert(std::pair<std::string, Animation*>("WalkRMove", new MovingAnimation(1, 0, 0.01f, true, index++)));
-			animations.insert(std::pair<std::string, Animation*>("WalkL", new FrameRangeAnimation(0, 8, 0, 0, 0.075f, true, index++)));
-			animations.insert(std::pair<std::string, Animation*>("WalkLMove", new MovingAnimation(-1, 0, 0.01f, true, index++)));
-			animations.insert(std::pair<std::string, Animation*>("WalkReverseR", new FrameRangeAnimation(0, 8, 0, 0, 0.075f, true, index++)));
-			animations.insert(std::pair<std::string, Animation*>("WalkReverseRMove", new MovingAnimation(1, 0, 0.01f, true, index++)));
-			animations.insert(std::pair<std::string, Animation*>("WalkReverseL", new FrameRangeAnimation(0, 8, 0, 0, 0.075f, true, index++)));
-			animations.insert(std::pair<std::string, Animation*>("WalkReverseLMove", new MovingAnimation(-1, 0, 0.01f, true, index++)));
+			animations.insert(std::pair<std::string, Animation*>("WalkR", new FrameRangeAnimation(0, 8, 0, 0, 0.065f, true, index++)));
+			animations.insert(std::pair<std::string, Animation*>("WalkRMove", new MovingAnimation(2, 0, 0.01f, true, index++)));
+			animations.insert(std::pair<std::string, Animation*>("WalkL", new FrameRangeAnimation(0, 8, 0, 0, 0.065f, true, index++)));
+			animations.insert(std::pair<std::string, Animation*>("WalkLMove", new MovingAnimation(-2, 0, 0.01f, true, index++)));
+			animations.insert(std::pair<std::string, Animation*>("WalkReverseR", new FrameRangeAnimation(0, 8, 0, 0, 0.065f, true, index++)));
+			animations.insert(std::pair<std::string, Animation*>("WalkReverseRMove", new MovingAnimation(2, 0, 0.01f, true, index++)));
+			animations.insert(std::pair<std::string, Animation*>("WalkReverseL", new FrameRangeAnimation(0, 8, 0, 0, 0.065f, true, index++)));
+			animations.insert(std::pair<std::string, Animation*>("WalkReverseLMove", new MovingAnimation(-2, 0, 0.01f, true, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Punchrighthigh", new FrameRangeAnimation(0, 2, 0, 0, 0.055f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Punchlefthigh", new FrameRangeAnimation(0, 5, 0, 0, 0.055f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Punchrightmid", new FrameRangeAnimation(0, 1, 0, 0, 0.06f, false, index++)));
@@ -305,11 +305,13 @@ public:
 	}
 	bool pressed;
 	void AddMove(std::string _key) {
-		if (_key == "d" || _key == "l") {
-			direction = Direction::right;
+		if (direction == none)
+			if (_key == "d" || _key == "l") {
+				direction = Direction::right;
 		}
 		else if (_key == "a" || _key == "j") {
-			direction = Direction::left;
+			if (direction == none)
+				direction = Direction::left;
 		}
 		else if ((_key == "q" || _key == "o") && !IsBlocking) {
 			IsBlocking = true;
