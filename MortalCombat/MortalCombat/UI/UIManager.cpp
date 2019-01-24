@@ -10,6 +10,9 @@ UICanvas* UIManager::currentScene;
 bool UIManager::paused;
 bool UIManager::keyboardBlocked;
 bool UIManager::reset;
+int UIManager::startTimer;
+int UIManager::stopAnimationTime;
+string UIManager::animationToKill;
 
 UIManager* UIManager::Get() {
 	if (!instance) {
@@ -26,6 +29,7 @@ void UIManager::InitializeManager(SDL_Renderer* _renderer)
 	renderer = _renderer;
 	paused = false;
 	keyboardBlocked = false;
+	stopAnimationTime = 0;
 }
 
 void UIManager::InitializeBattleScene(Fighter* player1, Fighter* player2)
@@ -47,11 +51,17 @@ void UIManager::SetScene(SceneTag scene)
 {
 	if (scene == SceneTag::Battle) {
 		//REMOVE COMMENTS FOR FINAL
-		//if (currentScene->GetSceneTag() == SceneTag::Welcome) {
+		if (currentScene->GetSceneTag() == SceneTag::Welcome) {
 			SoundEngine::Get()->StopAllSounds();
 			SoundEngine::Get()->Play("./SoundEngine/Sounds/BattleMusic1.mp3", true);
-		//}
-		currentScene = battleScene;
+			SoundEngine::Get()->Play("./SoundEngine/Sounds/announcer/fight.mp3");
+			currentScene = battleScene;
+			FireAnimation("fight", 1500);
+		}
+		else {
+			currentScene = battleScene;
+		}
+
 	}else if (scene == SceneTag::Welcome) {
 		SoundEngine::Get()->Play("./SoundEngine/Sounds/Mortal Kombat Theme Song Original.mp3", true);
 		currentScene = welcomeScene;
@@ -81,6 +91,12 @@ void UIManager::BlockKeyboard()
 
 void UIManager::RenderScene()
 {
+	//Timer Update
+	if (stopAnimationTime != 0) {
+		if (startTimer + stopAnimationTime < SDL_GetTicks()) {
+			currentScene->KillAnimation(animationToKill);
+		}
+	}
 	currentScene->RenderUI();
 }
 
@@ -91,5 +107,13 @@ void UIManager::DisplayScene(SceneTag sceneTag)
 SDL_Renderer * UIManager::GetRenderer()
 {
 	return renderer;
+}
+
+void UIManager::FireAnimation(string animationNamde, int destroytime)
+{
+	stopAnimationTime = destroytime;
+	animationToKill = animationNamde;
+	startTimer = SDL_GetTicks();
+	currentScene->FireAnimation(animationNamde, destroytime);
 }
 ;

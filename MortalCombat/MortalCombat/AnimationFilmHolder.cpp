@@ -37,3 +37,31 @@ void AnimationFilmHolder::LoadHorizon(SDL_Renderer *rend)
 		films.insert(std::pair<std::string, AnimationFilm*>("h" + std::to_string(i), anim));
 	}
 }
+
+void AnimationFilmHolder::LoadBattleUIAnimations(SDL_Renderer *rend)
+{
+	int bmframes[4] = {22,21,2,2};
+	std::string bmnames[4] = { "fight","finishhim","scorpionwins","subzerowins" };
+
+	int i, j;
+	BITMAP* bm;
+	int width, height;
+
+	for(int k = 0; k < 4; ++k)
+	{
+		bm = loader.Load("./Bitmaps/BattleElements/"+bmnames[k]+".png", rend);
+		SDL_QueryTexture(bm, NULL, NULL, &width, &height);
+		std::vector<SDL_Rect> rects;
+		for (int i = 0; i < bmframes[k]; ++i)
+		{
+			SDL_Rect box;
+			box.x = i*(width/ bmframes[k]);
+			box.y = 0;
+			box.w = width/ bmframes[k];
+			box.h = height;
+			rects.push_back(box);
+		}
+		AnimationFilm* anim = new AnimationFilm(bm, rects, bmnames[k]);
+		films.insert(std::pair<std::string, AnimationFilm*>(bmnames[k], anim));
+	}
+}

@@ -13,7 +13,6 @@ enum SceneTag { Welcome, Battle, Options };
 class UIManager
 {
 public:
-	
 	static UICanvas* currentScene;
 	static UIManager* Get(void);
 	static SDL_Renderer* renderer;
@@ -30,6 +29,7 @@ public:
 	static SDL_Renderer* GetRenderer();
 	static bool reset;
 
+	static void FireAnimation(string animationNamde, int destroytime);
 private:
 	static bool paused;
 	static bool keyboardBlocked;
@@ -38,6 +38,8 @@ private:
 	static OptionsUI* optionsScene;
 	static WelcomeUI* welcomeScene;
 	static void DisplayScene(SceneTag sceneTag);
+	static int  startTimer, stopAnimationTime;
+	static string animationToKill;
 
 };
 

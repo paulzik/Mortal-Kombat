@@ -1,4 +1,5 @@
 #include "FrameRangeAnimator.h"
+#include "../Animator/AnimatorHolder.h"
 
 void FrameRangeAnimator::Progress(timestamp_t currTime)
 {
