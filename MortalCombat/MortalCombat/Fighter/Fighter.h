@@ -289,7 +289,7 @@ public:
 	Fighter(FighterTag _tag, int playerIndex, SDL_Renderer *renderer);
 	Fighter();
 	bool PlayerIsAlive();
-	void DamageOpponent(int damage, Animator* animToPlay);
+	void DamageOpponent(int damage, std::queue<Animator*> animQueue);
 	int GetHealth();
 	logic::StateTransitions* GetState() {
 		return &stateTransitions;
