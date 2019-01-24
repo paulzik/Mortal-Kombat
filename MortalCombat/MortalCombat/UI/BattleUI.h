@@ -15,10 +15,8 @@ public:
 		vector<RenderElement*> coins;
 	};
 
-	
-
 	BattleUI(Fighter* player1, Fighter* player2);
-	
+	void InitializeBattleUIAnimations(SDL_Renderer *renderer);
 	virtual void InitializeUI();
 	void RenderUI();
 private:
@@ -28,5 +26,13 @@ private:
 	vector<SDL_Texture*> pointsTextures;
 	float timer;
 	int countdown = 99;
+
+	AnimationFilmHolder*	afh;
+	AnimatorHolder*		ah;
+	typedef std::map<std::string, Animator*>	Animators;
+	Animators *animators;
+	SpritesHolder* sprites;
+	bool flipped;
+	int bmXs[4], bmYs[4];
 };
 

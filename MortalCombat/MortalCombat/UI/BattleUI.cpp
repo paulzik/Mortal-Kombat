@@ -2,6 +2,7 @@
 #include "UIManager.h"
 #include <string>
 #include <SDL_ttf.h>
+
 using namespace std;
 
 BattleUI::BattleUI(Fighter* _player1, Fighter* _player2)
@@ -10,8 +11,18 @@ BattleUI::BattleUI(Fighter* _player1, Fighter* _player2)
 	player1 = _player1;
 	player2 = _player2;
 	tag = SceneTag::Battle;
+	flipped = false;
+	bmXs[0] = 400;
+	bmXs[1] = 400;
+	bmXs[2] = 400;
+	bmXs[3] = 400;
+	bmYs[0] = 250;
+	bmYs[1] = 250;
+	bmYs[2] = 250;
+	bmYs[3] = 250;
 	InitializeUI();
 
+	InitializeBattleUIAnimations(renderer);
 }
 
 
@@ -83,6 +94,48 @@ void BattleUI::RenderUI()
 
 
 	UICanvas::RenderUI();
+}
+
+void BattleUI::InitializeBattleUIAnimations(SDL_Renderer *renderer)
+{
+	int index = 2000;
+	afh = new AnimationFilmHolder();
+	sprites = new SpritesHolder();
+	afh->Load("BattleUI", renderer);
+
+
+	animators = new Animators();
+
+	animators->insert(std::pair<std::string, Animator*>("fight", new FrameRangeAnimator(index++)));
+	animators->insert(std::pair<std::string, Animator*>("finishhim", new FrameRangeAnimator(index++)));
+	animators->insert(std::pair<std::string, Animator*>("scorpionwins", new FrameRangeAnimator(index++)));
+	animators->insert(std::pair<std::string, Animator*>("subzerowins", new FrameRangeAnimator(index++)));
+
+	index = 2000;
+	std::map<std::string, Animation*> animations;
+	animations.insert(std::pair<std::string, Animation*>("fight", new FrameRangeAnimation(0, 22, 0, 0, 0.2f, true, index++)));
+	animations.insert(std::pair<std::string, Animation*>("finishhim", new FrameRangeAnimation(0, 21, 0, 0, 0.2f, true, index++)));
+	animations.insert(std::pair<std::string, Animation*>("scorpionwins", new FrameRangeAnimation(0, 2, 0, 0, 0.2f, true, index++)));
+	animations.insert(std::pair<std::string, Animation*>("subzerowins", new FrameRangeAnimation(0, 2, 0, 0, 0.2f, true, index++)));
+
+	float time = clock() / CLOCKS_PER_SEC;
+
+	std::string bmnames[4] = { "fight","finishhim","scorpionwins","subzerowins" };
+	int k = 0;
+	for (auto entry : *animators)
+	{
+		AnimationFilm* af = new AnimationFilm(*afh->GetFilm(bmnames[k]));
+
+		Sprite *s = new Sprite(bmXs[k], bmYs[k], af, flipped);
+		((FrameRangeAnimator*)entry.second)->Start(s, (FrameRangeAnimation*)animations.at(entry.first), time, true);
+
+		AnimatorHolder::Register(entry.second);
+		AnimatorHolder::MarkAsRunning(animators->at(bmnames[k]));
+		sprites->Add(s, 0);
+	
+		++k;
+	}
+
 }
 
 

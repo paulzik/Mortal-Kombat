@@ -16,7 +16,7 @@ private:
 	BitmapLoader loader;
 
 	void LoadHorizon(SDL_Renderer* rend);
-	
+	void LoadBattleUIAnimations(SDL_Renderer* rend);
 
 public:
 	static AnimationFilmHolder& Get(void) {
@@ -30,6 +30,12 @@ public:
 		if (catalogue == "Horizon")
 		{
 			LoadHorizon(rend);
+			return;
+		}
+
+		if (catalogue == "BattleUI")
+		{
+			LoadBattleUIAnimations(rend);
 			return;
 		}
 
