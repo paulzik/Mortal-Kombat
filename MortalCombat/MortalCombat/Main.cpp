@@ -9,7 +9,6 @@
 #include "Animator/SDL_Helper.h"
 #include "Fighter/Fighter.h"
 #include "UI/UIManager.h"
-#include "Arena/Arena.h"
 #include "HorizonLayer/HorizonLayer.h"
 #include "SoundEngine\SoundEngine.h"
 #include "KeyboardController/KeyboardController.h"
@@ -45,8 +44,6 @@ int main(int argc, char ** argv)
 	//layerRenderer->InitializeImageElement("./Bitmaps/BattleElements/lifebar.png", LayerRenderer::Layer::Foreground, { 42,58,163 * 2,12 * 2 });
 	//layerRenderer->InitializeImageElement("./Bitmaps/BattleElements/lifebar.png", LayerRenderer::Layer::Foreground, { 412,58,163 * 2,12 * 2 });
 
-	//Generate Arena
-	Arena* arena = new Arena(renderer);
 	//Generate 2 Players
 	Fighter* player1 = new Fighter(FighterTag::Scorpion, PlayerIndex::P1, renderer);
 	Fighter* player2 = new Fighter(FighterTag::SubZero, PlayerIndex::P2, renderer);
@@ -72,7 +69,6 @@ int main(int argc, char ** argv)
 		//Render all 3 layers
 		SDL_RenderClear(renderer);
 		if (!UIManager::Get()->IsGamePaused()) {
-			hl.DisplayHorizon();
 			//layerRenderer->RenderLayer(LayerRenderer::Layer::Background);
 
 			layerRenderer->RenderLayer(LayerRenderer::Layer::Action);

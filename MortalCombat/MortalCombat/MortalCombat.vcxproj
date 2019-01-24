@@ -134,7 +134,6 @@
     <ClCompile Include="Animator\Animator\MovingPathAnimator.cpp" />
     <ClCompile Include="Animator\Sprites\AnimationFilms\AnimationFilm.cpp" />
     <ClCompile Include="Animator\Sprites\Sprite\Sprite.cpp" />
-    <ClCompile Include="Arena\Arena.cpp" />
     <ClCompile Include="Configuration\ConfigAPI.cpp" />
     <ClCompile Include="Configuration\ConfigAPIs.cpp" />
     <ClCompile Include="Configuration\JSONParser\jsoncpp.cpp" />
@@ -169,7 +168,6 @@
     <ClInclude Include="Animator\Sprites\AnimationFilms\BitmapLoader.h" />
     <ClInclude Include="Animator\Sprites\Sprite\Sprite.h" />
     <ClInclude Include="Animator\Sprites\Sprite\SpritesHolder.h" />
-    <ClInclude Include="Arena.h" />
     <ClInclude Include="Configuration\ConfigAPI.h" />
     <ClInclude Include="Configuration\ConfigAPIs.h" />
     <ClInclude Include="Configuration\ConfigData.h" />

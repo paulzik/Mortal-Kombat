@@ -7,7 +7,8 @@ void Sprite::Display(BITMAP * dest, const SDL_Rect& da, SDL_Renderer *rend)
 	//SDL_RenderCopy(rend, dest, &frameBox, &da);
 	
 	SDL_Rect pos;
-	if (currFilm->GetId() == "h3")
+	if (	currFilm->GetId() == "h0" || currFilm->GetId() == "h1" || currFilm->GetId() == "h2" ||
+		currFilm->GetId() == "h3" || currFilm->GetId() == "h4")
 	{
 		SDL_Rect fb;
 		fb = currFilm->GetFrameBox(frameNo);

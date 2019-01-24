@@ -15,7 +15,7 @@ private:
 	Films films;
 	BitmapLoader loader;
 
-	void LoadShaolins(SDL_Renderer* rend);
+	void LoadHorizon(SDL_Renderer* rend);
 	
 
 public:
@@ -27,9 +27,9 @@ public:
 	~AnimationFilmHolder() { CleanUp(); }
 	void Load(const std::string& catalogue, SDL_Renderer* rend) {
 
-		if (catalogue == "Shaolins")
+		if (catalogue == "Horizon")
 		{
-			LoadShaolins(rend);
+			LoadHorizon(rend);
 			return;
 		}
 

@@ -67,12 +67,6 @@
     <Filter Include="Header Files\InputManager">
       <UniqueIdentifier>{ad75a8db-3b09-4966-a44e-1a34b100e8c9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Arena">
-      <UniqueIdentifier>{8a1b65be-8128-42e4-9c4b-455255e74b79}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Arena">
-      <UniqueIdentifier>{13fc2179-f64c-48fb-8cf0-15a2f38bfb28}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\StateTransition">
       <UniqueIdentifier>{c50eff30-c509-4e0f-8e2c-fff9f8f688bd}</UniqueIdentifier>
     </Filter>
@@ -134,9 +128,6 @@
     </ClCompile>
     <ClCompile Include="Fighter\Fighter.cpp">
       <Filter>Source Files\Fighter</Filter>
-    </ClCompile>
-    <ClCompile Include="Arena\Arena.cpp">
-      <Filter>Source Files\Arena</Filter>
     </ClCompile>
     <ClCompile Include="UI\UIManager.cpp">
       <Filter>Source Files\UI</Filter>
@@ -253,9 +244,6 @@
     </ClInclude>
     <ClInclude Include="InputManager\InputManager.h">
       <Filter>Header Files\InputManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Arena.h">
-      <Filter>Header Files\Arena</Filter>
     </ClInclude>
     <ClInclude Include="StateTransition\StateTransition.h">
       <Filter>Header Files\StateTransition</Filter>
