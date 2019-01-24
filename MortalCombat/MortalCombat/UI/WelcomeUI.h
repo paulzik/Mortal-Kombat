@@ -5,6 +5,9 @@ class WelcomeUI :
 {
 public:
 	WelcomeUI();
-	~WelcomeUI();
+	virtual void InitializeUI();
+	void RenderUI();
+private:
+	RenderElement* background;
 };
 

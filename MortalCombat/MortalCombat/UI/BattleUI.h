@@ -24,6 +24,9 @@ public:
 private:
 	Fighter *player1, *player2;
 	PlayerUI player1UI, player2UI;
-
+	vector<SDL_Texture*> timerTextures;
+	vector<SDL_Texture*> pointsTextures;
+	float timer;
+	int countdown = 99;
 };
 

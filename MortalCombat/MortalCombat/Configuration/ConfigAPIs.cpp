@@ -1,6 +1,7 @@
 #include "ConfigAPIs.h"
 #include <iostream>
 #include <list>
+#include <vector>
 
 list<ConfigAPI*> ConfigAPIs::apis;
 

@@ -2,10 +2,10 @@ class ConfigData
 {
 public:
 	//Atributes
-	bool infiniteLife;
-	float gravity;
-	float musicLevel;
-	float gameSpeed;
+	int gameSpeed;
+	int musicLevel;
+	bool tinyMode;
+	bool godMode;
 
 private:
 

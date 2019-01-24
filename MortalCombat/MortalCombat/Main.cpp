@@ -39,7 +39,7 @@ int main(int argc, char ** argv)
 	
 	//Configuration Initial setup
 	ConfigAPI* configAPI = new ConfigAPI("ConfigurationFile.json");
-	
+	ConfigAPIs::Add(configAPI);
 
 	//LifeBars -- TODO: Will be otimized as they are the same texture
 	//layerRenderer->InitializeImageElement("./Bitmaps/BattleElements/lifebar.png", LayerRenderer::Layer::Foreground, { 42,58,163 * 2,12 * 2 });
@@ -57,10 +57,10 @@ int main(int argc, char ** argv)
 	UIManager::Get()->InitializeBattleScene(player1, player2);
 	UIManager::Get()->InitializeWelcomeScene();
 	UIManager::Get()->InitializeOptionsScene();
-	//Setup Battle scene *Replace with welcome scene
-	UIManager::Get()->SetScene(SceneTag::Battle);
 
-	//SoundEngine::Get()->Play("./SoundEngine/Sounds/Mortal Kombat Theme Song Original.mp3", true);
+	//Setup Battle scene *Replace with welcome scene
+	//UIManager::Get()->SetScene(SceneTag::Welcome);
+	UIManager::Get()->SetScene(SceneTag::Battle);
 
 	KeyboardController* keyboardController = new KeyboardController();
 

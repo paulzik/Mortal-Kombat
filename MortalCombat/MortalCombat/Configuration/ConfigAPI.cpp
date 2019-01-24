@@ -3,6 +3,7 @@
 #include "../Configuration/JSONParser/json/json.h"
 #include <iostream>
 #include <fstream>
+#include "../SoundEngine/SoundEngine.h"
 
 ConfigAPI::ConfigAPI(string configFilename)
 {
@@ -20,19 +21,19 @@ void ConfigAPI::ImportConfigurationData()
 	file >> jsonValue;
 	file.close();
 
-	SetGravity(jsonValue["Configuration"]["Gravity"].asFloat());
-	SetGameSpeed(jsonValue["Configuration"]["GameSpeed"].asFloat());
-	SetMusicLevel(jsonValue["Configuration"]["MusicLevel"].asFloat());
-	SetInfiniteLife(jsonValue["Configuration"]["InfiniteLife"].asBool());
+	SetGameSpeed(jsonValue["Configuration"]["GameSpeed"].asInt());
+	SetMusicLevel(jsonValue["Configuration"]["MusicLevel"].asInt());
+	SetTinyMode(jsonValue["Configuration"]["TinyMode"].asBool());
+	SetGodMode(jsonValue["Configuration"]["GodMode"].asBool());
 }
 
 void ConfigAPI::ExportConfigurationData()
 {
 	Json::Value root;
-	root["Configuration"]["Gravity"] = GetGravity();
 	root["Configuration"]["GameSpeed"] = GetGameSpeed();
 	root["Configuration"]["MusicLevel"] = GetMusicLevel();
-	root["Configuration"]["InfiniteLife"] = GetInfiniteLife();
+	root["Configuration"]["TinyMode"] = GetTinyMode();
+	root["Configuration"]["GodMode"] = GetGodMode();
 
 	ofstream file;
 	file.open(configFile);
@@ -45,42 +46,44 @@ const ConfigData ConfigAPI::GetConfigData()
 	return configData;
 }
 
-const float ConfigAPI::GetGravity()
-{
-	return configData.gravity;
-}
-
-void ConfigAPI::SetGravity(float grav)
-{
-	configData.gravity = grav;
-}
-
-const bool ConfigAPI::GetInfiniteLife()
-{
-	return configData.infiniteLife;
-}
-
-void ConfigAPI::SetInfiniteLife(bool infinite)
-{
-	configData.infiniteLife = infinite;
-}
-
-const float ConfigAPI::GetMusicLevel()
-{
-	return configData.musicLevel;
-}
-
-void ConfigAPI::SetMusicLevel(float level)
-{
-	configData.musicLevel = level;
-}
-
-const float ConfigAPI::GetGameSpeed()
+const int ConfigAPI::GetGameSpeed()
 {
 	return configData.gameSpeed;
 }
 
-void ConfigAPI::SetGameSpeed(float speed)
+void ConfigAPI::SetGameSpeed(int speed)
 {
 	configData.gameSpeed = speed;
+}
+
+const int ConfigAPI::GetTinyMode()
+{
+	return configData.tinyMode;
+}
+
+void ConfigAPI::SetTinyMode(int tinyMode)
+{
+	configData.tinyMode = tinyMode;
+}
+
+const int ConfigAPI::GetGodMode()
+{
+	return configData.godMode;
+}
+
+void ConfigAPI::SetGodMode(int godMode)
+{
+	configData.godMode = godMode;
+}
+
+const int ConfigAPI::GetMusicLevel()
+{
+	return configData.musicLevel;
+}
+
+void ConfigAPI::SetMusicLevel(int level)
+{
+	configData.musicLevel = level;
+	//Set volume
+	SoundEngine::Get()->SetVolume(level);
 }

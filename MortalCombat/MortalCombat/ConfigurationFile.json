@@ -1,9 +1,9 @@
 {
 	"Configuration" : 
 	{
-		"GameSpeed" : 1.0,
-		"Gravity" : -1.0,
-		"InfiniteLife" : true,
-		"MusicLevel" : -431602080.0
+		"GameSpeed" : 1,
+		"GodMode" : 0,
+		"MusicLevel" : 1,
+		"TinyMode" : 0
 	}
 }

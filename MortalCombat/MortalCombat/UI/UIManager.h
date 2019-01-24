@@ -4,6 +4,7 @@
 #include <vector>
 #include <SDL_image.h>
 #include "OptionsUI.h"
+#include "WelcomeUI.h"
 
 using namespace std;
 
@@ -23,14 +24,17 @@ public:
 	static void SetScene(SceneTag scene);
 	static bool IsGamePaused();
 	static void ToggleGamePause();
+	static bool KeyBoardBlocked();
+	static void BlockKeyboard();
 	static void RenderScene();
 	static SDL_Renderer* GetRenderer();
 private:
 	static bool paused;
+	static bool keyboardBlocked;
 	static UIManager* instance;
 	static BattleUI* battleScene;
 	static OptionsUI* optionsScene;
+	static WelcomeUI* welcomeScene;
 	static void DisplayScene(SceneTag sceneTag);
-	
 };
 

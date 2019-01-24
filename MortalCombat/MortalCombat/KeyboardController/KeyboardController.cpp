@@ -2,6 +2,9 @@
 #include "../../Libraries/include/SDL.h"
 #include <iostream>
 #include "../UI/UIManager.h"
+#include "../Configuration/ConfigAPIs.h"
+#include "../SoundEngine/SoundEngine.h"
+
 KeyboardController::KeyboardController()
 {
 	optionsOpen = false;
@@ -19,15 +22,20 @@ void KeyboardController::Update(Fighter* _p1, Fighter* _p2)
 					UIManager::Get()->ToggleGamePause();
 					if (UIManager::Get()->currentScene->GetSceneTag() == SceneTag::Battle) {
 						UIManager::Get()->SetScene(SceneTag::Options);
-						//Load Options
+						SoundEngine::Get()->Play("./SoundEngine/Sounds/ui/GamePause.mp3");
 					}
 					else if (UIManager::Get()->currentScene->GetSceneTag() == SceneTag::Options) {
 						UIManager::Get()->SetScene(SceneTag::Battle);
-						//Save Changes
+						//Save and Apply Changes (Configurations)
+						ConfigAPIs::Get().front()->ExportConfigurationData();
 					}
 					optionsOpen = true;
 				}
 				break;
+			case SDLK_SPACE:
+				if (UIManager::Get()->currentScene->GetSceneTag() == SceneTag::Welcome) {
+					UIManager::Get()->SetScene(SceneTag::Battle);
+				}
 			case SDLK_w:
 				UIManager::Get()->currentScene->InvokeMethod("w");
 				AddKey(_p1, "w");
@@ -159,7 +167,7 @@ void KeyboardController::Update(Fighter* _p1, Fighter* _p2)
 
 void KeyboardController::AddKey(Fighter* _fighter, std::string _key)
 {
-	if (UIManager::Get()->IsGamePaused())
+	if (UIManager::Get()->IsGamePaused() || UIManager::Get()->KeyBoardBlocked())
 		return;
 	if (_key == "d" || _key == "s" || _key == "a" || _key == "w" || _key == "i" || _key == "l" || _key == "k" || _key == "j" || _key == "q" || _key == "o") {
 		_fighter->AddMove(_key);
@@ -170,7 +178,7 @@ void KeyboardController::AddKey(Fighter* _fighter, std::string _key)
 
 void KeyboardController::RemoveKey(Fighter * _fighter, std::string _key)
 {
-	if (UIManager::Get()->IsGamePaused())
+	if (UIManager::Get()->IsGamePaused() || UIManager::Get()->KeyBoardBlocked())
 		return;
 	if (_key == "d" || _key == "s" || _key == "a" || _key == "w" || _key == "i" || _key == "l" || _key == "k" || _key == "j" || _key == "q" || _key == "o") {
 		_fighter->RemoveMove(_key);

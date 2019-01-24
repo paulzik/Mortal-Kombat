@@ -17,16 +17,29 @@ SoundEngine* SoundEngine::Get() {
 	return instance;
 };
 
-void SoundEngine::Play(const char* audioFile, bool loop = false) {
+ISound* SoundEngine::Play(const char* audioFile, bool loop) {
+	ISound* sound;
 	if (loop) {
-		engine->play2D(audioFile, true);
+		sound = engine->play2D(audioFile, true);
 	}
 	else
 	{
-		engine->play2D(audioFile);
+		sound = engine->play2D(audioFile);
 	}
+
+	return sound;
 }
 
 void SoundEngine::DeleteSoundEngine() {
 	engine->drop();
+}
+
+void SoundEngine::SetVolume(int volumeLevel)
+{
+	engine->setSoundVolume(volumeLevel * 0.33);
+}
+
+void SoundEngine::StopAllSounds()
+{
+	engine->stopAllSounds();
 }

@@ -2,6 +2,7 @@
 #include "../SoundEngine/SoundEngine.h"
 #include <algorithm>
 #include <future>
+#include "../Configuration/ConfigAPIs.h"
 
 SDL_Joystick *joystick;
 
@@ -60,13 +61,20 @@ bool Fighter::PlayerIsAlive()
 
 void Fighter::DamageOpponent(int damage)
 {
+	if (ConfigAPIs::Get().front()->GetGodMode())
+		return;
 	//Collisions
 	if (CalculateDistanceWithOpponent() < 165) {
 		opponent->health -= damage;
 
 		//Set health back to zero to avoid visual bugs (lifebar)
-		if (opponent->health < 0)
+		if (opponent->health < 0) {
 			opponent->health = 0;
+			if (tag == FighterTag::Scorpion)
+				SoundEngine::Get()->Play("./SoundEngine/Sounds/announcer/ScorpionWins.mp3");
+			else
+				SoundEngine::Get()->Play("./SoundEngine/Sounds/announcer/SubzeroWins.mp3");
+		}
 	}
 
 }
@@ -87,7 +95,7 @@ void Fighter::Update()
 	AnimationFilmHolder& AFH = AnimationFilmHolder::Get();
 
 	//UpdateKeys();
-	if (direction == left) {
+	if (direction == Direction::left) {
 		AnimatorHolder::MarkAsSuspended(animators->at("Idle"));
 
 		if (isFlipped)
@@ -104,7 +112,7 @@ void Fighter::Update()
 			AnimatorHolder::MarkAsRunning(animators->at("WalkReverseLMove"));
 		}
 	}
-	else if (direction == right) {
+	else if (direction == Direction::right) {
 		AnimatorHolder::MarkAsSuspended(animators->at("Idle"));
 
 		if (!isFlipped)

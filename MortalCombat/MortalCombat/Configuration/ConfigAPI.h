@@ -18,21 +18,21 @@ public:
 	
 	void ExportConfigurationData();
 
-	//Gravity
-	const float GetGravity();
-	void SetGravity(float grav);
+	//Tiny Mode
+	const int GetTinyMode();
+	void SetTinyMode(int tinyMode);
 
 	//Infinite Life
-	const bool GetInfiniteLife();
-	void SetInfiniteLife(bool infinite);
+	const int GetGodMode();
+	void SetGodMode(int godMode);
 
 	//Music Level
-	const float GetMusicLevel();
-	void SetMusicLevel(float level);
+	const int GetMusicLevel();
+	void SetMusicLevel(int level);
 
 	//Speed
-	const float GetGameSpeed();
-	void SetGameSpeed(float speed);
+	const int GetGameSpeed();
+	void SetGameSpeed(int speed);
 
 	ConfigAPI(string configFile);
 

@@ -27,5 +27,6 @@ private:
 	void AddOption(string optionImage, int numberOfBoxes);
 	void TraverseBoxes(int nextPrevID);
 	void TraverseOptions(int nextPrevID);
+	void UpdateConfiguration();
 };
 

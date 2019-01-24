@@ -12,10 +12,12 @@ public:
 	static SoundEngine* Get(void);
 
 	//Play sound
-	static void Play(const char* audioFile, bool loop);
+	static ISound* Play(const char* audioFile, bool loop = false);
 
 	//Clear engine
 	static void DeleteSoundEngine();
 
+	static void SetVolume(int volumeLevel);
 
+	static void StopAllSounds();
 };
