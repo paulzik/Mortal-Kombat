@@ -36,6 +36,10 @@ void KeyboardController::Update(Fighter* _p1, Fighter* _p2)
 				if (UIManager::Get()->currentScene->GetSceneTag() == SceneTag::Welcome) {
 					UIManager::Get()->SetScene(SceneTag::Battle);
 				}
+				else if (UIManager::Get()->currentScene->GetSceneTag() == SceneTag::Battle) {
+					UIManager::reset = true;
+					//UIManager::Get()->SetScene(SceneTag::Welcome);
+				}
 			case SDLK_w:
 				UIManager::Get()->currentScene->InvokeMethod("w");
 				AddKey(_p1, "w");

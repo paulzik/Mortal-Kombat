@@ -9,6 +9,7 @@ WelcomeUI* UIManager::welcomeScene;
 UICanvas* UIManager::currentScene;
 bool UIManager::paused;
 bool UIManager::keyboardBlocked;
+bool UIManager::reset;
 
 UIManager* UIManager::Get() {
 	if (!instance) {

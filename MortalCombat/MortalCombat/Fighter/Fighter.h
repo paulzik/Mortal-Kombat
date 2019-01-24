@@ -91,25 +91,34 @@ private:
 		animators->insert(std::pair<std::string, Animator*>("Jesus", new FrameRangeAnimator(index++)));
 		animators->insert(std::pair<std::string, Animator*>("Dmgduck", new FrameRangeAnimator(index++)));
 		animators->insert(std::pair<std::string, Animator*>("Fallback", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("FallbackR", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("FallbackMove", new MovingPathAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("FallbackRMove", new MovingPathAnimator(index++)));
 		animators->insert(std::pair<std::string, Animator*>("Fallside", new FrameRangeAnimator(index++)));
 		animators->insert(std::pair<std::string, Animator*>("Fallthrow", new FrameRangeAnimator(index++)));
 		animators->insert(std::pair<std::string, Animator*>("Getup", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("Death", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("Win", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("JumpForth", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("JumpForthMove", new MovingPathAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("Jump", new FrameRangeAnimator(index++)));
+		animators->insert(std::pair<std::string, Animator*>("JumpMove", new MovingPathAnimator(index++)));
 
-		//animators->at("punchrighthigh")->SetOnFinish([](Animator*, void* fighter = this) {
-		//	ToBeRunning = ((Fighter*)fighter)->animators->at("idle");
-		//	ToBeSuspended = ((Fighter*)fighter)->animators->at("punchrighthigh");
-		//	scorpion->SetAnimFilm(((Fighter*)fighter)->AFH->GetFilm("Idle"));
-		//	//direction = MOVE_DIR::none;
-		//});
 		std::map<std::string, Animation*> animations;
+		animations.insert(std::pair<std::string, Animation*>("Jump", new FrameRangeAnimation(0, 4, 0, 0, 0.35f, false, index++)));
+		animations.insert(std::pair<std::string, Animation*>("JumpMove", new MovingPathAnimation(0, 0, 0.02f, false, index++)));
+		animations.insert(std::pair<std::string, Animation*>("JumpForth", new FrameRangeAnimation(0, 9, 0, 0, 0.08f, false, index++)));
+		animations.insert(std::pair<std::string, Animation*>("JumpForthMove", new MovingPathAnimation(2, 0, 0.02f, false, index++)));
+		animations.insert(std::pair<std::string, Animation*>("Death", new FrameRangeAnimation(0, 6, 0, 0, 0.075f, false, index++, true)));
+		animations.insert(std::pair<std::string, Animation*>("Win", new FrameRangeAnimation(0, 4, 0, 0, 0.075f, false, index++, true)));
 
 		if (playerIndex == P1)
 		{
 			animators->insert(std::pair<std::string, Animator*>("Rope", new FrameRangeAnimator(index++)));
 			animators->insert(std::pair<std::string, Animator*>("Burn", new FrameRangeAnimator(index++)));
-			animators->insert(std::pair<std::string, Animator*>("Jump", new FrameRangeAnimator(index++)));
-			animators->insert(std::pair<std::string, Animator*>("JumpMove", new MovingPathAnimator(index++)));
 
+			
+			
 			animators->insert(std::pair<std::string, Animator*>("WalkR", new FrameRangeAnimator(index++)));
 			animators->insert(std::pair<std::string, Animator*>("WalkRMove", new MovingAnimator(index++)));
 			animators->insert(std::pair<std::string, Animator*>("WalkL", new FrameRangeAnimator(index++)));
@@ -125,7 +134,6 @@ private:
 			animations.insert(std::pair<std::string, Animation*>("Blockhigh", new FrameRangeAnimation(0, 4, 0, 0, 0.07f, false, index++, true)));
 			animations.insert(std::pair<std::string, Animation*>("Duck", new FrameRangeAnimation(0, 4, 0, 0, 0.03f, false, index++, true)));
 			animations.insert(std::pair<std::string, Animation*>("Blocklow", new FrameRangeAnimation(0, 2, 0, 0, 0.07f, false, index++, true)));
-			animations.insert(std::pair<std::string, Animation*>("JumpForth", new FrameRangeAnimation(0, 9, 0, 0, 0.07f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("WalkR", new FrameRangeAnimation(0, 8, 0, 0, 0.065f, true, index++)));
 			animations.insert(std::pair<std::string, Animation*>("WalkRMove", new MovingAnimation(2, 0, 0.01f, true, index++)));
 			animations.insert(std::pair<std::string, Animation*>("WalkL", new FrameRangeAnimation(0, 8, 0, 0, 0.065f, true, index++)));
@@ -134,6 +142,7 @@ private:
 			animations.insert(std::pair<std::string, Animation*>("WalkReverseRMove", new MovingAnimation(2, 0, 0.01f, true, index++)));
 			animations.insert(std::pair<std::string, Animation*>("WalkReverseL", new FrameRangeAnimation(0, 8, 0, 0, 0.065f, true, index++)));
 			animations.insert(std::pair<std::string, Animation*>("WalkReverseLMove", new MovingAnimation(-2, 0, 0.01f, true, index++)));
+
 
 			animations.insert(std::pair<std::string, Animation*>("Frozen", new FrameRangeAnimation(0, 8, 0, 0, 0.075f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("FatalFrozen", new FrameRangeAnimation(0, 10, 0, 0, 0.075f, false, index++)));
@@ -146,6 +155,9 @@ private:
 			animations.insert(std::pair<std::string, Animation*>("Dmgduck", new FrameRangeAnimation(0, 3, 0, 0, 0.075f, false, index++)));
 
 			animations.insert(std::pair<std::string, Animation*>("Fallback", new FrameRangeAnimation(0, 6, 0, 0, 0.075f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("FallbackR", new FrameRangeAnimation(0, 6, 0, 0, 0.2f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("FallbackMove", new MovingPathAnimation(-1, 0, 0.02f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("FallbackRMove", new MovingPathAnimation(1, 0, 0.02f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Fallthrow", new FrameRangeAnimation(0, 7, 0, 0, 0.075f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Fallside", new FrameRangeAnimation(0, 6, 0, 0, 0.075f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Getup", new FrameRangeAnimation(0, 5, 0, 0, 0.075f, false, index++)));
@@ -164,8 +176,8 @@ private:
 			animations.insert(std::pair<std::string, Animation*>("Throw", new FrameRangeAnimation(0, 8, 0, 0, 0.085f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Rope", new FrameRangeAnimation(0, 12, 0, 0, 0.085f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Burn", new FrameRangeAnimation(0, 21, 0, 0, 0.15f, false, index++)));
-			animations.insert(std::pair<std::string, Animation*>("Jump", new FrameRangeAnimation(0, 4, 0, 0, 0.35f, false, index++)));
-			animations.insert(std::pair<std::string, Animation*>("JumpMove", new MovingPathAnimation(0, 0, 0.02f, false, index++)));
+
+
 			rightIsForward = true;
 
 		}
@@ -190,7 +202,10 @@ private:
 			animations.insert(std::pair<std::string, Animation*>("Dmgduck", new FrameRangeAnimation(0, 3, 0, 0, 0.075f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Burned", new FrameRangeAnimation(0, 9, 0, 0, 0.075f, false, index++)));
 
-			animations.insert(std::pair<std::string, Animation*>("Fallback", new FrameRangeAnimation(0, 6, 0, 0, 0.075f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("Fallback", new FrameRangeAnimation(0, 6, 0, 0, 0.2f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("FallbackR", new FrameRangeAnimation(0, 6, 0, 0, 0.2f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("FallbackMove", new MovingPathAnimation(-1, 0, 0.02f, false, index++)));
+			animations.insert(std::pair<std::string, Animation*>("FallbackRMove", new MovingPathAnimation(1, 0, 0.02f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Fallthrow", new FrameRangeAnimation(0, 7, 0, 0, 0.075f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Fallside", new FrameRangeAnimation(0, 6, 0, 0, 0.075f, false, index++)));
 			animations.insert(std::pair<std::string, Animation*>("Getup", new FrameRangeAnimation(0, 5, 0, 0, 0.075f, false, index++)));
@@ -202,7 +217,6 @@ private:
 			animations.insert(std::pair<std::string, Animation*>("Blockhigh", new FrameRangeAnimation(0, 4, 0, 0, 0.07f, false, index++, true)));
 			animations.insert(std::pair<std::string, Animation*>("Duck", new FrameRangeAnimation(0, 4, 0, 0, 0.03f, false, index++, true)));
 			animations.insert(std::pair<std::string, Animation*>("Blocklow", new FrameRangeAnimation(0, 2, 0, 0, 0.07f, false, index++, true)));
-			animations.insert(std::pair<std::string, Animation*>("JumpForth", new FrameRangeAnimation(0, 8, 0, 0, 0.07f, true, index++)));
 			animations.insert(std::pair<std::string, Animation*>("WalkR", new FrameRangeAnimation(0, 8, 0, 0, 0.065f, true, index++)));
 			animations.insert(std::pair<std::string, Animation*>("WalkRMove", new MovingAnimation(2, 0, 0.01f, true, index++)));
 			animations.insert(std::pair<std::string, Animation*>("WalkL", new FrameRangeAnimation(0, 8, 0, 0, 0.065f, true, index++)));
@@ -226,7 +240,7 @@ private:
 
 			//animations.insert(std::pair<std::string, Animation*>("Rope", new FrameRangeAnimation(0, 6, 0, 0, 0.085f, false, index++)));
 
-			positionX = 350;
+			positionX = 580;
 		}
 		float time = clock() / CLOCKS_PER_SEC;
 		for (auto entry : *animators) {
@@ -254,6 +268,34 @@ private:
 				Sprite* s = new Sprite(positionX, positionY, AFH->GetFilm("Jump"), isFlipped);
 				((MovingPathAnimator*)entry.second)->Start(s, (MovingPathAnimation*)animations.at(entry.first), time);
 				((MovingPathAnimator*)entry.second)->SetLogicState(stateTransitions);
+				Sprites->Add(s, 0);
+
+			}
+			else if (entry.first == "JumpForthMove") {
+				Sprite* s = new Sprite(positionX, positionY, AFH->GetFilm("JumpForth"), isFlipped);
+				((MovingPathAnimator*)entry.second)->Start(s, (MovingPathAnimation*)animations.at(entry.first), time);
+				((MovingPathAnimator*)entry.second)->SetLogicState(stateTransitions);
+				Sprites->Add(s, 0);
+
+			}
+			else if (entry.first == "FallbackMove" || entry.first == "FallbackRMove" ) {
+				Sprite* s = new Sprite(positionX, positionY, AFH->GetFilm("Fallback"), isFlipped);
+				((MovingPathAnimator*)entry.second)->Start(s, (MovingPathAnimation*)animations.at(entry.first), time);
+				((MovingPathAnimator*)entry.second)->SetLogicState(stateTransitions);
+				Sprites->Add(s, 0);
+
+			}
+			else if (entry.first == "FallbackR") {
+				Sprite* s = new Sprite(positionX, positionY, AFH->GetFilm("Fallback"), isFlipped);
+				((FrameRangeAnimator*)entry.second)->Start(s, (FrameRangeAnimation*)animations.at(entry.first), time);
+				((FrameRangeAnimator*)entry.second)->SetLogicState(stateTransitions);
+				Sprites->Add(s, 0);
+
+			}
+			else if (entry.first == "Death") {
+				Sprite* s = new Sprite(positionX, positionY, AFH->GetFilm("Fallback"), isFlipped);
+				((FrameRangeAnimator*)entry.second)->Start(s, (FrameRangeAnimation*)animations.at(entry.first), time);
+				((FrameRangeAnimator*)entry.second)->SetLogicState(stateTransitions);
 				Sprites->Add(s, 0);
 
 			}
@@ -305,44 +347,48 @@ public:
 	}
 	bool pressed;
 	void AddMove(std::string _key) {
-		if (direction == none)
-			if (_key == "d" || _key == "l") {
-				direction = Direction::right;
-		}
-		else if (_key == "a" || _key == "j") {
+		if (health > 0 && opponent->health > 0)
+		{
+
 			if (direction == none)
-				direction = Direction::left;
-		}
-		else if ((_key == "q" || _key == "o") && !IsBlocking) {
-			IsBlocking = true;
-			//AnimatorHolder::MarkAsSuspended(animators->at("Idle"));
-			//AnimatorHolder::MarkAsRunning(animators->at("Blockhigh"));
-			inputController.buttons.push_back(_key);
-			pressed = true;
-			timer = float((float)clock() / (float)CLOCKS_PER_SEC);
-			if (!IsCrouching)
-				animators->at("Blockhigh")->SetState(animatorstate_t::ANIMATOR_RUNNING);
-			else {
-				AnimatorHolder::MarkAsSuspended(animators->at("Duck"));
+				if (_key == "d" || _key == "l") {
+					direction = Direction::right;
+				}
+				else if (_key == "a" || _key == "j") {
+					if (direction == none)
+						direction = Direction::left;
+				}
+				else if ((_key == "q" || _key == "o") && !IsBlocking) {
+					IsBlocking = true;
+					//AnimatorHolder::MarkAsSuspended(animators->at("Idle"));
+					//AnimatorHolder::MarkAsRunning(animators->at("Blockhigh"));
+					inputController.buttons.push_back(_key);
+					pressed = true;
+					timer = float((float)clock() / (float)CLOCKS_PER_SEC);
+					if (!IsCrouching)
+						animators->at("Blockhigh")->SetState(animatorstate_t::ANIMATOR_RUNNING);
+					else {
+						AnimatorHolder::MarkAsSuspended(animators->at("Duck"));
 
-				animators->at("Duck")->SetState(animatorstate_t::ANIMATOR_FINISHED);
-				animators->at("Blocklow")->SetState(animatorstate_t::ANIMATOR_RUNNING);
-				AnimatorHolder::MarkAsSuspended(animators->at("Idle"));
+						animators->at("Duck")->SetState(animatorstate_t::ANIMATOR_FINISHED);
+						animators->at("Blocklow")->SetState(animatorstate_t::ANIMATOR_RUNNING);
+						AnimatorHolder::MarkAsSuspended(animators->at("Idle"));
+					}
+				}
+				else if ((_key == "s" || _key == "k") && !IsCrouching) {
+					IsCrouching = true;
+					//AnimatorHolder::MarkAsSuspended(animators->at("Idle"));
+					//AnimatorHolder::MarkAsRunning(animators->at("Blockhigh"));
+					AnimatorHolder::MarkAsRunning(animators->at("Duck"));
+					animators->at("Duck")->SetState(animatorstate_t::ANIMATOR_RUNNING);
+				}
+
+			if (!pressed) {
+				inputController.buttons.push_back(_key);
+				pressed = true;
+
+				timer = float((float)clock() / (float)CLOCKS_PER_SEC);
 			}
-		}
-		else if ((_key == "s" || _key == "k") && !IsCrouching) {
-			IsCrouching = true;
-			//AnimatorHolder::MarkAsSuspended(animators->at("Idle"));
-			//AnimatorHolder::MarkAsRunning(animators->at("Blockhigh"));
-			AnimatorHolder::MarkAsRunning(animators->at("Duck"));
-			animators->at("Duck")->SetState(animatorstate_t::ANIMATOR_RUNNING);
-		}
-
-		if (!pressed) {
-			inputController.buttons.push_back(_key);
-			pressed = true;
-
-			timer = float((float)clock() / (float)CLOCKS_PER_SEC);
 		}
 
 	}
@@ -411,7 +457,7 @@ public:
 	}
 
 
-	int positionX = 50, positionY = 330;
+	int positionX = 80, positionY = 330;
 	std::queue<Animator*> RunningQueue;
 	std::queue<Animator*> MovingQueue;
 

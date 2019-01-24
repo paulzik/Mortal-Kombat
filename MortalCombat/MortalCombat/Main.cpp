@@ -17,7 +17,6 @@
 #define SCREEN_WIDTH  800
 #define SCREEN_HEIGHT 508
 
-
 int main(int argc, char ** argv)
 {
 	bool quit = false;
@@ -43,7 +42,8 @@ int main(int argc, char ** argv)
 	//LifeBars -- TODO: Will be otimized as they are the same texture
 	//layerRenderer->InitializeImageElement("./Bitmaps/BattleElements/lifebar.png", LayerRenderer::Layer::Foreground, { 42,58,163 * 2,12 * 2 });
 	//layerRenderer->InitializeImageElement("./Bitmaps/BattleElements/lifebar.png", LayerRenderer::Layer::Foreground, { 412,58,163 * 2,12 * 2 });
-
+INITIALIZE:
+	UIManager::reset = false;
 	//Generate 2 Players
 	Fighter* player1 = new Fighter(FighterTag::Scorpion, PlayerIndex::P1, renderer);
 	Fighter* player2 = new Fighter(FighterTag::SubZero, PlayerIndex::P2, renderer);
@@ -88,6 +88,13 @@ int main(int argc, char ** argv)
 		keyboardController->Update(player1, player2);
 		
 		SDL_RenderPresent(renderer);
+
+		if ((player1->GetHealth() <= 0 || player2->GetHealth() <= 0) && UIManager::Get()->reset) {
+			player1->StopAll();
+			player2->StopAll();
+			goto INITIALIZE;
+		}
+
 	}
 	SoundEngine::Get()->DeleteSoundEngine();
 	layerRenderer->ClearLayerRenderer();

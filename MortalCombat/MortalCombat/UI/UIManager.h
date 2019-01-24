@@ -28,6 +28,8 @@ public:
 	static void BlockKeyboard();
 	static void RenderScene();
 	static SDL_Renderer* GetRenderer();
+	static bool reset;
+
 private:
 	static bool paused;
 	static bool keyboardBlocked;
@@ -36,5 +38,6 @@ private:
 	static OptionsUI* optionsScene;
 	static WelcomeUI* welcomeScene;
 	static void DisplayScene(SceneTag sceneTag);
+
 };
 
