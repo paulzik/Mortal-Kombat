@@ -270,7 +270,12 @@ void Fighter::Update()
 		AnimatorHolder::MarkAsSuspended(currAnimator2);
 		currAnimator2 = NULL;
 	}
-
+	if (positionX < 10 ) {
+		positionX = 10;
+	}
+	else if (positionX > 700) {
+		positionX = 700;
+	}
 }
 bool kayPressed[500000];
 void Fighter::UpdateKeys() {
