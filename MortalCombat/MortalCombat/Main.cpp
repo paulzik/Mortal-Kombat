@@ -13,6 +13,7 @@
 #include "SoundEngine\SoundEngine.h"
 #include "KeyboardController/KeyboardController.h"
 #include "Configuration\ConfigAPIs.h"
+#include "Animator/Animator/AnimatorHolder.h"
 
 #define SCREEN_WIDTH  800
 #define SCREEN_HEIGHT 508
@@ -21,6 +22,7 @@ int main(int argc, char ** argv)
 {
 	bool quit = false;
 	SDL_Event event;
+	AnimatorHolder::clap = false;
 
 	SDL_Init(SDL_INIT_EVERYTHING);
 
@@ -88,12 +90,18 @@ while (!UIManager::Get()->ExitApp) {
 			keyboardController->Update(player1, player2);
 
 			SDL_RenderPresent(renderer);
+			if (player1->GetHealth() <= 0 || player2->GetHealth() <= 0)
+			{
+				AnimatorHolder::clap = true;
+			}
 
 			if ((player1->GetHealth() <= 0 || player2->GetHealth() <= 0) && UIManager::Get()->reset) {
 				player1->StopAll();
 				player2->StopAll();
 				UIManager::Get()->currentScene->KillAnimation("scorpionwins");
 				UIManager::Get()->currentScene->KillAnimation("subzerowins");
+				AnimatorHolder::clap = false;
+				//AnimatorHolder::Cancel(hl.animators->at("h2"));
 				break;
 			}
 			if (UIManager::Get()->ExitApp) break;

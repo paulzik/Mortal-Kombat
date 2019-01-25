@@ -60,5 +60,9 @@ void FrameRangeAnimator::Render(SDL_Renderer* rend)
 	srcrect.y = 0;
 	srcrect.w = 90;
 	srcrect.h = 140;
+	if ((AnimatorHolder::clap == false) && (this->GetID() == 1003))
+		return;
+	else if ((AnimatorHolder::clap == true) && this->GetID() == 1002)
+		return;
 	sprite->Display(NULL, srcrect, rend);
 }

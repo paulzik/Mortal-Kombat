@@ -7,12 +7,12 @@ void AnimationFilmHolder::LoadHorizon(SDL_Renderer *rend)
 	BITMAP* bm;
 	int width, height;
 
-	for (int i = 0; i < 5; ++i)
+	for (int i = 0; i < 6; ++i)
 	{
 		std::vector<SDL_Rect> rects;
 		bm = loader.Load("./Bitmaps/Horizon/h" + std::to_string(i) + ".png", rend);
 		SDL_QueryTexture(bm, NULL, NULL, &width, &height);
-		if (i != 2)
+		if (i != 2 && i != 3)
 		{
 			SDL_Rect box;
 			box.x = 0;

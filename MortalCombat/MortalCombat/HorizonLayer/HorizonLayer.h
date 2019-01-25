@@ -5,7 +5,7 @@
 #include "../Animator/Sprites/AnimationFilms/AnimationFilmHolder.h"
 #include "../Animator/Animator/AnimatorHolder.h"
 #include "../Animator/Sprites/Sprite/SpritesHolder.h"
-#define TOTAL_HOBJECTS	5
+#define TOTAL_HOBJECTS	6
 
 
 class HorizonLayer
@@ -14,6 +14,9 @@ public:
 
 	HorizonLayer(SDL_Renderer* _renderer, int sw, int sh);
 	~HorizonLayer();
+	typedef std::map<std::string, Animator*>	Animators;
+	Animators *animators;
+	
 private:
 	SDL_Renderer	*renderer;
 	BITMAP		*hObjects[TOTAL_HOBJECTS];
@@ -21,8 +24,6 @@ private:
 
 	AnimationFilmHolder*	afh;
 	AnimatorHolder*		ah;
-	typedef std::map<std::string, Animator*>	Animators;
-	Animators *animators;
 	SpritesHolder* sprites;
 
 	std::queue<Animator*> RunningQueue;
@@ -34,5 +35,6 @@ private:
 
 	bool ClippedEntirely(SDL_Rect& area, SDL_Rect& in, SDL_Rect* out);
 	void InitializeHorizon(SDL_Renderer *renderer);
+
 };
 

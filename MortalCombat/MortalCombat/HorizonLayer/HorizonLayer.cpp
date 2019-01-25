@@ -2,6 +2,7 @@
 
 #include <string>
 
+
 bool HorizonLayer::ClippedEntirely(SDL_Rect& area, SDL_Rect& in, SDL_Rect* out)
 {
 	return true;
@@ -26,8 +27,9 @@ void HorizonLayer::InitializeHorizon(SDL_Renderer *renderer)
 	hRects[0].y = 0;
 	hRects[1].y = 0;
 	hRects[2].y = screen_h - hRects[2].h*1.5;
-	hRects[3].y = screen_h - hRects[3].h;
+	hRects[3].y = screen_h - hRects[3].h*1.5;
 	hRects[4].y = screen_h - hRects[4].h;
+	hRects[5].y = screen_h - hRects[5].h;
 
 
 	animators = new Animators();
@@ -36,14 +38,16 @@ void HorizonLayer::InitializeHorizon(SDL_Renderer *renderer)
 	animators->insert(std::pair<std::string, Animator*>("h2", new FrameRangeAnimator(index++)));
 	animators->insert(std::pair<std::string, Animator*>("h3", new FrameRangeAnimator(index++)));
 	animators->insert(std::pair<std::string, Animator*>("h4", new FrameRangeAnimator(index++)));
+	animators->insert(std::pair<std::string, Animator*>("h5", new FrameRangeAnimator(index++)));
 
 	index = 1000;
 	std::map<std::string, Animation*> animations;
 	animations.insert(std::pair<std::string, Animation*>("h0", new FrameRangeAnimation(0, 1, 0, 0, 0.2f, true, index++)));
 	animations.insert(std::pair<std::string, Animation*>("h1", new FrameRangeAnimation(0, 1, 0, 0, 0.2f, true, index++)));
 	animations.insert(std::pair<std::string, Animation*>("h2", new FrameRangeAnimation(0, 3, 0, 0, 0.2f, true, index++)));
-	animations.insert(std::pair<std::string, Animation*>("h3", new FrameRangeAnimation(0, 1, 0, 0, 0.2f, true, index++)));
+	animations.insert(std::pair<std::string, Animation*>("h3", new FrameRangeAnimation(0, 3, 0, 0, 0.1f, true, index++)));
 	animations.insert(std::pair<std::string, Animation*>("h4", new FrameRangeAnimation(0, 1, 0, 0, 0.2f, true, index++)));
+	animations.insert(std::pair<std::string, Animation*>("h5", new FrameRangeAnimation(0, 1, 0, 0, 0.2f, true, index++)));
 
 
 
@@ -53,10 +57,8 @@ void HorizonLayer::InitializeHorizon(SDL_Renderer *renderer)
 	for (auto entry : *animators)
 	{
 		AnimationFilm* af = new AnimationFilm(*afh->GetFilm("h"+ std::to_string(i)));
-
 		Sprite *s = new Sprite(hRects[i].x, hRects[i].y, af, flipped);
 		((FrameRangeAnimator*)entry.second)->Start(s, (FrameRangeAnimation*)animations.at(entry.first), time, true);
-
 		AnimatorHolder::Register(entry.second);
 		AnimatorHolder::MarkAsRunning(animators->at("h" + std::to_string(i)));
 		sprites->Add(s, 0);

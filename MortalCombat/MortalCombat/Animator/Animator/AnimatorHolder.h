@@ -73,6 +73,7 @@ private:
 
 
 public:
+	static bool clap;
 	static std::list<Animator*> running, suspended;
 
 	static void Register(Animator* a) { suspended.push_back(a); a->isSuspended = true; }
