@@ -95,7 +95,10 @@ void UIManager::RenderScene()
 	//Timer Update
 	if (stopAnimationTime != 0) {
 		if (startTimer + stopAnimationTime < SDL_GetTicks()) {
-			currentScene->KillAnimation(animationToKill);
+			if (currentScene->GetSceneTag() == 1) {
+				currentScene->KillAnimation(animationToKill);
+			}
+			
 			stopAnimationTime = 0;
 		}
 	}
