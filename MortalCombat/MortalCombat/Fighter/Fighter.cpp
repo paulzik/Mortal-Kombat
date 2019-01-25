@@ -55,8 +55,9 @@ bool Fighter::PlayerIsAlive()
 	return isAlive;
 }
 
-void Fighter::DamageOpponent(int damage, std::queue<Animator*> animQueue)
+void Fighter::DamageOpponent(int _damage, std::queue<Animator*> animQueue)
 {
+	int damage = _damage * 3;
 	if (ConfigAPIs::Get().front()->GetGodMode())
 		return;
 	//Collisions
@@ -81,7 +82,7 @@ void Fighter::DamageOpponent(int damage, std::queue<Animator*> animQueue)
 					opponent->wins--;
 					if (opponent->wins < 0)
 						opponent->wins = 0;
-					ConfigAPIs::Get().front()->AddPlayerWin(1,-1);
+					ConfigAPIs::Get().front()->AddPlayerWin(2,-1);
 				}
 			}
 			else{
@@ -97,7 +98,7 @@ void Fighter::DamageOpponent(int damage, std::queue<Animator*> animQueue)
 					opponent->wins--;
 					if (opponent->wins < 0)
 						opponent->wins = 0;
-					ConfigAPIs::Get().front()->AddPlayerWin(2, -1);
+					ConfigAPIs::Get().front()->AddPlayerWin(1, -1);
 				}
 			}
 
@@ -888,7 +889,7 @@ void Fighter::InitializeStateMachineSubZero(logic::StateTransitions * ST)
 		}
 
 	});
-	ST->SetTransition("Idle", Input{ "7" }, [anim, ST, RunningQueue, currAnim](void) {
+	ST->SetTransition("Idle", Input{ "0" }, [anim, ST, RunningQueue, currAnim, thisFighter, opposingFighter](void) {
 		if (canDoActionP2 && currAnim == NULL)
 		{
 			AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
@@ -897,16 +898,21 @@ void Fighter::InitializeStateMachineSubZero(logic::StateTransitions * ST)
 			//canDoAction = false;
 			ST->SetState("Punchrightmid");
 			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
-
+			queue<Animator*> animeQueue;
+			animeQueue.push(opposingFighter->GetAnimators()->at("Dmgmid"));
+			thisFighter->DamageOpponent(3, animeQueue);
 		}
 
 	});
-	ST->SetTransition("Punchrightmid", Input{ "7.7" }, [anim, ST, RunningQueue](void) {
+	ST->SetTransition("Punchrightmid", Input{ "0.0" }, [anim, ST, RunningQueue, thisFighter, opposingFighter](void) {
 		//AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
 		if (canDoActionP2) {
 			RunningQueue->push(anim->at("Punchleftmid"));
 			canDoActionP2 = false;
 			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
+			queue<Animator*> animeQueue;
+			animeQueue.push(opposingFighter->GetAnimators()->at("Dmgmid"));
+			thisFighter->DamageOpponent(3, animeQueue);
 		}
 
 	});
@@ -967,7 +973,7 @@ void Fighter::InitializeStateMachineSubZero(logic::StateTransitions * ST)
 		}
 
 	});
-	ST->SetTransition("Idle", Input{ "j.9" }, [anim, ST, RunningQueue, thisFighter, opposingFighter](void) {
+	ST->SetTransition("Idle", Input{ "l.9" }, [anim, ST, RunningQueue, thisFighter, opposingFighter](void) {
 		AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
 		if (canDoActionP2) {
 			RunningQueue->push(anim->at("Kickround"));
@@ -978,12 +984,16 @@ void Fighter::InitializeStateMachineSubZero(logic::StateTransitions * ST)
 			thisFighter->DamageOpponent(3, animeQueue);
 		}
 	});
-	ST->SetTransition("Idle", Input{ "l.9" }, [anim, ST, RunningQueue](void) {
+	ST->SetTransition("Idle", Input{ "l.8" }, [anim, ST, RunningQueue, thisFighter, opposingFighter](void) {
 		//AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
 		if (canDoActionP2) {
 			AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
 			AnimatorHolder::MarkAsSuspended(anim->at("Idle"));
 			RunningQueue->push(anim->at("Tackle"));
+			queue<Animator*> animeQueue;
+			animeQueue.push(opposingFighter->GetAnimators()->at("Getup"));
+			animeQueue.push(opposingFighter->GetAnimators()->at("Fallside"));
+			thisFighter->DamageOpponent(4, animeQueue);
 			canDoActionP2 = false;
 		}
 
@@ -995,7 +1005,13 @@ void Fighter::InitializeStateMachineSubZero(logic::StateTransitions * ST)
 			canDoActionP2 = false;
 			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00208.mp3", false);
 			queue<Animator*> animeQueue;
-			animeQueue.push(opposingFighter->GetAnimators()->at("Dmghigh"));
+			animeQueue.push(opposingFighter->GetAnimators()->at("Getup"));
+			if (thisFighter->isFlipped)
+				animeQueue.push(opposingFighter->GetAnimators()->at("FallbackMove"));
+			else
+				animeQueue.push(opposingFighter->GetAnimators()->at("FallbackRMove"));
+
+			animeQueue.push(opposingFighter->GetAnimators()->at("Fallback"));
 			thisFighter->DamageOpponent(4, animeQueue);
 		}
 	});

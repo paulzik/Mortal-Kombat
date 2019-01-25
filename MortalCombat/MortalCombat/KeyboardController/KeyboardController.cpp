@@ -105,7 +105,7 @@ void KeyboardController::Update(Fighter* _p1, Fighter* _p2)
 				break;
 			}
 		}
-		else
+		else if (event.type == SDL_KEYUP)
 		{
 			switch (event.key.keysym.sym) {
 			case SDLK_ESCAPE:
@@ -166,7 +166,11 @@ void KeyboardController::Update(Fighter* _p1, Fighter* _p2)
 		}
 
 	}
+		else if (event.type == SDL_QUIT) 
+		{
 
+			UIManager::Get()->ExitApp = true;
+		}
 
 }
 
