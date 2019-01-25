@@ -46,7 +46,6 @@ Fighter::Fighter(FighterTag _tag, int playerIndex, SDL_Renderer *renderer)
 	Animators* anim = animators;
 	
 	logic::StateTransitions *state = &stateTransitions;
-	
 
 
 }
@@ -62,7 +61,7 @@ void Fighter::DamageOpponent(int damage, std::queue<Animator*> animQueue)
 		return;
 	//Collisions
 	if (CalculateDistanceWithOpponent() < 165 && opponent->IsBlocking == false) {
-		//Set health back to zero to avoid visual bugs (lifebar)		
+		
 		opponent->health -= damage;
 		if (deadFlag)
 			return;
@@ -72,14 +71,36 @@ void Fighter::DamageOpponent(int damage, std::queue<Animator*> animQueue)
 			if (tag == FighterTag::Scorpion){
 				SoundEngine::Get()->Play("./SoundEngine/Sounds/announcer/ScorpionWins.mp3");
 				UIManager::Get()->FireAnimation("scorpionwins", 0);
-				ConfigAPIs::Get().front()->AddPlayerWin(1);
+				ConfigAPIs::Get().front()->AddPlayerWin(1,1);
+				if (ConfigAPIs::Get().front()->GetBetWinMode() == 1) {
+					wins ++;
+					ConfigAPIs::Get().front()->AddPlayerWin(1,1);
+				}
+				wins++;
+				if (ConfigAPIs::Get().front()->GetBetWinMode() == 2) {
+					opponent->wins--;
+					if (opponent->wins < 0)
+						opponent->wins = 0;
+					ConfigAPIs::Get().front()->AddPlayerWin(1,-1);
+				}
 			}
 			else{
 				SoundEngine::Get()->Play("./SoundEngine/Sounds/announcer/SubzeroWins.mp3");
 				UIManager::Get()->FireAnimation("subzerowins", 0);
-				ConfigAPIs::Get().front()->AddPlayerWin(2);
+				ConfigAPIs::Get().front()->AddPlayerWin(2, 1);
+				if (ConfigAPIs::Get().front()->GetBetWinMode() == 2) {
+					wins++;
+					ConfigAPIs::Get().front()->AddPlayerWin(2, 1);
+				}
+				wins++;
+				if (ConfigAPIs::Get().front()->GetBetWinMode() == 1) {
+					opponent->wins--;
+					if (opponent->wins < 0)
+						opponent->wins = 0;
+					ConfigAPIs::Get().front()->AddPlayerWin(2, -1);
+				}
 			}
-			wins++;
+
 			ConfigAPIs::Get().front()->ExportConfigurationData();
 
 			while (animQueue.size() != 0)

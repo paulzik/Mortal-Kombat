@@ -24,10 +24,8 @@ void ConfigAPI::ImportConfigurationData()
 
 	SetMusicTrack(jsonValue["Configuration"]["MusicTrack"].asInt());
 	SetMusicLevel(jsonValue["Configuration"]["MusicLevel"].asInt());
-	SetTinyMode(jsonValue["Configuration"]["TinyMode"].asBool());
+	SetBetWinMode(jsonValue["Configuration"]["BetWin"].asInt());
 	SetGodMode(jsonValue["Configuration"]["GodMode"].asBool());
-	SetPlayerWins(1,jsonValue["Configuration"]["Player1Wins"].asInt());
-	SetPlayerWins(2,jsonValue["Configuration"]["Player2Wins"].asInt());
 }
 
 void ConfigAPI::ExportConfigurationData()
@@ -35,10 +33,8 @@ void ConfigAPI::ExportConfigurationData()
 	Json::Value root;
 	root["Configuration"]["MusicTrack"] = GetMusicTrack();
 	root["Configuration"]["MusicLevel"] = GetMusicLevel();
-	root["Configuration"]["TinyMode"] = GetTinyMode();
+	root["Configuration"]["BetWin"] = GetBetWinMode();
 	root["Configuration"]["GodMode"] = GetGodMode();
-	root["Configuration"]["Player1Wins"] = GetPlayerWins(1);
-	root["Configuration"]["Player2Wins"] = GetPlayerWins(2);
 
 	ofstream file;
 	file.open(configFile);
@@ -83,22 +79,36 @@ void ConfigAPI::SetPlayerWins(int playerId, int wins)
 		player2Wins = wins;
 }
 
-void ConfigAPI::AddPlayerWin(int playerId)
+void ConfigAPI::AddPlayerWin(int playerId, int winsToAdd)
 {
 	if (playerId == 1)
-		player1Wins++;
+		player1Wins+=winsToAdd;
 	else if (playerId == 2)
-		player2Wins++;
+		player2Wins+=winsToAdd;
+
+	if (player1Wins < 0)
+		player1Wins = 0;
+	if (player2Wins < 0)
+		player2Wins = 0;
 }
 
-const int ConfigAPI::GetTinyMode()
+const int ConfigAPI::GetBetWinMode()
 {
-	return configData.tinyMode;
+	return configData.BetWinMode;
 }
 
-void ConfigAPI::SetTinyMode(int tinyMode)
+
+void ConfigAPI::SetBetWinMode(int betmode)
 {
-	configData.tinyMode = tinyMode;
+	configData.BetWinMode = betmode;
+}
+
+const int ConfigAPI::GetPlayerBet(int playerId)
+{
+	if (playerId == 1)
+		return player1Bet;
+	else
+		return player2Bet;
 }
 
 const int ConfigAPI::GetGodMode()

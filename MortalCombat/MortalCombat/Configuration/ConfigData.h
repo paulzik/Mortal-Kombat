@@ -4,9 +4,6 @@ public:
 	//Atributes
 	int musicTrack;
 	int musicLevel;
-	bool tinyMode;
+	int BetWinMode;
 	bool godMode;
-
-private:
-
 };

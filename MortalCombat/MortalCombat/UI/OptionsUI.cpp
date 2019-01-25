@@ -24,15 +24,15 @@ void OptionsUI::InitializeUI()
 	selectionTriangle = IMG_LoadTexture(renderer, "./Bitmaps/Options/Triangle.png");
 
 	//Initialize Option elements
-	AddOption("./Bitmaps/Options/SpeedOption.png", 3);
+	AddOption("./Bitmaps/Options/MusicOption.png", 3);
 	AddOption("./Bitmaps/Options/SoundOption.png", 3);
-	AddOption("./Bitmaps/Options/TinyModeOption.png", 1);
+	AddOption("./Bitmaps/Options/BetOption.png", 2);
 	AddOption("./Bitmaps/Options/GodModeOption.png", 1);
 
 	//Initialize Configurations
 	optionsVector[0].selectedBox = ConfigAPIs::Get().front()->GetMusicTrack() - 1;
 	optionsVector[1].selectedBox = ConfigAPIs::Get().front()->GetMusicLevel() - 1;
-	optionsVector[2].selectedBox = ConfigAPIs::Get().front()->GetTinyMode() - 1;
+	optionsVector[2].selectedBox = ConfigAPIs::Get().front()->GetBetWinMode() - 1;
 	optionsVector[3].selectedBox = ConfigAPIs::Get().front()->GetGodMode() - 1;
 }
 
@@ -118,7 +118,7 @@ void OptionsUI::UpdateConfiguration()
 	if(selectedOption==0)
 		ConfigAPIs::Get().front()->SetMusicTrack(optionsVector[0].selectedBox +1);
 	ConfigAPIs::Get().front()->SetMusicLevel(optionsVector[1].selectedBox +1);
-	ConfigAPIs::Get().front()->SetTinyMode(optionsVector[2].selectedBox +1);
+	ConfigAPIs::Get().front()->SetBetWinMode(optionsVector[2].selectedBox +1);
 	ConfigAPIs::Get().front()->SetGodMode(optionsVector[3].selectedBox +1);
 }
 

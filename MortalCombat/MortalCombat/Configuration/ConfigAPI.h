@@ -9,6 +9,7 @@ private:
 	void ImportConfigurationData();
 	string configFile;
 	int player1Wins, player2Wins;
+	bool player1Bet, player2Bet;
 protected:
 	//UIComponent* ui;
 	ConfigData configData;
@@ -18,9 +19,10 @@ public:
 	
 	void ExportConfigurationData();
 
-	//Tiny Mode
-	const int GetTinyMode();
-	void SetTinyMode(int tinyMode);
+	//BetWin Mode
+	const int GetBetWinMode();
+	void SetBetWinMode(int value);
+	const int GetPlayerBet(int playerId);
 
 	//Infinite Life
 	const int GetGodMode();
@@ -37,7 +39,7 @@ public:
 	//Wins
 	const int GetPlayerWins(int playerId);
 	void SetPlayerWins(int playerId, int wins);
-	void AddPlayerWin(int playerId);
+	void AddPlayerWin(int playerId, int winsToAdd);
 
 	ConfigAPI(string configFile);
 

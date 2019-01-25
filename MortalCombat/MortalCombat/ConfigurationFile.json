@@ -1,11 +1,9 @@
 {
 	"Configuration" : 
 	{
+		"BetWin" : 0,
 		"GodMode" : 0,
 		"MusicLevel" : 1,
-		"MusicTrack" : 1,
-		"Player1Wins" : 0,
-		"Player2Wins" : 0,
-		"TinyMode" : 0
+		"MusicTrack" : 1
 	}
 }

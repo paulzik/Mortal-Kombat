@@ -39,7 +39,9 @@ int main(int argc, char ** argv)
 	ConfigAPI* configAPI = new ConfigAPI("ConfigurationFile.json");
 	ConfigAPIs::Add(configAPI);
 
-
+	ConfigAPIs::Get().front()->SetBetWinMode(0);
+	ConfigAPIs::Get().front()->SetPlayerWins(1, 0);
+	ConfigAPIs::Get().front()->SetPlayerWins(2, 0);
 INITIALIZE:
 	
 	//Generate 2 Players
@@ -62,6 +64,8 @@ INITIALIZE:
 
 	KeyboardController* keyboardController = new KeyboardController();
 
+
+	
 	while (!quit)
 	{
 		//keyboardController->Update();
@@ -104,6 +108,8 @@ INITIALIZE:
 	SDL_Quit();
 	ConfigAPIs::Get().front()->SetPlayerWins(1, 0);
 	ConfigAPIs::Get().front()->SetPlayerWins(2, 0);
+
+	ConfigAPIs::Get().front()->SetBetWinMode(0);
 	ConfigAPIs::Get().front()->ExportConfigurationData();
 
 	return 0;
