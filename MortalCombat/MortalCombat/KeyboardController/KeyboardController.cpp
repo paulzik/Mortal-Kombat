@@ -19,15 +19,22 @@ void KeyboardController::Update(Fighter* _p1, Fighter* _p2)
 			switch (event.key.keysym.sym) {
 			case SDLK_ESCAPE:
 				if (!optionsOpen) {
-					UIManager::Get()->ToggleGamePause();
+					
 					if (UIManager::Get()->currentScene->GetSceneTag() == SceneTag::Battle) {
 						UIManager::Get()->SetScene(SceneTag::Options);
 						SoundEngine::Get()->Play("./SoundEngine/Sounds/ui/GamePause.mp3");
+						UIManager::Get()->ToggleGamePause();
 					}
 					else if (UIManager::Get()->currentScene->GetSceneTag() == SceneTag::Options) {
 						UIManager::Get()->SetScene(SceneTag::Battle);
 						//Save and Apply Changes (Configurations)
 						ConfigAPIs::Get().front()->ExportConfigurationData();
+						UIManager::Get()->ToggleGamePause();
+						UIManager::Get()->currentScene->KillAnimation("fight");
+					}
+					else {
+						optionsOpen = false;
+						break;
 					}
 					optionsOpen = true;
 				}
