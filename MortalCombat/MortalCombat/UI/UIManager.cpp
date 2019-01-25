@@ -54,7 +54,8 @@ void UIManager::SetScene(SceneTag scene)
 		//REMOVE COMMENTS FOR FINAL
 		if ((currentScene->GetSceneTag() == SceneTag::Welcome || UIManager::reset)) {
 			SoundEngine::Get()->StopAllSounds();
-			SoundEngine::Get()->Play("./SoundEngine/Sounds/BattleMusic1.mp3", true);
+			ConfigAPIs::Get().front()->SetMusicTrack(ConfigAPIs::Get().front()->GetMusicTrack());
+			
 			SoundEngine::Get()->Play("./SoundEngine/Sounds/announcer/fight.mp3");
 			currentScene = battleScene;
 			FireAnimation("fight", 1500);
