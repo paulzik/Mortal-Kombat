@@ -12,7 +12,6 @@ public:
 		RenderElement* lifebarRed;
 		RenderElement* lifebarGreen;
 		RenderElement* name;
-		vector<RenderElement*> coins;
 	};
 
 	BattleUI(Fighter* player1, Fighter* player2);
@@ -24,6 +23,7 @@ private:
 	PlayerUI player1UI, player2UI;
 	vector<SDL_Texture*> timerTextures;
 	vector<SDL_Texture*> pointsTextures;
+	SDL_Texture* coin;
 	float timer;
 	int countdown = 99;
 

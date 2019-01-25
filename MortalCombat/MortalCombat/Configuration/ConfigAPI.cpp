@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include "../SoundEngine/SoundEngine.h"
+#include "../UI/UIManager.h"
 
 ConfigAPI::ConfigAPI(string configFilename)
 {
@@ -21,19 +22,23 @@ void ConfigAPI::ImportConfigurationData()
 	file >> jsonValue;
 	file.close();
 
-	SetGameSpeed(jsonValue["Configuration"]["GameSpeed"].asInt());
+	SetMusicTrack(jsonValue["Configuration"]["MusicTrack"].asInt());
 	SetMusicLevel(jsonValue["Configuration"]["MusicLevel"].asInt());
 	SetTinyMode(jsonValue["Configuration"]["TinyMode"].asBool());
 	SetGodMode(jsonValue["Configuration"]["GodMode"].asBool());
+	SetPlayerWins(1,jsonValue["Configuration"]["Player1Wins"].asInt());
+	SetPlayerWins(2,jsonValue["Configuration"]["Player2Wins"].asInt());
 }
 
 void ConfigAPI::ExportConfigurationData()
 {
 	Json::Value root;
-	root["Configuration"]["GameSpeed"] = GetGameSpeed();
+	root["Configuration"]["MusicTrack"] = GetMusicTrack();
 	root["Configuration"]["MusicLevel"] = GetMusicLevel();
 	root["Configuration"]["TinyMode"] = GetTinyMode();
 	root["Configuration"]["GodMode"] = GetGodMode();
+	root["Configuration"]["Player1Wins"] = GetPlayerWins(1);
+	root["Configuration"]["Player2Wins"] = GetPlayerWins(2);
 
 	ofstream file;
 	file.open(configFile);
@@ -46,14 +51,44 @@ const ConfigData ConfigAPI::GetConfigData()
 	return configData;
 }
 
-const int ConfigAPI::GetGameSpeed()
+const int ConfigAPI::GetMusicTrack()
 {
-	return configData.gameSpeed;
+	return configData.musicTrack;
 }
 
-void ConfigAPI::SetGameSpeed(int speed)
+void ConfigAPI::SetMusicTrack(int trackID)
 {
-	configData.gameSpeed = speed;
+	configData.musicTrack = trackID;
+	if (UIManager::Get()->currentScene == NULL)
+		return;
+
+	SoundEngine::Get()->StopAllSounds();
+	string file = "./SoundEngine/Sounds/BattleMusic" + to_string(trackID) + ".mp3";
+	SoundEngine::Get()->Play(file.c_str(), true);
+}
+
+const int ConfigAPI::GetPlayerWins(int playerId)
+{
+	if (playerId == 1)
+		return player1Wins;
+	else
+		return player2Wins;
+}
+
+void ConfigAPI::SetPlayerWins(int playerId, int wins)
+{
+	if (playerId == 1)
+		player1Wins = wins;
+	else if (playerId == 2)
+		player2Wins = wins;
+}
+
+void ConfigAPI::AddPlayerWin(int playerId)
+{
+	if (playerId == 1)
+		player1Wins++;
+	else if (playerId == 2)
+		player2Wins++;
 }
 
 const int ConfigAPI::GetTinyMode()

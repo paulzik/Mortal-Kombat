@@ -8,7 +8,6 @@ SoundEngine* SoundEngine::Get() {
 		//Initialize IrrKlang Engine
 		engine = createIrrKlangDevice();
 		if (!engine) {
-			std::cout << "Error initializing irrklang" << std::endl;
 			return 0;
 		}
 		instance = new SoundEngine;

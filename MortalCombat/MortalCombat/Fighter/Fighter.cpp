@@ -21,7 +21,7 @@ Fighter::Fighter(FighterTag _tag, int playerIndex, SDL_Renderer *renderer)
 
 	SDL_JoystickEventState(SDL_ENABLE);
 	joystick = SDL_JoystickOpen(0);
-
+	deadFlag = false;
 	using Input = logic::StateTransitions::Input;
 	
 	AnimationFilmHolder& AFH = AnimationFilmHolder::Get();
@@ -34,8 +34,6 @@ Fighter::Fighter(FighterTag _tag, int playerIndex, SDL_Renderer *renderer)
 	InitializeCharacter(_tag, renderer);
 
 	std::string forward = rightIsForward ? "d" : "a";
-	//sprite->SetAnimFilm(AFH.GetFilm("Idle"));
-	//AnimatorHolder::MarkAsRunning(animators->at("Idle"));
 
 	Renderer = renderer;
 
@@ -66,17 +64,24 @@ void Fighter::DamageOpponent(int damage, std::queue<Animator*> animQueue)
 	if (CalculateDistanceWithOpponent() < 165 && opponent->IsBlocking == false) {
 		//Set health back to zero to avoid visual bugs (lifebar)		
 		opponent->health -= damage;
-
+		if (deadFlag)
+			return;
 		if (opponent->health < 0) {
 			opponent->health = 0;
+			deadFlag = true;
 			if (tag == FighterTag::Scorpion){
 				SoundEngine::Get()->Play("./SoundEngine/Sounds/announcer/ScorpionWins.mp3");
 				UIManager::Get()->FireAnimation("scorpionwins", 0);
+				ConfigAPIs::Get().front()->AddPlayerWin(1);
 			}
 			else{
 				SoundEngine::Get()->Play("./SoundEngine/Sounds/announcer/SubzeroWins.mp3");
 				UIManager::Get()->FireAnimation("subzerowins", 0);
+				ConfigAPIs::Get().front()->AddPlayerWin(2);
 			}
+			wins++;
+			ConfigAPIs::Get().front()->ExportConfigurationData();
+
 			while (animQueue.size() != 0)
 			{
 				animQueue.pop();
@@ -120,6 +125,11 @@ Fighter::Fighter()
 int Fighter::GetHealth()
 {
 	return health;
+}
+
+int Fighter::GetWins()
+{
+	return wins;
 }
 
 void Fighter::Update()
@@ -196,8 +206,6 @@ void Fighter::Update()
 		}
 		else
 			str.append(*it + ".");
-
-		std::cout << str << std::endl;
 	}
 
 	stateTransitions.PerformTransitions(Input{ str }, false);
@@ -352,7 +360,6 @@ void Fighter::UpdateKeys() {
 			break;
 		}
 		case SDL_JOYBUTTONDOWN: {
-			std::cout << (int)_event.jbutton.button;
 			if ((int)_event.jbutton.button == SDL_CONTROLLER_BUTTON_X) {
 				if (!kayPressed[SDLK_6])
 				{

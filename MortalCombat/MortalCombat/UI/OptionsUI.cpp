@@ -30,7 +30,7 @@ void OptionsUI::InitializeUI()
 	AddOption("./Bitmaps/Options/GodModeOption.png", 1);
 
 	//Initialize Configurations
-	optionsVector[0].selectedBox = ConfigAPIs::Get().front()->GetGameSpeed() - 1;
+	optionsVector[0].selectedBox = ConfigAPIs::Get().front()->GetMusicTrack() - 1;
 	optionsVector[1].selectedBox = ConfigAPIs::Get().front()->GetMusicLevel() - 1;
 	optionsVector[2].selectedBox = ConfigAPIs::Get().front()->GetTinyMode() - 1;
 	optionsVector[3].selectedBox = ConfigAPIs::Get().front()->GetGodMode() - 1;
@@ -115,7 +115,8 @@ void OptionsUI::TraverseOptions(int nextPrevID)
 
 void OptionsUI::UpdateConfiguration()
 {
-	ConfigAPIs::Get().front()->SetGameSpeed(optionsVector[0].selectedBox +1);
+	if(selectedOption==0)
+		ConfigAPIs::Get().front()->SetMusicTrack(optionsVector[0].selectedBox +1);
 	ConfigAPIs::Get().front()->SetMusicLevel(optionsVector[1].selectedBox +1);
 	ConfigAPIs::Get().front()->SetTinyMode(optionsVector[2].selectedBox +1);
 	ConfigAPIs::Get().front()->SetGodMode(optionsVector[3].selectedBox +1);

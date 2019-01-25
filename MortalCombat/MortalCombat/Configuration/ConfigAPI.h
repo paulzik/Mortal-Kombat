@@ -7,8 +7,8 @@ class ConfigAPI
 {
 private:
 	void ImportConfigurationData();
-	
 	string configFile;
+	int player1Wins, player2Wins;
 protected:
 	//UIComponent* ui;
 	ConfigData configData;
@@ -31,8 +31,13 @@ public:
 	void SetMusicLevel(int level);
 
 	//Speed
-	const int GetGameSpeed();
-	void SetGameSpeed(int speed);
+	const int GetMusicTrack();
+	void SetMusicTrack(int trackId);
+
+	//Wins
+	const int GetPlayerWins(int playerId);
+	void SetPlayerWins(int playerId, int wins);
+	void AddPlayerWin(int playerId);
 
 	ConfigAPI(string configFile);
 

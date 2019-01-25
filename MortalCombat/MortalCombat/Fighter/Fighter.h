@@ -10,6 +10,7 @@
 #include "../Animator/Animator/MovingAnimator.h"
 #include "../Animator/Animator/MovingPathAnimator.h"
 #include "../Animator/AnimationTypes/MovingPathAnimation.h"
+#include "../Configuration/ConfigAPIs.h"
 #include <queue>
 
 #define	FIGHTER_ACTION_DELAY_MSECS	150
@@ -25,7 +26,7 @@ private:
 	Sprite*			sprite = nullptr;
 	SpritesHolder* Sprites;
 	std::string FighterName[2] = { "SubZero", "Scorpion" };
-
+	int wins;
 	static int index;
 	bool rightIsForward = false;
 	Fighter* opponent;
@@ -41,6 +42,7 @@ private:
 	void										UpdateKeys();
 						
 	int										health;
+	bool										deadFlag;
 	FighterTag									tag;
 	bool										isAlive;
 	int											numberOfWins;
@@ -61,10 +63,13 @@ private:
 		Sprites = new SpritesHolder();
 		//AnimationFilmHolder& AFH = AnimationFilmHolder::Get();
 		AFH->Load("./Bitmaps/Clips/" + FighterName[_charName] + "/" + FighterName[_charName], renderer);
-
-		//TODO: check json for animators
-
-		//sprite = new Sprite(50, 330, AFH.GetFilm("Idle"));
+		if (FighterName[_charName] == "Scorpion") {
+			wins = ConfigAPIs::Get().front()->GetPlayerWins(1);
+		}
+		else {
+			wins = ConfigAPIs::Get().front()->GetPlayerWins(2);
+		}
+			
 
 		animators = new Animators();
 		animators->insert(std::pair<std::string, Animator*>("Idle", new FrameRangeAnimator(index++)));
@@ -333,6 +338,7 @@ public:
 	bool PlayerIsAlive();
 	void DamageOpponent(int damage, std::queue<Animator*> animQueue);
 	int GetHealth();
+	int GetWins();
 	logic::StateTransitions* GetState() {
 		return &stateTransitions;
 	}

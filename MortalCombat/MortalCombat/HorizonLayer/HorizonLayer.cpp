@@ -47,22 +47,22 @@ void HorizonLayer::InitializeHorizon(SDL_Renderer *renderer)
 
 
 
-	std::cout << "shaolins animations entered\n";
+
 	float time = clock() / CLOCKS_PER_SEC;
 	int i = 0;
 	for (auto entry : *animators)
 	{
 		AnimationFilm* af = new AnimationFilm(*afh->GetFilm("h"+ std::to_string(i)));
-		std::cout << "got afh\n";
+
 		Sprite *s = new Sprite(hRects[i].x, hRects[i].y, af, flipped);
 		((FrameRangeAnimator*)entry.second)->Start(s, (FrameRangeAnimation*)animations.at(entry.first), time, true);
-		std::cout << "before register\n";
+
 		AnimatorHolder::Register(entry.second);
 		AnimatorHolder::MarkAsRunning(animators->at("h" + std::to_string(i)));
 		sprites->Add(s, 0);
 		++i;
 	}
-	std::cout << "horizon initialized\n";
+
 }
 
 HorizonLayer::HorizonLayer(SDL_Renderer* _renderer, int sw, int sh)

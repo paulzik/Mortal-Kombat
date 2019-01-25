@@ -39,11 +39,9 @@ int main(int argc, char ** argv)
 	ConfigAPI* configAPI = new ConfigAPI("ConfigurationFile.json");
 	ConfigAPIs::Add(configAPI);
 
-	//LifeBars -- TODO: Will be otimized as they are the same texture
-	//layerRenderer->InitializeImageElement("./Bitmaps/BattleElements/lifebar.png", LayerRenderer::Layer::Foreground, { 42,58,163 * 2,12 * 2 });
-	//layerRenderer->InitializeImageElement("./Bitmaps/BattleElements/lifebar.png", LayerRenderer::Layer::Foreground, { 412,58,163 * 2,12 * 2 });
+
 INITIALIZE:
-	UIManager::reset = false;
+	
 	//Generate 2 Players
 	Fighter* player1 = new Fighter(FighterTag::Scorpion, PlayerIndex::P1, renderer);
 	Fighter* player2 = new Fighter(FighterTag::SubZero, PlayerIndex::P2, renderer);
@@ -56,10 +54,11 @@ INITIALIZE:
 	UIManager::Get()->InitializeBattleScene(player1, player2);
 	UIManager::Get()->InitializeWelcomeScene();
 	UIManager::Get()->InitializeOptionsScene();
-
-	//Setup Battle scene *Replace with welcome scene
-	UIManager::Get()->SetScene(SceneTag::Welcome);
-	//UIManager::Get()->SetScene(SceneTag::Battle);
+	if(!UIManager::reset)
+		UIManager::Get()->SetScene(SceneTag::Welcome);
+	else
+		UIManager::Get()->SetScene(SceneTag::Battle);
+	UIManager::reset = false;
 
 	KeyboardController* keyboardController = new KeyboardController();
 
@@ -69,8 +68,6 @@ INITIALIZE:
 		//Render all 3 layers
 		SDL_RenderClear(renderer);
 		if (!UIManager::Get()->IsGamePaused()) {
-			//layerRenderer->RenderLayer(LayerRenderer::Layer::Background);
-
 			layerRenderer->RenderLayer(LayerRenderer::Layer::Action);
 			player1->Update();
 			player2->Update();
@@ -105,6 +102,9 @@ INITIALIZE:
 	SDL_DestroyWindow(window);
 
 	SDL_Quit();
+	ConfigAPIs::Get().front()->SetPlayerWins(1, 0);
+	ConfigAPIs::Get().front()->SetPlayerWins(2, 0);
+	ConfigAPIs::Get().front()->ExportConfigurationData();
 
 	return 0;
 }

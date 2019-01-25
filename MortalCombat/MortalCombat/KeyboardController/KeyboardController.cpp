@@ -37,7 +37,7 @@ void KeyboardController::Update(Fighter* _p1, Fighter* _p2)
 					UIManager::Get()->SetScene(SceneTag::Battle);
 				}
 				else if (UIManager::Get()->currentScene->GetSceneTag() == SceneTag::Battle) {
-					UIManager::reset = true;
+					UIManager::Get()->reset = true;
 					//UIManager::Get()->SetScene(SceneTag::Welcome);
 				}
 				break;

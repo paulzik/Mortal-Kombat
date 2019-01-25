@@ -35,7 +35,6 @@ void MovingPathAnimator::Progress(timestamp_t currTime) {
 
 		}
 
-		std::cout << sprite->y << std::endl;
 		if (sprite->y >= 330) {
 			state = ANIMATOR_FINISHED;
 			sprite->y = 330;
@@ -45,11 +44,6 @@ void MovingPathAnimator::Progress(timestamp_t currTime) {
 			return;
 		}
 
-		//if (!anim->GetCont()) {
-		//	state = ANIMATOR_FINISHED;
-		//	NotifyStopped();
-		//	return;
-		//}
 		else {
 			lastTime += anim->GetDelay();
 			//Progress(currTime); // Recursion (make it a loop)

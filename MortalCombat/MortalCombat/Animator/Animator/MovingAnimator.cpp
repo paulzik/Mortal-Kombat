@@ -6,7 +6,6 @@ void MovingAnimator::Progress(timestamp_t currTime)
 	if (currTime > lastTime && currTime - lastTime >= anim->GetDelay()) {
 		int x = anim->GetDx();
 		int y = anim->GetDy();
-		std::cout << sprite->y << std::endl;
 		if (sprite->y < 150) {
 			stop = true;
 		}

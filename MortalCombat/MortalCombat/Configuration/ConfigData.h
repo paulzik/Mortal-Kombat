@@ -2,7 +2,7 @@ class ConfigData
 {
 public:
 	//Atributes
-	int gameSpeed;
+	int musicTrack;
 	int musicLevel;
 	bool tinyMode;
 	bool godMode;

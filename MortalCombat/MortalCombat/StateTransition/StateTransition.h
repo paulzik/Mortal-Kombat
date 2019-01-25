@@ -102,7 +102,6 @@ namespace logic {
 							fired.insert(key);
 					}
 			}
-			//std::cout << "Animations Triggered: " << fired.size() << std::endl;
 			if (fired.empty())
 				PerformDefaultTransition();
 			else

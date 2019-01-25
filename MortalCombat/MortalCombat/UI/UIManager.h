@@ -29,7 +29,6 @@ public:
 	static void ResetTimer();
 	static SDL_Renderer* GetRenderer();
 	static bool reset;
-
 	static void FireAnimation(string animationNamde, int destroytime);
 private:
 	static bool paused;

@@ -66,7 +66,7 @@ public:
 			Json::Value tmp = *i;
 			for (Json::ValueIterator j = tmp.begin(); j != tmp.end(); ++j) {
 				Json::Value temp = *j;
-				//std::cout << "\t" << j.name() << ": " << temp.asInt() << std::endl;
+
 
 				Array[count++] = temp.asInt();
 			}

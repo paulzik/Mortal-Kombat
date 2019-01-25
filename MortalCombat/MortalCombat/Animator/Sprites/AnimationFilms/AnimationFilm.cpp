@@ -3,7 +3,6 @@
 void AnimationFilm::DisplayFrame(SDL_Texture *dest, const SDL_Rect& at, BYTE frameNo, SDL_Renderer* rend, bool _fliped) const {
 
 	if (id == "Walk") {
-		std::cout << id.c_str() << ": " << fliped << std::endl;
 	}
 	if (_fliped) {
 		SDL_RendererFlip flip = SDL_FLIP_VERTICAL;
