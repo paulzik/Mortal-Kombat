@@ -30,6 +30,7 @@ public:
 	static SDL_Renderer* GetRenderer();
 	static bool reset;
 	static void FireAnimation(string animationNamde, int destroytime);
+	static bool ExitApp;
 private:
 	static bool paused;
 	static bool keyboardBlocked;

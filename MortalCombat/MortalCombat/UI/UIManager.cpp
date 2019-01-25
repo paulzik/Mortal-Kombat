@@ -13,6 +13,7 @@ bool UIManager::reset;
 int UIManager::startTimer;
 int UIManager::stopAnimationTime;
 string UIManager::animationToKill;
+bool UIManager::ExitApp;
 
 UIManager* UIManager::Get() {
 	if (!instance) {
