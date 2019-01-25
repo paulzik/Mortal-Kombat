@@ -71,6 +71,7 @@ void Fighter::DamageOpponent(int _damage, std::queue<Animator*> animQueue)
 			deadFlag = true;
 			if (tag == FighterTag::Scorpion){
 				SoundEngine::Get()->Play("./SoundEngine/Sounds/announcer/ScorpionWins.mp3");
+				SoundEngine::Get()->Play("./SoundEngine/Sounds/arenas/Clapping1.mp3");
 				UIManager::Get()->FireAnimation("scorpionwins", 0);
 				ConfigAPIs::Get().front()->AddPlayerWin(1,1);
 				if (ConfigAPIs::Get().front()->GetBetWinMode() == 1) {
@@ -87,6 +88,7 @@ void Fighter::DamageOpponent(int _damage, std::queue<Animator*> animQueue)
 			}
 			else{
 				SoundEngine::Get()->Play("./SoundEngine/Sounds/announcer/SubzeroWins.mp3");
+				SoundEngine::Get()->Play("./SoundEngine/Sounds/arenas/Clapping2.mp3");
 				UIManager::Get()->FireAnimation("subzerowins", 0);
 				ConfigAPIs::Get().front()->AddPlayerWin(2, 1);
 				if (ConfigAPIs::Get().front()->GetBetWinMode() == 2) {
@@ -668,7 +670,7 @@ void Fighter::InitializeStateMachineSubZero(logic::StateTransitions * ST)
 				RunningQueue->push(anim->at("Punchrighthigh"));
 			//canDoAction = false;
 			ST->SetState("Punchrighthigh");
-			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
+			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00214.mp3", false);
 			queue<Animator*> animeQueue;
 			animeQueue.push(opposingFighter->GetAnimators()->at("Dmghigh"));
 			thisFighter->DamageOpponent(3, animeQueue);
@@ -683,7 +685,7 @@ void Fighter::InitializeStateMachineSubZero(logic::StateTransitions * ST)
 				RunningQueue->push(anim->at("Punchrightmid"));
 			//canDoAction = false;
 			ST->SetState("Punchrightmid");
-			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
+			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00214.mp3", false);
 			queue<Animator*> animeQueue;
 			animeQueue.push(opposingFighter->GetAnimators()->at("Dmgmid"));
 			thisFighter->DamageOpponent(3, animeQueue);
@@ -695,7 +697,7 @@ void Fighter::InitializeStateMachineSubZero(logic::StateTransitions * ST)
 		if (canDoActionP2) {
 			RunningQueue->push(anim->at("Punchleftmid"));
 			canDoActionP2 = false;
-			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
+			SoundEngine::Get()->Play("SoundEngine/Sounds/malemk1-00214.mp3", false);
 			queue<Animator*> animeQueue;
 			animeQueue.push(opposingFighter->GetAnimators()->at("Dmgmid"));
 			thisFighter->DamageOpponent(3, animeQueue);
@@ -752,7 +754,7 @@ void Fighter::InitializeStateMachineSubZero(logic::StateTransitions * ST)
 		if (canDoActionP2) {
 			RunningQueue->push(anim->at("Punchlefthigh"));
 			canDoActionP2 = false;
-			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00199.mp3", false);
+			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00214.mp3", false);
 			queue<Animator*> animeQueue;
 			animeQueue.push(opposingFighter->GetAnimators()->at("Dmghigh"));
 			thisFighter->DamageOpponent(3, animeQueue);
@@ -806,7 +808,7 @@ void Fighter::InitializeStateMachineSubZero(logic::StateTransitions * ST)
 		if (canDoActionP2) {
 			RunningQueue->push(anim->at("Kickhigh"));
 			canDoActionP2 = false;
-			//SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00208.mp3", false);
+			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00213.mp3", false);
 			queue<Animator*> animeQueue;
 			animeQueue.push(opposingFighter->GetAnimators()->at("Dmghigh"));
 			thisFighter->DamageOpponent(4, animeQueue);
@@ -817,7 +819,7 @@ void Fighter::InitializeStateMachineSubZero(logic::StateTransitions * ST)
 		if (canDoActionP2) {
 			RunningQueue->push(anim->at("Kickmid"));
 			canDoActionP2 = false;
-			//SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00208.mp3", false);
+			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00213.mp3", false);
 			queue<Animator*> animeQueue;
 			animeQueue.push(opposingFighter->GetAnimators()->at("Dmgmid"));
 			thisFighter->DamageOpponent(4, animeQueue);
