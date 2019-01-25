@@ -697,7 +697,7 @@ void Fighter::InitializeStateMachineSubZero(logic::StateTransitions * ST)
 		if (canDoActionP2) {
 			RunningQueue->push(anim->at("Punchleftmid"));
 			canDoActionP2 = false;
-			SoundEngine::Get()->Play("SoundEngine/Sounds/malemk1-00214.mp3", false);
+			SoundEngine::Get()->Play("SoundEngine/Sounds/male/mk1-00214.mp3", false);
 			queue<Animator*> animeQueue;
 			animeQueue.push(opposingFighter->GetAnimators()->at("Dmgmid"));
 			thisFighter->DamageOpponent(3, animeQueue);
