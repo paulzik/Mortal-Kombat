@@ -1,29 +1,27 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This project was an assignment for CS454-Software Engineering course.
+The goal of the project was to develop a game engine and on top of it build a Mortal Kombat clone game.
 
-### What is this repository for? ###
+The project features:
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* A custom animator controller that runs on sprides and can generate various animation patterns.
+* A prototyped UI system for rapid population of interactive 2D UIs
+* Mechanism to traverse game scenes
+* Layered Renderer for Sprides
+* Adaptation during use from options scene
+* JSON parser to save/load user's preferences
+* A custom sound engine and voice Actior
+* A keyboard controller to support combo moves 
+
+Runs on SDL2/OpenGL.
 
 ### How do I get set up? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* Run it from Visual Studion on Debug x86
 
-### Contribution guidelines ###
+### Contributors ###
 
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+* Stelios Georgiou
+* Manos Skordalakis
+* Paul Zikas
