@@ -1,29 +1,14 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
-
-### What is this repository for? ###
-
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+This project was a project assignment for the course CS454-Software Engineering
+The goal of the project was to develop a game engine and on top of it build a Mortal Kombat clone game.
 
 ### How do I get set up? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* Run it from Visual Studion on Debug x86
 
-### Contribution guidelines ###
+### Contributors###
 
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+* Stelios Georgiou
+* Manos Skordalakis
+* Paul Zikas
