@@ -7,7 +7,7 @@
 static Animator* ToBeRunning, *ToBeSuspended;
 
 template<class ArgumentType, class ResultType>
-struct unary_function
+struct unary_function_custom
 {
 	typedef ArgumentType argument_type;
 	typedef ResultType result_type;
@@ -17,7 +17,7 @@ class AnimatorHolder {
 
 private:
 
-	class ProgressFunctor : public unary_function<Animator*, void> {
+	class ProgressFunctor : public unary_function_custom<Animator*, void> {
 	private:
 		timestamp_t t;
 	public:
@@ -31,7 +31,7 @@ private:
 		ProgressFunctor(timestamp_t _t) : t(_t) {}
 	};
 
-	class RenderFunctor : public unary_function<Animator*, void> {
+	class RenderFunctor : public unary_function_custom<Animator*, void> {
 	private:
 		SDL_Renderer* rend;
 	public:
@@ -41,7 +41,7 @@ private:
 		RenderFunctor(SDL_Renderer* rend) : rend(rend) {}
 	};
 
-	class ComparatorSuspended : public unary_function<Animator*, void> {
+	class ComparatorSuspended : public unary_function_custom<Animator*, void> {
 	private:
 		int id;
 	public:
@@ -56,7 +56,7 @@ private:
 		ComparatorSuspended(int ID) : id(ID) {}
 	};
 
-	class ComparatorRunning : public unary_function<Animator*, void> {
+	class ComparatorRunning : public unary_function_custom<Animator*, void> {
 	private:
 		int id;
 	public:
