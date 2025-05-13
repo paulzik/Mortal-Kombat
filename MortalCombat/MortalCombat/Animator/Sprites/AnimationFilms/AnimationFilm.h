@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <string> 
 #include "../../SDL_Helper.h"
 #include <assert.h> 
 #include "SDL.h"
